@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.vite/
+probe-*.png
+.env
+.env.*
+!.env.example

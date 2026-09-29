@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>Jura 3D — essai CesiumJS</title>
+  </head>
+  <body>
+    <div id="cesiumContainer"></div>
+    <aside class="controls">
+      <h1>Jura 3D</h1>
+      <p>Essai technique autour de Delémont</p>
+      <label for="basemap">Fond de carte</label>
+      <select id="basemap">
+        <option value="aerial">Vue aérienne</option>
+        <option value="topo">Carte topographique</option>
+      </select>
+      <label for="datetime">Date et heure locales</label>
+      <input id="datetime" type="datetime-local" value="2026-06-21T16:00" />
+      <div class="time-heading"><label for="time-slider">Heure de la journée</label><output id="time-value" for="time-slider">16:00</output></div>
+      <input id="time-slider" type="range" min="0" max="1439" step="1" value="960" aria-label="Heure de la journée" />
+      <div class="time-markers"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>23:59</span></div>
+      <label class="checkbox"><input id="buildings" type="checkbox" checked /> Bâtiments 3D</label>
+      <p id="status" role="status">Chargement de la scène…</p>
+      <small>Glisser avec le clic droit : rotation · Molette : zoom</small><br />
+      <small>Données © swisstopo</small>
+    </aside>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
