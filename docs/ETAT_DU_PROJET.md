@@ -2,6 +2,8 @@
 
 **Dernière vérification : 29 septembre 2026.** Ce document est le point d'entrée pour reprendre le travail dans une nouvelle discussion.
 
+**Dépôt officiel :** [jackseg80/jura3d](https://github.com/jackseg80/jura3d), public, branche `main`, code du projet sous licence MIT. Le premier push et le contrôle de compilation GitHub Actions ont réussi le 29 septembre 2026.
+
 ## Objectif connu
 
 Construire à terme un projet neuf pour le **canton du Jura suisse**, en s'inspirant des briques utiles de SunTrail 3D sans reprendre son application entière. Le propriétaire souhaite discuter ensuite du concept du jeu et d'un plan. Aucune mécanique de jeu ou feuille de route n'est encore approuvée.
