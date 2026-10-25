@@ -1,12 +1,12 @@
 # Relais de reprise
 
-**25 octobre 2026 — PUB1 autorisée, contrôles locaux réussis à 21:37:23 Europe/Zurich.** Publication GitHub Pages ajoutée au plan avant P8 à la demande du propriétaire, autorisant commit/push/déploiement nécessaires ; restrictions précédentes historiques. Mêmes modèle/effort. Pages non activé au précontrôle, dépôt public/admin, distant `main` au même 57eb361 que local.
+**25 octobre 2026 — PUB1 terminée, site public vérifié à 21:41:01 Europe/Zurich.** Autorisation explicite du propriétaire pour commits, push et publication ; ancien « aucun commit/push/déploiement » historique pour P1–P7. Modèle/effort conservés, modifications préexistantes examinées et intégrées sans perte.
 
-- Préfixe `/jura3d/` et chemin Cesium configurés ; défaut local `/` conservé, `build-info.json` expose le commit Actions ou `null` en local.
-- Workflow `pages.yml` manuel sur `main`, aucun déploiement sur push ; CI build séparée et renforcée par tests/contrôle des fichiers.
-- Documents/plan PUB1/procédure mis à jour ; inventaire des fichiers examinés et preuves locales sous `.vite/publication/`. Aucun cache, `dist/`, secret ou capture de probe à envoyer.
-- Vérifié : tests configuration/géométrie, builds racine/sous-dossier et probe complet P1/P3/P4/P6 en sous-dossier réussis, zéro erreur (Chrome 156/RTX 4080). Fichiers éprouvés identiques après ajout des licences.
-- Reste : commit des évolutions Jura P1–P7 + publication, push normal, activer Pages Actions et déclencher le workflow ; vérifier HTTPS, commit servi et rendu Chrome réel, consigner le résultat puis envoyer la mise à jour documentaire. P8 non commencé.
+- **Site :** https://jackseg80.github.io/jura3d/ ; commit servi `29a4089a94bd5a3a5626da5c33cf1c1276a497ae`, source et build-info publics. CI 40231781138 et déploiement manuel 40231805506 réussis ; publication à 21:40:13. Un commit documentaire suivant enregistre ce bilan sans redéployer.
+- **Architecture :** `JURA3D_BASE_PATH=/jura3d/` dans Pages, `/` par défaut en local, chemin Cesium/données/conditions adapté. `build-info.json` donne révision/territoire/base (révision null en local). Licence CesiumJS/inventaire tiers joints. `.github/workflows/pages.yml` manuel sur main, compilation CI séparée ; aucun déploiement automatique sur push, ni secret ajouté.
+- **Contrôles :** tests configuration/géométrie 140 tracés et deux builds réussis ; probe complet P1/P3/P4/P6 du sous-dossier à 21:37:23, zéro erreur. Contrôle du site public sans diagnostic : quatre destinations prêtes, retour, patrimoine/bus/fiches, conditions PDF et crédits, aucune erreur JS/ressource relevée. Chrome 156/RTX 4080, aucune nouvelle mesure Android. Sept fichiers publics identiques au commit ; deux index JSON normalisés CRLF→LF par Git, contenu JSON inchangé. Licences vérifiées aussi.
+- **Documents/preuves :** `PUBLICATION.md`, plan PUB1 entre P7/P8, README/état/architecture/données/décisions/CHANGELOG synchronisés. Rapports locaux `.vite/publication/probe-before-publish.json`, `published-probe.json`, `host-check.json`, `tested-build-hashes.json`, journaux et inventaires. Capture choisie `docs/images/publication-pages-2026-10-25.png`. Préserver aussi .vite/p5/p6/p7, exclus de Git avec dist/node_modules/captures temporaires.
+- **Accès/suite :** preview de contrôle 4304 arrêtée, locale 4300 conservée ; aucun appareil Android ni réglage système utilisé. Le propriétaire peut tester l'URL sans câble. P8 Bâle non commencé ; droits/sources à revalider avant intégration. Petit texte d'aide bus P4 « tracés entiers » à harmoniser avec découpe P6 à 5,25 km ; comportement et docs de géométrie corrects. Les futures publications restent soumises à autorisation explicite, cette opération n'instaure pas de déploiement automatique.
 
 ---
 

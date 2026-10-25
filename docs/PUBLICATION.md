@@ -4,7 +4,9 @@
 
 ## État
 
-Publication en préparation. Adresse prévue : <https://jackseg80.github.io/jura3d/>. Ne pas confondre dépôt, build Actions, déploiement et vérification du site public. P8 Bâle non commencé.
+**Site public disponible et vérifié : [https://jackseg80.github.io/jura3d/](https://jackseg80.github.io/jura3d/).** Première publication terminée le 25 octobre 2026 à **21:40:13 Europe/Zurich**, contrôle Chrome public terminé à **21:41:01**. Commit servi : `29a4089a94bd5a3a5626da5c33cf1c1276a497ae`. P8 Bâle non commencé.
+
+Le lien fonctionne depuis un navigateur connecté à Internet, sans serveur PC ni câble. Aucun nouveau parcours sur appareil Android physique n'a été effectué lors de la publication ; les réserves P6 restent applicables.
 
 ## Configuration et mise à jour
 
@@ -49,4 +51,14 @@ Références techniques consultées le 25 octobre : [Vite et le sous-dossier Git
 
 ## Résultat vérifié
 
-À compléter après déploiement : commit servi, exécution Actions, date, URL, preuve de rendu public et limites. Aucune publication accomplie ne doit être déduite de la seule préparation du workflow.
+- Commit applicatif/publication : [`29a4089`](https://github.com/jackseg80/jura3d/commit/29a4089a94bd5a3a5626da5c33cf1c1276a497ae), contenant les évolutions Jura P1–P7 auparavant locales et les fichiers de publication, sans perte des modifications existantes.
+- [Compilation CI](https://github.com/jackseg80/jura3d/actions/runs/40231781138) et [déploiement manuel Pages](https://github.com/jackseg80/jura3d/actions/runs/40231805506) réussis, jobs build/deploy terminés. Mode `workflow`, HTTPS imposé ; aucun domaine personnalisé.
+- Lecture de [`build-info.json`](https://jackseg80.github.io/jura3d/build-info.json) : révision exacte ci-dessus, territoire `jura`, base `/jura3d/`, source `github-actions`.
+- Contrôle Chrome **sans `?probe`** du 25 octobre **21:40:42–21:41:01 Europe/Zurich** réussi : quatre destinations prêtes, retour initial, patrimoine/arrêts/fiches et fiche de tracé, conditions PDF HTTP 200/signature correcte, crédits visibles, zéro erreur JavaScript/ressource relevée. Qualité Moyen fixée pour le contrôle PC ; aucune conclusion de performance ou validation Android déduite. Les liens d'horaires externes ne sont pas tous ouverts ni requalifiés.
+- Sept ressources cantonales servies identiques par SHA256 aux blobs du commit publié ; licence et inventaire tiers identiques aux fichiers du paquet installé. Les deux index de contrôle de liens avaient des fins de ligne CRLF dans le dossier Windows : Git les livre en LF. Leur contenu JSON est identique ; cette seule normalisation explique la différence d'empreinte avec le build local, aucune modification d'attributs.
+- Rapports locaux ignorés : `.vite/publication/probe-before-publish.json`, `tested-build-hashes.json`, `published-probe.json`, `host-check.json`, journaux de build/Actions et inventaires de revue. Capture de rendu sélectionnée et examinée ci-dessous ; aucun navigateur utilisateur ni réglage Android modifié. Preview de contrôle 4304 arrêtée, preview locale 4300 conservée.
+- Un commit documentaire ultérieur enregistre le bilan et peut être plus récent sur `main` que le commit public. Il ne déclenche pas de déploiement. La version servie reste identifiée par son marqueur ; toute prochaine publication exige un déclenchement explicite autorisé.
+
+![Site public, patrimoine et bus chargés dans Chrome PC ; capture hors benchmark](images/publication-pages-2026-10-25.png)
+
+Point mineur à harmoniser ultérieurement : l'aide bus contient encore la phrase P4 « les tracés entiers touchant le secteur sont conservés ». Depuis P6, les portions du secteur sont découpées à 5,25 km ; le réseau entier reste disponible via le sélecteur. Le rendu, la documentation P6/P7 et le README décrivent déjà cette différence. Aucune nouvelle correction fonctionnelle introduite dans PUB1.

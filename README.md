@@ -29,9 +29,12 @@ Prototype web ouvert pour explorer en 3D le canton du Jura et consulter des info
 
 Les services de données sont accessibles en ligne. Le prototype ne demande ni clé MapTiler ni compte Cesium ion. Une connexion Internet et un navigateur avec WebGL sont nécessaires.
 
-## Site de test public — préparation
+## Site de test public
 
-Une publication GitHub Pages a été autorisée le 25 octobre 2026, après P7, avant Bâle. [Procédure et état vérifié](docs/PUBLICATION.md). L'adresse ne sera présentée comme disponible qu'après déploiement et contrôle. Les mises à jour publiques sont déclenchées manuellement ; envoyer le code sur GitHub ne publie pas automatiquement le site.
+**[Ouvrir Jura 3D sur GitHub Pages](https://jackseg80.github.io/jura3d/)** — disponible depuis le 25 octobre 2026, sans serveur PC ni câble. Publication et contrôle du rendu public réussis après P7 : navigation, patrimoine, bus, fiches, conditions et crédits. Version servie `29a4089`, limites mobiles P6 conservées ; aucune nouvelle mesure Android. [Bilan, preuves et procédure](docs/PUBLICATION.md).
+
+Les mises à jour publiques sont déclenchées manuellement : envoyer du code ou de la documentation sur GitHub ne republie pas automatiquement le site. Le marqueur [build-info.json](https://jackseg80.github.io/jura3d/build-info.json) indique la révision effectivement servie.
+
 
 ## Démarrage
 

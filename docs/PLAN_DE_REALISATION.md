@@ -1,6 +1,6 @@
 # Plan de réalisation — Jura 3D
 
-**Date : 25 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 réalisé et validé sur PC ; publication de test ajoutée avant P8, en préparation ; P8–P9 non commencés.**
+**Date : 25 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 réalisé et validé sur PC ; PUB1 (publication de test) réalisée et vérifiée avant P8 ; P8–P9 non commencés.**
 
 **Sauvegarde historique à 13:13 Europe/Zurich :** Tab S8 Faible terminé à 13:04:07, 13 min 27 s, 28 phases/616 lectures sans erreur/coupure, nettoyage confirmé par Wi-Fi appairé. Moyen en cours après repos, aucun résultat achevé à ce point ; manuel/récupération réseau encore ouverts. Vérifier le [rapport et processus consignés dans le relais](RELAIS.md) avant toute relance. P5 non clos, P6 non proposé ou commencé.
 
@@ -102,6 +102,8 @@ P1 est réalisé localement, avec [validation bureau, premiers essais physiques 
 - **Sortie :** Jura conserve ses comportements vérifiés ; une configuration de seconde ville ne nécessite pas de copier l'application. Documenter l'architecture réalisée. Renommage du dépôt, paquet de moteur et séparation en plusieurs dépôts restent des décisions ultérieures ; ne pas les imposer avant cette preuve.
 
 ### PUB1 — Publication de test, ajout du 25 octobre 2026
+
+**Réalisé le 25 octobre :** publication à 21:40:13, contrôle Chrome HTTPS achevé à 21:41:01 Europe/Zurich, zéro erreur relevée. [Site](https://jackseg80.github.io/jura3d/), commit servi `29a4089`, CI et workflow manuel réussis. Navigation quatre localités, patrimoine/bus/fiches, conditions et crédits vérifiés. Documents de bilan envoyés ensuite sans republier l'application ; aucune nouvelle validation physique Android. [Preuves](PUBLICATION.md).
 
 Cette étape manquait au plan initial : le dépôt et sa compilation ne constituaient pas un site public. Le propriétaire demande sa mise en ligne avant de continuer et autorise les opérations Git/déploiement nécessaires. Publier le Jura validé après P7 sur GitHub Pages, puis tenir les documents à jour.
 

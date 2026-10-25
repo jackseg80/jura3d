@@ -1,10 +1,10 @@
 # Historique
 
-## 2026-10-25 — Préparation de la publication de test
+## 2026-10-25 — Première publication de test sur GitHub Pages
 
 - Étape PUB1 ajoutée avant Bâle, autorisée par le propriétaire avec commits/envoi/déploiement nécessaires.
 - Chemins configurables pour GitHub Pages, ressources Cesium et conditions accessibles en sous-dossier ; aperçu local conservé.
-- Workflow de publication manuel, contrôles du build et marqueur du commit servi ; [procédure](docs/PUBLICATION.md). État public à compléter après vérification.
+- Workflow de publication manuel, contrôles du build et marqueur du commit servi ; [procédure](docs/PUBLICATION.md). Site https://jackseg80.github.io/jura3d/ publié à 21:40:13 et contrôlé dans Chrome à 21:41:01 Europe/Zurich, commit servi 29a4089 ; navigation/couches/fiches/conditions/crédits, zéro erreur relevée. Aucun nouveau benchmark Android.
 
 ## 2026-10-25 — P7 : configuration et cycle de vie des couches
 
