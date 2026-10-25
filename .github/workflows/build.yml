@@ -17,4 +17,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: node scripts/test-territory.mjs
+      - run: node scripts/test-transport-geometry.mjs
       - run: npm run build
+      - run: node scripts/check-build.mjs dist /

@@ -2,15 +2,95 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" href="data:," />
-    <title>Jura 3D — essai CesiumJS</title>
+    <title>Jura 3D — explorer le Jura</title>
   </head>
   <body>
     <div id="cesiumContainer"></div>
-    <aside class="controls">
-      <h1>Jura 3D</h1>
-      <p>Essai technique autour de Delémont</p>
+    <aside class="controls" aria-label="Explorer le Jura">
+      <div class="controls-header">
+        <div class="controls-heading">
+          <h1>Jura 3D</h1>
+          <p id="active-place">Destination : Delémont</p>
+        </div>
+        <button id="toggle-controls" aria-controls="controls-body" aria-expanded="true">Replier</button>
+      </div>
+      <div id="controls-body" class="controls-content" tabindex="0" aria-label="Commandes défilantes">
+      <p class="controls-scroll-hint">Commandes · Faites défiler ↕</p>
+      <nav class="destinations" aria-label="Localités">
+        <button data-place="delemont" aria-pressed="true">Delémont</button>
+        <button data-place="porrentruy" aria-pressed="false">Porrentruy</button>
+        <button data-place="saignelegier" aria-pressed="false">Saignelégier</button>
+        <button data-place="saint-ursanne" aria-pressed="false">Saint-Ursanne</button>
+      </nav>
+      <button id="home" class="wide">Vue initiale · Delémont</button>
+      <div class="camera-tools" role="group" aria-label="Caméra">
+        <button data-camera="zoom-out" aria-label="Éloigner la caméra" title="Éloigner">−</button>
+        <button data-camera="zoom-in" aria-label="Rapprocher la caméra" title="Rapprocher">+</button>
+        <button data-camera="left" aria-label="Tourner à gauche" title="Tourner à gauche">↶</button>
+        <button data-camera="right" aria-label="Tourner à droite" title="Tourner à droite">↷</button>
+        <button data-camera="tilt" aria-label="Changer l’inclinaison" title="Changer l’inclinaison">Incliner</button>
+      </div>
+      <details id="heritage-settings">
+        <summary>Patrimoine et lieux</summary>
+        <label class="checkbox"><input id="heritage" type="checkbox" /> Afficher le patrimoine</label>
+        <p id="heritage-status" class="help" role="status" aria-live="polite" data-state="off">Patrimoine masqué.</p>
+        <button id="heritage-retry" class="wide" hidden>Réessayer le patrimoine</button>
+        <label for="heritage-locality">Localité</label>
+        <select id="heritage-locality" disabled>
+          <option value="active">Destination courante</option>
+          <option value="">Toutes les localités</option>
+          <option>Delémont</option><option>Porrentruy</option><option>Saignelégier</option><option>Saint-Ursanne</option>
+        </select>
+        <label for="heritage-category">Catégorie</label>
+        <select id="heritage-category" disabled><option value="">Toutes les catégories</option></select>
+        <label for="heritage-place">Lieu à consulter</label>
+        <select id="heritage-place" disabled></select>
+        <button id="heritage-open" class="wide" disabled>Voir la fiche et le lieu</button>
+        <p class="help heritage-help">Repères « P » : lieux patrimoniaux. Touchez un nombre pour consulter les lieux du groupe ; le zoom peut séparer leurs repères.</p>
+      </details>
+      <details id="transport-settings">
+        <summary>Bus et horaires</summary>
+        <label class="checkbox"><input id="transport" type="checkbox" /> Afficher le réseau de bus</label>
+        <p id="transport-status" class="help" role="status" aria-live="polite" data-state="off">Transports masqués.</p>
+        <button id="transport-retry" class="wide" hidden>Réessayer les transports</button>
+        <label for="transport-sector">Secteur</label>
+        <select id="transport-sector" disabled>
+          <option value="active">Autour de la destination · ~5 km</option>
+          <option value="">Tout le réseau fourni</option>
+        </select>
+        <label for="transport-offer">Offre indiquée par la source</label>
+        <select id="transport-offer" disabled><option value="">Jour et nuit</option><option value="day">Jour</option><option value="night">Nuit</option></select>
+        <label class="checkbox"><input id="transport-stops" type="checkbox" checked disabled /> Arrêts</label>
+        <label class="checkbox"><input id="transport-lines" type="checkbox" checked disabled /> Tracés des lignes</label>
+        <label class="checkbox"><input id="transport-zones" type="checkbox" disabled /> Zones Noctambus · Ajoie</label>
+        <label for="transport-kind">Objet à consulter</label>
+        <select id="transport-kind" disabled><option value="stop">Arrêt</option><option value="line">Tracé</option><option value="zone">Zone Noctambus</option></select>
+        <select id="transport-place" aria-label="Arrêt, tracé ou zone à consulter" disabled></select>
+        <button id="transport-open" class="wide" disabled>Voir la fiche et situer</button>
+        <div class="help transport-legend">
+          <p><span class="legend-day" aria-hidden="true"></span> Bleu : jour ou jour/nuit. <span class="legend-night" aria-hidden="true"></span> Violet tireté : nocturne seul. Gris : offre non renseignée.</p>
+          <p>« B » = arrêt ; « B » avec un nombre = groupe d’arrêts consultable. Aplats violets = zones Noctambus, indépendantes du secteur et du filtre jour/nuit.</p>
+          <p>Touchez un tracé pour son cadre horaire ; choisissez dans la liste si plusieurs se superposent.</p>
+          <p>Réseau statique du 13.09.2026. Les tracés entiers touchant le secteur sont conservés ; leur nombre n’est pas celui des lignes commerciales. Aucun véhicule ou retard en direct.</p>
+        </div>
+      </details>
+      <details id="settings" open>
+      <summary>Qualité, fond et heure</summary>
+      <div class="settings-content">
+      <label for="quality">Qualité d'affichage</label>
+      <select id="quality">
+        <option value="auto">Auto</option>
+        <option value="low">Faible</option>
+        <option value="medium">Moyen</option>
+        <option value="high">Élevé</option>
+        <option value="ultra">Ultra</option>
+        <option value="custom" disabled>Personnalisé</option>
+      </select>
+      <p id="quality-status" class="help" role="status" aria-live="polite"></p>
+      <p id="quality-gpu" class="help"></p>
+      <button id="quality-recheck" type="button" class="wide">Réévaluer la qualité Auto</button>
       <label for="basemap">Fond de carte</label>
       <select id="basemap">
         <option value="aerial">Vue aérienne</option>
@@ -22,10 +102,45 @@
       <input id="time-slider" type="range" min="0" max="1439" step="1" value="960" aria-label="Heure de la journée" />
       <div class="time-markers"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>23:59</span></div>
       <label class="checkbox"><input id="buildings" type="checkbox" checked /> Bâtiments 3D</label>
-      <p id="status" role="status">Chargement de la scène…</p>
-      <small>Glisser avec le clic droit : rotation · Molette : zoom</small><br />
-      <small>Données © swisstopo</small>
+      <label class="checkbox"><input id="shadows" type="checkbox" checked /> Ombres simulées</label>
+      <label class="checkbox"><input id="fps" type="checkbox" checked /> Afficher le compteur FPS</label>
+      <p class="help">Toucher un bâtiment ou un point pour le sélectionner. Glisser : déplacer · Pincer : zoomer. Sur ordinateur : clic droit glissé pour tourner et incliner, molette pour zoomer.</p>
+      </div>
+      </details>
+      </div>
+      <p id="status" role="status" aria-live="polite" data-state="loading">Chargement de la scène…</p>
+      <button id="retry" class="wide" hidden>Réessayer le chargement</button>
+      <p id="layer-alert" class="help" role="status" aria-live="polite" hidden></p>
+      <button id="layer-alert-retry" class="wide" hidden>Réessayer les couches indisponibles</button>
+      <div class="data-credits">
+      <small class="credit">Données © swisstopo</small>
+      <small id="heritage-credit" hidden>© Géodonnées de la République et Canton du Jura · <a href="%BASE_URL%jura/Conditions_utilisation_geodonnees.pdf" target="_blank" rel="noopener noreferrer">Conditions</a></small>
+      </div>
     </aside>
+    <section id="selection" class="selection" aria-label="Sélection" aria-live="polite" hidden>
+      <div class="selection-header">
+        <h2 id="selection-title"></h2>
+        <button id="clear-selection" aria-label="Fermer la sélection">×</button>
+      </div>
+      <div id="selection-content">
+      <p id="selection-description"></p>
+      <p id="selection-position"></p>
+      <div id="selection-group" aria-label="Lieux du groupe" hidden></div>
+      <div id="selection-transport" hidden>
+        <dl id="transport-properties"></dl>
+        <div id="transport-links"></div>
+        <p id="transport-link-status" class="help"></p>
+        <p class="help">Source : <a href="https://opendata.swiss/en/dataset/lignes-de-bus" target="_blank" rel="noopener noreferrer">Réseau de bus · Service du développement territorial / SIT-Jura</a>. Données du 13.09.2026. Horaires sur les sites officiels, connexion nécessaire ; vérifiez-y les dates et changements.</p>
+      </div>
+      <div id="selection-extra" hidden>
+        <dl id="selection-properties"></dl>
+        <a id="selection-pdf" class="selection-link" target="_blank" rel="noopener noreferrer">Ouvrir la fiche officielle PDF</a>
+        <p id="selection-link-status" class="help"></p>
+        <p class="help">Source : <a href="https://opendata.swiss/fr/dataset/repertoire-des-biens-culturels-rbc" target="_blank" rel="noopener noreferrer">Répertoire des biens culturels · Office de la culture / SIT-Jura</a>. Export du 13.09.2026 ; données des fiches datées du 02.04.2026.</p>
+      </div>
+      </div>
+      <small id="selection-credit">Données © swisstopo</small>
+    </section>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -2,6 +2,11 @@ node_modules/
 dist/
 .vite/
 probe-*.png
+probe-p1-report.json
+probe-android-report.json
+probe-p3-report.json
+probe-p4-report.json
+__pycache__/
 .env
 .env.*
 !.env.example

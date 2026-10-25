@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-09-30T17:05:24.950184+00:00",
+  "checks": [
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:323",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/2285.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/2285.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:334",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/2307.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/2307.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:457",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/3135.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/3135.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:101",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/1304.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/1304.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:104",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/1308.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/1308.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:105",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/1309.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/1309.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:164",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/1657.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/1657.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:805",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/1660.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/1660.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:310",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/2185.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/2185.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:311",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/2186.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/2186.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:312",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/2202.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/2202.pdf",
+      "status": 200,
+      "pdf": true
+    },
+    {
+      "featureId": "rcju_autre.occ_02_14_rbc:165",
+      "sourceUrl": "http://geo.jura.ch/doc/OCC/RBC/1661.pdf",
+      "url": "https://geo.jura.ch/doc/OCC/RBC/1661.pdf",
+      "status": 200,
+      "pdf": true
+    }
+  ]
+}

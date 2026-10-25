@@ -1,0 +1,467 @@
+{
+  "checks": [
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:25",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8571965&lang=fr",
+      "checkedAt": "2026-09-30T19:15:04.805344+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8571965&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:24:43.679Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8571965&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:25",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Delémont, Gare",
+      "checkedAt": "2026-09-30T19:15:04.805861+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Del%C3%A9mont,%20Gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Del%C3%A9mont,%20Gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false,
+      "browser": {
+        "checkedAt": "2026-09-30T19:24:47.447Z",
+        "status": 403,
+        "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Del%C3%A9mont,%20Gare",
+        "title": "",
+        "stopNameVisible": false
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:25",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Delémont, Gare",
+      "checkedAt": "2026-09-30T19:15:04.806134+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Del%C3%A9mont,%20Gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Del%C3%A9mont,%20Gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false,
+      "browser": {
+        "checkedAt": "2026-09-30T19:24:50.890Z",
+        "status": 403,
+        "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Del%C3%A9mont,%20Gare",
+        "title": "",
+        "stopNameVisible": false
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:65",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8510378&lang=fr",
+      "checkedAt": "2026-09-30T19:15:04.806447+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8510378&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:24:54.348Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8510378&lang=fr",
+        "title": "CarPostal SA",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:65",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Delémont, Hôtel de Ville",
+      "checkedAt": "2026-09-30T19:15:05.086935+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Del%C3%A9mont,%20H%C3%B4tel%20de%20Ville",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Del%C3%A9mont,%20H%C3%B4tel%20de%20Ville",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:65",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Delémont, Hôtel de Ville",
+      "checkedAt": "2026-09-30T19:15:05.143323+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Del%C3%A9mont,%20H%C3%B4tel%20de%20Ville",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Del%C3%A9mont,%20H%C3%B4tel%20de%20Ville",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:77",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572041&lang=fr",
+      "checkedAt": "2026-09-30T19:15:05.327504+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572041&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:24:58.017Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572041&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:77",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Porrentruy, gare",
+      "checkedAt": "2026-09-30T19:15:05.334123+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Porrentruy,%20gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Porrentruy,%20gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:77",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Porrentruy, gare",
+      "checkedAt": "2026-09-30T19:15:05.421359+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Porrentruy,%20gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Porrentruy,%20gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:117",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8571934&lang=fr",
+      "checkedAt": "2026-09-30T19:15:05.504175+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8571934&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:25:06.201Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8571934&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:117",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Saignelégier, gare",
+      "checkedAt": "2026-09-30T19:15:05.574079+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Saignel%C3%A9gier,%20gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Saignel%C3%A9gier,%20gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:117",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Saignelégier, gare",
+      "checkedAt": "2026-09-30T19:15:05.672332+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Saignel%C3%A9gier,%20gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Saignel%C3%A9gier,%20gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:124",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8500988&lang=fr",
+      "checkedAt": "2026-09-30T19:15:05.743201+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8500988&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:25:13.577Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8500988&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:124",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=St-Ursanne, Pont St-Jean/ville",
+      "checkedAt": "2026-09-30T19:15:05.813842+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=St-Ursanne,%20Pont%20St-Jean/ville",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=St-Ursanne,%20Pont%20St-Jean/ville",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:124",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=St-Ursanne, Pont St-Jean/ville",
+      "checkedAt": "2026-09-30T19:15:06.042391+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=St-Ursanne,%20Pont%20St-Jean/ville",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=St-Ursanne,%20Pont%20St-Jean/ville",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:140",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572034&lang=fr",
+      "checkedAt": "2026-09-30T19:15:06.047337+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572034&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:25:17.208Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572034&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:140",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=St-Ursanne, gare",
+      "checkedAt": "2026-09-30T19:15:06.221485+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=St-Ursanne,%20gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=St-Ursanne,%20gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:140",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=St-Ursanne, gare",
+      "checkedAt": "2026-09-30T19:15:06.229546+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=St-Ursanne,%20gare",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=St-Ursanne,%20gare",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:287",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572042&lang=fr",
+      "checkedAt": "2026-09-30T19:15:06.438778+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572042&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:25:02.521Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8572042&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:287",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Porrentruy, ville",
+      "checkedAt": "2026-09-30T19:15:06.492856+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Porrentruy,%20ville",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Porrentruy,%20ville",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:287",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Porrentruy, ville",
+      "checkedAt": "2026-09-30T19:15:06.690389+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Porrentruy,%20ville",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Porrentruy,%20ville",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:380",
+      "field": "urlhorairepassage",
+      "sourceUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8583814&lang=fr",
+      "checkedAt": "2026-09-30T19:15:06.709149+00:00",
+      "requestUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8583814&lang=fr",
+      "status": 403,
+      "error": "HTTP Error 403: Forbidden",
+      "browser": {
+        "checkedAt": "2026-09-30T19:25:09.888Z",
+        "status": 200,
+        "finalUrl": "https://haltestelle.postauto.ch/qr/qr.php?hid=8583814&lang=fr",
+        "title": "CarPostal Suisse SA.",
+        "stopNameVisible": true
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:380",
+      "field": "urlhoraireorigine",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Saignelégier, Bellevue",
+      "checkedAt": "2026-09-30T19:15:06.766014+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Saignel%C3%A9gier,%20Bellevue",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?von=Saignel%C3%A9gier,%20Bellevue",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:380",
+      "field": "urlhorairedestination",
+      "sourceUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Saignelégier, Bellevue",
+      "checkedAt": "2026-09-30T19:15:06.856747+00:00",
+      "requestUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Saignel%C3%A9gier,%20Bellevue",
+      "status": 200,
+      "finalUrl": "https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml?nach=Saignel%C3%A9gier,%20Bellevue",
+      "contentType": "text/html;charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:4",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.051.pdf",
+      "checkedAt": "2026-09-30T19:15:06.974064+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.051.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.051.pdf",
+      "contentType": "application/pdf",
+      "pdf": true
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:6",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.001.pdf",
+      "checkedAt": "2026-09-30T19:15:06.976805+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.001.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.001.pdf",
+      "contentType": "application/pdf",
+      "pdf": true,
+      "document": {
+        "cadre": "21.001",
+        "timetableYear": 2026,
+        "stateDate": "2025-10-27",
+        "method": "First-page text of the official PDF, read on 2026-09-30; no timetable republication."
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:13",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.822.pdf",
+      "checkedAt": "2026-09-30T19:15:07.040877+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.822.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.822.pdf",
+      "contentType": "application/pdf",
+      "pdf": true,
+      "document": {
+        "cadre": "21.822",
+        "timetableYear": 2026,
+        "stateDate": "2025-11-04",
+        "method": "First-page text of the official PDF, read on 2026-09-30; no timetable republication."
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:16",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.077.pdf",
+      "checkedAt": "2026-09-30T19:15:07.107139+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.077.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.077.pdf",
+      "contentType": "application/pdf",
+      "pdf": true,
+      "document": {
+        "cadre": "21.077",
+        "timetableYear": 2026,
+        "stateDate": "2025-10-27",
+        "method": "First-page text of the official PDF, read on 2026-09-30; no timetable republication."
+      }
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:25",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/50.116.pdf",
+      "checkedAt": "2026-09-30T19:15:07.124074+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/50.116.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/50.116.pdf",
+      "contentType": "application/pdf",
+      "pdf": true
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:32",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.078.pdf",
+      "checkedAt": "2026-09-30T19:15:07.172202+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.078.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.078.pdf",
+      "contentType": "application/pdf",
+      "pdf": true
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:47",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.021.pdf",
+      "checkedAt": "2026-09-30T19:15:07.230472+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.021.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.021.pdf",
+      "contentType": "application/pdf",
+      "pdf": true
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:80",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.823.pdf",
+      "checkedAt": "2026-09-30T19:15:07.249778+00:00",
+      "requestUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.823.pdf",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.823.pdf",
+      "contentType": "application/pdf",
+      "pdf": true
+    },
+    {
+      "featureId": "sdt.sdt_09_07_noctambus:1",
+      "field": "horaire",
+      "sourceUrl": "https://www.noctambus-jura.ch/horaires/lignes/ouest/#list-lines-hours",
+      "checkedAt": "2026-09-30T19:15:07.261089+00:00",
+      "requestUrl": "https://www.noctambus-jura.ch/horaires/lignes/ouest/#list-lines-hours",
+      "status": 200,
+      "finalUrl": "https://www.noctambus-jura.ch/horaires/lignes/ouest/#list-lines-hours",
+      "contentType": "text/html; charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_noctambus:2",
+      "field": "horaire",
+      "sourceUrl": "https://www.noctambus-jura.ch/horaires/lignes/est/#list-lines-hours",
+      "checkedAt": "2026-09-30T19:15:07.303329+00:00",
+      "requestUrl": "https://www.noctambus-jura.ch/horaires/lignes/est/#list-lines-hours",
+      "status": 200,
+      "finalUrl": "https://www.noctambus-jura.ch/horaires/lignes/est/#list-lines-hours",
+      "contentType": "text/html; charset=UTF-8",
+      "pdf": false
+    },
+    {
+      "featureId": "sdt.sdt_09_07_lignes_de_bus:19",
+      "field": "urlcadrehoraire",
+      "sourceUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.061.pdf",
+      "checkedAt": "2026-09-30T19:37:11.119068+00:00",
+      "status": 200,
+      "finalUrl": "https://widgets.oev-info.ch/publikation/jahresfpl/21.061.pdf",
+      "contentType": "application/pdf",
+      "pdf": true,
+      "document": {
+        "cadre": "21.061",
+        "timetableYear": 2026,
+        "stateDate": "2025-10-27",
+        "method": "First-page text of the official PDF, read on 2026-09-30; no timetable republication."
+      }
+    }
+  ],
+  "method": "HTTP requests with five-byte PDF signature; Chrome 154 rendered checks for eight CarPostal stops and two CFF links. No schedules republished."
+}

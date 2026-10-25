@@ -1,5 +1,13 @@
 # Données et conditions d'usage
 
+## Publication de test — 25 octobre 2026
+
+GitHub Pages sert les mêmes instantanés et conditions sous `/jura3d/jura/`, les crédits restent visibles. Aucun PDF de fiche patrimoniale ni contenu de page d'horaire externe recopié. Les services swisstopo restent contactés par chaque navigateur. Conditions FSDI relues, usage de test et limites de diffusion consignés dans [PUBLICATION.md](PUBLICATION.md). La licence CesiumJS et son inventaire tiers accompagnent le build. Aucune nouvelle source ni modification de droits ; les sources/configuration restent celles du Jura.
+
+## Organisation P7 — 25 octobre 2026
+
+Les sources, emprises, niveaux d'imagerie, crédits, effectifs et date des instantanés sont désormais déclarés dans `src/territories/jura.js`. Même fournisseur, mêmes URL publiques, données, règles de liens et conditions qu'en P6 ; aucune nouvelle source ni licence introduite. Vite livre uniquement les instantanés déclarés par les adaptateurs, avec les conditions communes une seule fois. Le témoin de navigation sans couches cantonales ne livre ni ne demande ces fichiers. © swisstopo reste visible. [Configuration et limites](VALIDATION_P7.md).
+
 ## Sources actuellement utilisées
 
 | Couche | Service et format | Réglage du prototype |
@@ -8,8 +16,53 @@
 | Bâtiments | `https://3d.geo.admin.ch/ch.swisstopo.swissbuildings3d.3d/v1/tileset.json` — 3D Tiles | Affichage activé au départ, masquable. |
 | Vue aérienne | `https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg` — XYZ JPEG | Niveau maximal 20. |
 | Fond topographique | `https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg` — XYZ JPEG | Niveau maximal 18. |
+| Bus statiques et zones Noctambus | Trois GeoJSON préparés depuis le réseau cantonal, `/jura/` | P4, désactivé au départ ; 464 arrêts, 140 tracés, 2 zones facultatives. |
+| Patrimoine RBC | GeoJSON préparé depuis l'archive cantonale, `/jura/heritage.geojson` — WGS84 | P3, couche activable, désactivée au départ ; 1 159 fiches / 1 156 positions utilisables. |
 
 Les modèles et images sont chargés directement depuis swisstopo par le navigateur ; le dépôt ne contient pas de copie de ces données. CesiumJS est une bibliothèque distincte, distribuée sous Apache 2.0. Aucun service MapTiler ou Cesium ion n'est configuré dans le code. Le logo Cesium dans le widget n'indique pas à lui seul l'utilisation d'un service ion.
+
+## Livraisons cantonales préparées P2 — 30 septembre 2026
+
+Les deux archives publiques officielles sont récupérées le 30 septembre, avec export déclaré du 13 septembre 2026. [Configuration d'origine](../data/sources-jura.json), [manifest complet](../data/jura/manifest.json) et [conditions PDF originales](../data/jura/Conditions_utilisation_geodonnees.pdf) accompagnent les [livraisons GeoJSON](../data/jura/README.md). P3 charge le patrimoine à l'activation et rend ses conditions accessibles ; P4 charge séparément les trois fichiers transports. Les conditions sont livrées dans le site. La version MIT du code ne couvre pas ces données.
+
+| Source | Préparation et date des entités | Condition / crédit |
+| --- | --- | --- |
+| [Répertoire des biens culturels RBC](https://opendata.swiss/fr/dataset/repertoire-des-biens-culturels-rbc), Office de la culture / SIT-Jura ; [ZIP](https://geo.jura.ch/geodonnees/donnees/OCC_2_14_Repertoire_des_biens_culturels_RBC.zip) | 1 159 fiches, 1 156 géométries exploitables, 1 142 descriptions ; entités datées du 2 avril 2026. Trois fiches conservées avec géométrie nulle. | Conditions cantonales §§4–5 : reproduction/publication des données publiques avec source lisible, conditions jointes à la transmission. |
+| [Réseau de bus](https://opendata.swiss/en/dataset/lignes-de-bus), Service du développement territorial / SIT-Jura ; [ZIP](https://geo.jura.ch/geodonnees/donnees/SDT_9_07_Reseau_de_bus.zip) | 464 arrêts, 140 tracés, 2 **zones** Noctambus ; entités datées du 13 septembre 2026. Réseau statique. | Même document de conditions, même empreinte. |
+
+Crédit requis bien lisible : **« © Géodonnées de la République et Canton du Jura »** ; auteurs, titres et liens du jeu également documentés. Les conditions datées du 1er juillet 2019 rappellent protection des données (§3), absence de garantie de précision/actualité (§2) et restrictions pour les données sur autorisation (§6). Les deux livraisons choisies sont celles des archives publiques. Les conditions générales [opendata.swiss avec attribution](https://opendata.swiss/fr/terms-of-use#terms_by) ont été consultées ; ne pas substituer une licence Creative Commons ou MIT aux conditions cantonales. Les pages/API catalogue indisponibles pour les transports pendant cette session ne sont pas utilisées comme nouvelle preuve ; les PDF joints sont relus intégralement. Les fiches patrimoniales individuelles restent des liens externes, sans copie d'illustrations.
+
+Conversion EPSG:2056 → WGS84 longitude/latitude RFC 7946, précision annoncée PROJ 1 m, sans altitude, simplification ou arrondi. Toutes les propriétés source, y compris identifiants métier, catégories et liens HTTP(S), sont conservées. Identifiants GeoJSON composés de la table et de sa clé locale ; pas une promesse de stabilité de cette clé lors d'un futur export. Le GeoPackage RBC ne contient ni EGID ni champ autonome d'importance nationale/régionale/locale ; ne pas inférer une jointure ni une cotation. Noctambus est séparé des lignes et des arrêts jour/nuit présents dans les autres tables.
+
+Anomalies source RBC : IDs 229 (fiche 1934), 247 (fiche 1986), 766 (fiche 1225), coordonnées hors de la grande région de contrôle. Identités conservées, `geometry: null` et géométries originales/motifs dans le manifeste. Aucune correction inventée. Huit repères convertis comparés au [service REFRAME officiel](https://www.swisstopo.admin.ch/fr/rest-api-geodesique-reframe-web), écart maximal 0,013313 m, puis revue orthophoto quatre localités. Comparaison de conversions, pas exactitude générale de la source. [Validation et reproduction P2](VALIDATION_P2.md).
+
+La fiche bus fournie annonce l'actualisation à partir de février après le changement d'horaire de décembre. Les 140 objets sont des tracés/tronçons : leur nombre n'est pas celui de services commerciaux uniques. Aucun bus GPS, retard ou horaire temps réel. Les URLs officielles sont conservées et vérifiées syntaxiquement ; des échantillons de disponibilité sont vérifiés en P3/P4, sans garantie exhaustive ou future. Les données brutes, caches et environnement Python ne sont pas versionnés.
+
+## Intégration patrimoine P3 — 30 septembre 2026
+
+La sélection d'un repère patrimonial ouvre la fiche de lieu issue du RBC ; elle n'enrichit pas la fiche swisstopo du bâtiment voisin et n'établit aucune jointure EGID. Les noms/descriptions/catégories/références sont ceux du GeoJSON P2. Les trois fiches sans position restent consultables, aucun repère ni cadrage deviné. Crédit cantonal, auteur et lien de catalogue affichés dans les fiches et le menu actif, conditions PDF servies sous `/jura/` ; © swisstopo reste visible.
+
+Douze liens officiels des quatre localités contrôlés : HTTP 200 avec signature PDF, observation datée dans [jura-heritage-link-checks.json](../data/jura-heritage-link-checks.json). Les propriétés conservent l'URL HTTP source ; le lien de fiche utilise HTTPS sur le même chemin cantonal validé. Absence/URL inutilisable ou indisponibilité connue : lien non actif et message, sans document inventé. Les autres liens et la disponibilité future ne sont pas garantis. Pas de copie des PDF individuels, images ou données privées. Les transports statiques préparés sont servis séparément par P4. [Résultats bureau et protocole physique P3](VALIDATION_P3.md).
+
+## Intégration transports P4 — 30 septembre 2026
+
+GeoJSON P2 inchangés, chargés à l’activation puis gardés en mémoire de l’onglet. P6 produit uniquement une copie d’affichage des lignes : simplification à 1 m dans une projection locale approximative, découpe à 5,25 km dans le secteur actif ; réseau entier disponible sans découpe. Ce mètre borne le déplacement de rendu dans la projection, pas l’exactitude géographique de la source ; aucune altitude officielle ajoutée ni donnée préparée remplacée. Date réseau 13.09.2026, source SDT/SIT-Jura, crédit cantonal et conditions accessibles. Pas de jointure avec les bâtiments, de numéro commercial déduit de `niveauoffre`, de bus GPS, de retards ou de départs affichés en direct. Les zones Noctambus restent des emprises polygonales, pas des lignes.
+
+[Contrôles de liens datés](../data/jura-transport-link-checks.json) : huit pages CarPostal d’arrêts échantillonnés renvoient HTTP 200 dans Chrome et montrent le nom attendu (requêtes Python refusées 403), neuf cadres PDF renvoient HTTP 200 avec signature PDF ; première page de quatre cadres contrôlée, année 2026. Deux pages Noctambus Est/Ouest disponibles. Seize URL CFF source conservées : HTTP 200 par requête simple, mais deux essais Chrome refusés 403 ; **préremplissage non confirmé**, avertissement dans la fiche. Aucun horaire recopié ; une réponse 200 ne prouve pas à elle seule que tous les liens fonctionnent ou que tous les services sont actuels. [Échantillon, preuves et limites](VALIDATION_P4.md).
+
+## Navigation et sélection P1 — 30 septembre 2026
+
+Les quatre localités sont des repères approximatifs de caméra définis dans `PLACES` de `src/main.js`, pas une couche de lieux ni une délimitation administrative : Delémont (7.3448, 47.3653), Porrentruy (7.0755, 47.4156), Saignelégier (6.9977, 47.2560), Saint-Ursanne (7.1547, 47.3652), longitude/latitude en degrés WGS84. Les altitudes de cadrage sont approximatives (435, 425, 980, 440 m). Elles ne servent pas à publier une altitude de bâtiment. Aucune nouvelle source externe ni donnée patrimoine/bus n'est intégrée par P1.
+
+La sélection lit les propriétés disponibles sur l'objet 3D Tiles : nom non vide (`NAME_KOMPLETT` ou variantes `name`/`nom`), EGID s'il existe et n'est pas nul/zéro. Le bâtiment échantillonné dans le probe du 30 septembre fournit l'EGID `190182609` et un `NAME_KOMPLETT` vide après suppression des espaces ; la fiche affiche donc « Bâtiment 3D », sans inventer de nom ou d'adresse. Cela ne décrit pas tous les objets du service et ne valide aucune jointure au patrimoine. Les coordonnées montrées sont celles du point choisi sur le modèle ou le terrain, pas une adresse ni nécessairement le centre de l'objet. Les crédits swisstopo restent visibles, y compris lorsque le panneau défile.
+
+## Hiérarchie des bâtiments et distance
+
+Lecture directe des manifestes officiels le 30 septembre 2026 : [racine stable](https://3d.geo.admin.ch/ch.swisstopo.swissbuildings3d.3d/v1/tileset.json), génération `20260520`, puis `tileset29.json` et [branche couvrant Delémont, tileset27.json](https://3d.geo.admin.ch/ch.swisstopo.swissbuildings3d.3d/v1/20260520/tileset27.json). Les 10 822 contenus de cette branche sont des B3DM sous `11/`, avec `geometricError: 0`, raffinement hérité `ADD`, aucune tuile `REPLACE`. Le repère du centre de Delémont appartient à `11/625/1597.b3dm`. Le chiffre 11 désigne le niveau du chemin de tuilage, pas le niveau sémantique LOD11 d'un bâtiment.
+
+Cette hiérarchie organise spatialement les bâtiments et leur ajout selon la vue ; elle ne fournit pas de versions progressivement simplifiées de remplacement pour cette branche. Cesium sélectionne les tuiles selon l'erreur à l'écran, sans simplifier automatiquement les maillages reçus. Augmenter le seuil peut donc changer les groupes visibles, sans garantir une version moins détaillée du même bâtiment. Lecture des manifestes uniquement : aucun comptage des triangles dessinés, aucune analyse exhaustive de toutes les branches suisses. Les chemins datés servent de preuve de cette session ; l'application conserve la racine stable. La date de génération ne démontre pas le millésime de chaque bâtiment. [Documentation officielle 3D Tiles](https://docs.geo.admin.ch/visualize-data/3d-tiles.html), [sélection Cesium](https://cesium.com/learn/cesiumjs/ref-doc/Cesium3DTileset.html#maximumScreenSpaceError).
+
+Diagnostic A53 ultérieur le même jour : seuils 64/128 avec tampon normal retirent des groupes, jusqu'à zéro bâtiment dans la vue ; rejetés pour les presets. Les compteurs de la passe principale des bâtiments et les captures sont dans [DIAGNOSTIC_PERFORMANCE.md](DIAGNOSTIC_PERFORMANCE.md). Aucun nouveau jeu de données, cache, téléchargement de territoire ou conversion LOD. Les presets changent le rendu et compensent le seuil selon la résolution ; identités et attributions restent celles de la source.
 
 ## Résolution et niveau des fonds
 

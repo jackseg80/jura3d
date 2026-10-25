@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "retrievedOn": "2026-09-30",
+  "attribution": "© Géodonnées de la République et Canton du Jura",
+  "conditionsSha256": "fb3ff36198e79575c2e9a8a78dbcd3adb2ee806159456f151d1533438cd6a4eb",
+  "sources": [
+    {
+      "id": "heritage",
+      "title": "Répertoire des biens culturels (RBC)",
+      "publisher": "République et Canton du Jura — Office de la culture / SIT-Jura",
+      "catalogUrl": "https://opendata.swiss/fr/dataset/repertoire-des-biens-culturels-rbc",
+      "archiveUrl": "https://geo.jura.ch/geodonnees/donnees/OCC_2_14_Repertoire_des_biens_culturels_RBC.zip",
+      "archiveSha256": "72b4fcc3129ba191e7f32bd606c28dc1c14a828906173c2bb6e98bed3eb8bdd2",
+      "layers": [
+        {"table": "rcju_autre.occ_02_14_rbc", "file": "heritage.geojson", "count": 1159, "unplacedIds": [229, 247, 766], "geometry": "MultiPoint", "nameField": "nom", "linkFields": ["url_pdf"], "idFields": ["id", "id_fiche", "rbc_no", "objectid"]}
+      ]
+    },
+    {
+      "id": "bus",
+      "title": "Réseau de bus",
+      "publisher": "République et Canton du Jura — Service du développement territorial / SIT-Jura",
+      "catalogUrl": "https://opendata.swiss/en/dataset/lignes-de-bus",
+      "archiveUrl": "https://geo.jura.ch/geodonnees/donnees/SDT_9_07_Reseau_de_bus.zip",
+      "archiveSha256": "ba212b8c8314d363bf4d23a87dcbe020902a4403e5e1d63d0ed648927b076f9f",
+      "layers": [
+        {"table": "sdt.sdt_09_07_arrets_de_bus", "file": "bus-stops.geojson", "count": 464, "geometry": "MultiPoint", "nameField": "nomarret", "linkFields": ["urlhorairepassage", "urlhoraireorigine", "urlhorairedestination"], "idFields": ["id", "idarret", "objectid"]},
+        {"table": "sdt.sdt_09_07_lignes_de_bus", "file": "bus-lines.geojson", "count": 140, "geometry": "MultiLineString", "nameField": "nomcadrehoraire", "linkFields": ["urlcadrehoraire"], "idFields": ["id", "idcadrehoraire", "objectid"]},
+        {"table": "sdt.sdt_09_07_noctambus", "file": "noctambus-zones.geojson", "count": 2, "geometry": "MultiPolygon", "nameField": "nom_zone", "linkFields": ["horaire"], "idFields": ["id", "objectid"]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "checkedAt": "2026-09-30T16:39:56.432571+00:00",
+  "method": "Independent swisstopo REFRAME LV95 to WGS84 responses; no height",
+  "maxDifferenceMetres": 2,
+  "points": [
+    {
+      "file": "heritage.geojson",
+      "featureId": "rcju_autre.occ_02_14_rbc:323",
+      "name": "Château",
+      "sourceXY": [
+        2592768.0,
+        1245886.0
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2592768.0&northing=1245886.0&format=json",
+      "referenceWgs84": [
+        7.342888698514645,
+        47.363776341494884
+      ]
+    },
+    {
+      "file": "heritage.geojson",
+      "featureId": "rcju_autre.occ_02_14_rbc:101",
+      "name": "Château de Porrentruy",
+      "sourceXY": [
+        2572333.0,
+        1252101.0
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2572333.0&northing=1252101.0&format=json",
+      "referenceWgs84": [
+        7.071989219060318,
+        47.41913097404563
+      ]
+    },
+    {
+      "file": "heritage.geojson",
+      "featureId": "rcju_autre.occ_02_14_rbc:945",
+      "name": "- église : 3 autels",
+      "sourceXY": [
+        2566480.0,
+        1233963.0
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2566480.0&northing=1233963.0&format=json",
+      "referenceWgs84": [
+        6.995789090326346,
+        47.25572110768608
+      ]
+    },
+    {
+      "file": "heritage.geojson",
+      "featureId": "rcju_autre.occ_02_14_rbc:164",
+      "name": "Collégiale",
+      "sourceXY": [
+        2578473.0,
+        1246025.0
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2578473.0&northing=1246025.0&format=json",
+      "referenceWgs84": [
+        7.153647509285887,
+        47.36471278772707
+      ]
+    },
+    {
+      "file": "bus-stops.geojson",
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:25",
+      "name": "Delémont, Gare",
+      "sourceXY": [
+        2593230.1176000014,
+        1245712.240000002
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2593230.1176000014&northing=1245712.240000002&format=json",
+      "referenceWgs84": [
+        7.3490088114063985,
+        47.36221845890283
+      ]
+    },
+    {
+      "file": "bus-stops.geojson",
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:77",
+      "name": "Porrentruy, gare",
+      "sourceXY": [
+        2572904.850900002,
+        1252137.8112000003
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2572904.850900002&northing=1252137.8112000003&format=json",
+      "referenceWgs84": [
+        7.07956486926165,
+        47.419485922482885
+      ]
+    },
+    {
+      "file": "bus-stops.geojson",
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:117",
+      "name": "Saignelégier, gare",
+      "sourceXY": [
+        2566360.2936000004,
+        1233856.9244000018
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2566360.2936000004&northing=1233856.9244000018&format=json",
+      "referenceWgs84": [
+        6.994215625072731,
+        47.25476091360125
+      ]
+    },
+    {
+      "file": "bus-stops.geojson",
+      "featureId": "sdt.sdt_09_07_arrets_de_bus:140",
+      "name": "St-Ursanne, gare",
+      "sourceXY": [
+        2579438.2095,
+        1246353.2058999985
+      ],
+      "referenceUrl": "https://geodesy.geo.admin.ch/reframe/lv95towgs84?easting=2579438.2095&northing=1246353.2058999985&format=json",
+      "referenceWgs84": [
+        7.166409848414047,
+        47.36769570125255
+      ]
+    }
+  ]
+}

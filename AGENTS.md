@@ -2,7 +2,7 @@
 
 ## Contexte et portée
 
-- Le dépôt est un prototype CesiumJS indépendant, centré aujourd'hui sur Delémont. L'objectif envisagé concerne le **canton du Jura suisse**, mais ni la couverture complète ni le jeu ne sont implémentés.
+- Le dépôt est un prototype CesiumJS indépendant, centré aujourd'hui sur Delémont. L'objectif est un **site web exploratoire utile pour le canton du Jura suisse**, avec bâtiments 3D et couches d'information (transports, trafic, lieux, etc.). La couverture complète et ces couches ne sont pas encore implémentées. Un jeu éventuel serait un projet ultérieur distinct, pas l'objectif actuel.
 - Utiliser SunTrail 3D comme source d'idées seulement. Ne pas copier son code ou celui de Geneva 3D sans analyse de licence et décision explicite.
 - Les données swisstopo sont chargées en ligne. Le code MIT de ce dépôt ne relicencie ni CesiumJS ni ces données.
 

@@ -1,0 +1,52 @@
+# Publication de test sur GitHub Pages
+
+25 octobre 2026 — étape ajoutée entre P7 et P8 à la demande du propriétaire. La publication n'était pas un lot explicite du plan ; le dépôt avait seulement un contrôle de compilation GitHub Actions. Le propriétaire autorise les commits, l'envoi et le déploiement nécessaires à cette publication. L'ancienne consigne « aucun commit/push/déploiement » reste historique pour P1–P7 ; elle ne bloque pas cette opération autorisée.
+
+## État
+
+Publication en préparation. Adresse prévue : <https://jackseg80.github.io/jura3d/>. Ne pas confondre dépôt, build Actions, déploiement et vérification du site public. P8 Bâle non commencé.
+
+## Configuration et mise à jour
+
+- Source : dépôt public `jackseg80/jura3d`, branche `main`.
+- `.github/workflows/build.yml` vérifie les push et pull requests sans publier.
+- `.github/workflows/pages.yml` publie uniquement sur déclenchement manuel, depuis `main`. Installation verrouillée `npm ci`, tests configuration/géométrie, build et contrôle des fichiers avant envoi de `dist/` à GitHub Pages. Aucun secret ajouté.
+- Permissions de publication limitées au job de déploiement : `pages: write` et `id-token: write`, environnement `github-pages`. Les pushes ultérieurs ne publient pas automatiquement.
+- `JURA3D_BASE_PATH=/jura3d/` adapte les chemins Vite, données et Workers/Assets Cesium ; le défaut `/` conserve l'aperçu local. `VITE_TERRITORY=jura` est fixé pour le site public.
+- La licence CesiumJS et son inventaire tiers sont livrés sous `cesiumStatic/LICENSE.md` et `cesiumStatic/ThirdParty.json`.
+- `build-info.json` identifie le commit Actions, la base et le territoire servis. En build local, la révision vaut `null` pour ne pas attribuer des modifications non committées à un ancien commit.
+
+Commandes, après autorisation d'une future publication et vérification des changements :
+
+```powershell
+git push origin main
+gh workflow run pages.yml --ref main
+gh run list --workflow pages.yml --limit 3
+# Après réussite du déploiement :
+$env:JURA3D_URL='https://jackseg80.github.io/jura3d/'
+$env:JURA3D_EXPECTED_REVISION='<SHA du commit déployé>'
+$env:JURA3D_PROBE_GPU='high'
+node scripts/probe-published.mjs
+```
+
+Ne pas forcer un push ni écraser une divergence. Un commit documentaire après publication peut être plus récent que le site : c'est attendu, puisque la publication est manuelle. Consigner séparément le commit servi et le dernier état du dépôt. Pour revenir à une version antérieure, construire/publier une révision examinée via un workflow adapté explicitement, ou rétablir les fichiers sur `main` par un nouveau commit ; ne pas réécrire l'historique. Aucune ancienne version Pages ne précède cette première publication.
+
+## Vérification
+
+**Avant publication, 25 octobre à 21:37:23 Europe/Zurich :** tests configuration/géométrie et contrôles des builds racine/sous-dossier réussis. Probe complet P1/P3/P4/P6 sur `127.0.0.1:4304/jura3d/` réussi, Chrome 156.0.8078.47/RTX 4080 Laptop GPU, zéro erreur. Les 400 fichiers du build éprouvé sont identiques après ajout des deux fichiers de licence ; aucun second parcours complet nécessaire pour ces seuls ajouts statiques. Rapport local `.vite/publication/probe-before-publish.json` et inventaire `tested-build-hashes.json`.
+
+Avant publication : compilation locale `/` et `/jura3d/`, présence des sept fichiers cantonaux/conditions et ressources Cesium, tests de configuration et des 140 tracés. Probe complet des interactions 3D sur le build en sous-dossier. Ensuite : réussite Actions, lecture HTTPS de la révision servie et contrôle Chrome normal sans `?probe` : navigation des quatre localités, patrimoine/transports/fiches, lien de conditions, crédits et absence d'erreurs de ressources. Ces contrôles PC ne prouvent pas de nouvelles performances Android.
+
+Les rapports temporaires restent ignorés dans `.vite/publication/`. Les sources, données préparées et images de documentation choisies sont versionnées ; ni `node_modules/`, `dist/`, archives/caches temporaires, captures de probe ou secrets ne sont envoyés. L'inventaire initial a contrôlé 120 fichiers (~74,7 Mo), aucun fichier > 10 Mo et aucun motif de clé privée/token détecté ; il s'agit d'un contrôle ciblé, pas d'une certification générale.
+
+## Données et limites de diffusion
+
+Publication d'un prototype exploratoire : dépendance au réseau, instantanés cantonaux et liens externes, absence de suivi des bus en direct, limites A53/Tab S8 conservées. Les deux crédits restent visibles et les conditions cantonales restent jointes. Aucun changement de licence des données ni copie des PDF de fiches individuelles.
+
+Les [conditions FSDI](https://www.geo.admin.ch/en/general-terms-of-use-fsdi), relues le 25 octobre 2026, permettent l'intégration sous conditions d'attribution et de fair use. Elles donnent comme repère les applications web ayant en moyenne 20 000 utilisateurs par jour ; ce chiffre n'est ni une capacité mesurée de Jura 3D ni une garantie. Cette mise en ligne de test n'est pas une campagne de diffusion à grande audience. Revoir trafic et conditions avant une telle diffusion.
+
+Références techniques consultées le 25 octobre : [Vite et le sous-dossier GitHub Pages](https://vite.dev/guide/static-deploy.html#github-pages), [workflow Pages personnalisé](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages). Les conditions cantonales préparées en P2 restent applicables, voir [DONNEES.md](DONNEES.md).
+
+## Résultat vérifié
+
+À compléter après déploiement : commit servi, exécution Actions, date, URL, preuve de rendu public et limites. Aucune publication accomplie ne doit être déduite de la seule préparation du workflow.
