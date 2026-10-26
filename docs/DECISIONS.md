@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-26 — Qualifier B1 avec le GPU réellement utilisé
+
+Après signalement de ralentissement, lire l'onglet intégré ChatGPT lui-même : Intel UHD, pas la RTX installée dans le PC. Le rendu commun P6 ne suffit pas à qualifier Bâle, qui contient environ dix fois plus de points de tracés que la vue Delémont mesurée. Garder les contrôles fonctionnels, borner les résultats RTX à leur environnement et remettre l'optimisation Intel/RTX **avant l'A53 puis B2/B3**. Ne pas modifier les réglages GPU Windows par déduction, forcer un preset ou retirer silencieusement des tracés. Aucune variante de rendu retenue à ce stade ; matériau uni mesuré sans gain utile. [Diagnostic et suites](DIAGNOSTIC_B1_TRACES.md).
+
 ## 2026-10-26 — B1 via API, rendu partagé et fiches propres à Bâle
 
 Après autorisation de commencer B1, intégrer les quais et tracés tram/bus de Basel-Stadt, en conservant le composant de rendu/cycle de vie Jura. Normaliser seulement la géométrie et les champs d'affichage ; garder les attributs source, exclure explicitement rail/bateaux, vérifier la pagination complète et la mention de licence avant affichage. API à la demande et cache en mémoire ; pas de snapshot distribué ni polling. Quais seuls à l'activation, tracés optionnels et secteur local par défaut, même simplification/découpe P6. Le choix réseau entier reste explicite ; pas d'extension des bâtiments.

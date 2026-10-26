@@ -1,5 +1,7 @@
 # Presets et diagnostic A53 — 30 septembre 2026
 
+**26 octobre 2026 — Bâle B1 :** le navigateur intégré ChatGPT du propriétaire a été lu directement : renderer Intel UHD, AutoFaible,14–15FPS avec les tracés. Ce constat actuel est distinct de l'ancien incident Auto décrit plus bas. Comparaison instrumentée Intel/RTX et Delémont/Bâle dans [DIAGNOSTIC_B1_TRACES.md](DIAGNOSTIC_B1_TRACES.md). Optimisation B1 ouverte avant qualification A53 ; ne pas déduire le GPU utilisé du modèle du PC.
+
 **Complément du 1er octobre 2026 :** première campagne P5 A53 complète, comparaison des sept configurations sur quatre localités, 13 min 17 s. Les anciens chiffres courts ci-dessous restent historiques ; [tableaux, limites et versions P5](VALIDATION_P5.md). Bâtiments/ombres pénalisent fortement les centres denses ; aucun nouveau LOD ou changement de moteur. Panneau corrigé ensuite, sans nouveau benchmark complet du bundle d’interface.
 
 Le propriétaire demande une adaptation automatique et des presets après le premier A53 à 4–8 FPS. Cet ajout local prolonge les essais P1 ; il ne clôture ni P1 mobile ni la campagne P5. S23 indisponible ; Tab S8 rechargée et reprise en fin de document, avec contrôles automatiques partiels et retour manuel Wi-Fi. Sources, identités et crédits conservés, aucun commit/push/déploiement.

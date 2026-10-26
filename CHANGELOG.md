@@ -1,5 +1,10 @@
 # Historique
 
+## 2026-10-26 — B1 : diagnostic des tracés sur Intel et RTX
+
+- Lire le GPU de l'onglet réellement utilisé dans ChatGPT : Intel UHD, AutoFaible, baisse avec les tracés confirmée. Comparer Bâle/Delémont et Intel/RTX par temps GPU, CPU de soumission et géométrie ; les anciens résultats RTX ne qualifient pas cet onglet.
+- Remettre l'optimisation B1 avant l'A53 et B2/B3. [Preuves et limites](docs/DIAGNOSTIC_B1_TRACES.md). Aucun renderer ou réglage GPU/Windows modifié, aucune amélioration revendiquée, aucun push/déploiement.
+
 ## 2026-10-26 — B1 : tram et bus à Bâle, qualification mobile ouverte
 
 - Quais et tracés du réseau officiel, modes tram/bus, secteur/réseau fourni, groupes et fiches avec attributs source ; quais affichés à l'activation, tracés séparément activables. 660 quais et 161 tracés retenus au contrôle.
