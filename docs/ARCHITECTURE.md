@@ -1,5 +1,13 @@
 # Architecture du prototype
 
+## B1 — Tracés bâlois en tuiles calculées localement
+
+`transport-imagery.js` fournit à Cesium une couche d'imagerie transparente, en tuiles512×512 WebMercator/niveaux0–20, produite par Canvas2D à partir de la géométrie d'affichage déjà simplifiée1m et découpée5,25km. Pas de serveur de tuiles, nouvel accès distant, nouvelle source ou modification du relief. Cache propre au fournisseur limité à24 canvas non vides ; cela ne borne pas toute la mémoire de Cesium ni ses textures. Le moteur conserve sa gestion des tuiles visibles. Couleurs tram/bus et pointillés nocturnes, contour blanc ; l'épaisseur de rasterisation dépend du niveau de tuile et de la vue.
+
+Seule la branche Bâle utilise cette couche pour le réseau de fond ; le Jura garde ses polylignes terrain P6. Les quais restent des entités Cesium regroupables. Les propriétés source, filtres, liste de tracés et cache API sont conservés. `transport-raster-geometry.js` projette les chemins, filtre les tuiles et recherche les identifiants proches sans raccorder deux portions disjointes. Au clic sur le terrain libre, intersection terrain puis test géométrique et contrôle à8pixels CSS ; un objet Cesium au premier plan garde la priorité. Les tracés superposés ouvrent la liste des identités source. Une ligne choisie reçoit une surbrillance terrain native temporaire ; sa fermeture ne reconstruit pas le réseau de fond.
+
+Chaque filtre/secteur remplace son fournisseur ; désactivation, erreur et destruction retirent uniquement cette couche d'imagerie et libèrent son cache. Génération synchrone dans une promesse rejetable, erreurs relayées vers le réessai des couches ; une erreur tardive d'un fournisseur remplacé est ignorée par identité. Le contrat et le registre P7 restent identiques. `scripts/test-transport-raster.mjs` couvre projection/frontières/proximité/identités/parties disjointes ; le probe B1 vérifie clics, groupes, surbrillance, absence d'accumulation de couches et récupération après panne Canvas2D. [Validation et mesures](OPTIMISATION_B1.md).
+
 ## B1 — Adaptation du réseau bâlois
 
 `basel-transit-data.js` lit les deux API 100064/100065 à la première activation, vérifie licence/pagination/identifiants/géométries/listes et normalise Point/LineString/MultiLineString pour le renderer commun. Les propriétés restent natives ; nom, modes et date de catalogue sont séparés dans `display`. Pas de copie du schéma Jura dans les attributs bâlois, pas de données réseau livrées dans le build. Cache mémoire jusqu'au rechargement, délai/abort/génération du contrat existant ; aucun polling.

@@ -1,5 +1,7 @@
 # B1 — Coût des tracés et GPU du navigateur intégré
 
+**Suite du diagnostic :** l'optimisation décrite comme ouverte dans ce relevé a ensuite été réalisée et qualifiée sur PC. [Rendu retenu, mesures finales et limites](OPTIMISATION_B1.md). Le diagnostic ci-dessous conserve ses versions et observations initiales ; A53/retour utilisateur intégré restent à recueillir.
+
 26 octobre 2026, complément après le signalement du propriétaire. **B1 reste ouvert : optimisation des tracés sur GPU intégré avant qualification A53 et B2.** Sources applicatives `17e93f7` inchangées pendant ce diagnostic ; aucune correction du renderer livrée par ce lot documentaire. Les parcours fonctionnels PC précédents restent valables sur leur version ; le relevé court RTX ne qualifie pas le navigateur intégré.
 
 ## Onglet effectivement utilisé

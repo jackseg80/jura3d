@@ -1,5 +1,7 @@
 # PUB2 — Accueil commun Jura et Bâle
 
+**Après optimisation B1 :** la preview4306 sert le build `.vite/b1-opt/site-final/` après contrôle, version précédente `.vite/b1/site-delivery/` conservée. [État et rapports actuels](OPTIMISATION_B1.md). Les étapes PUB2 ci-dessous sont historiques ; aucune publication effectuée.
+
 **Après B1, 26 octobre :** la preview commune4306 sert désormais l'assemblage `.vite/b1/site-delivery/` avec les transports Bâle. Les builds et rapports PUB2 ci-dessous sont conservés comme références antérieures ; [B1](VALIDATION_B1.md) donne les nouvelles vérifications, empreintes et limites. Aucun nouveau déploiement, qualification A53 B1 ouverte.
 
 **Revue du 26 octobre :** mise à jour des documents et commit de sauvegarde autorisés. Le propriétaire confirme l'ordre transports → lieux/patrimoine → services et juge insuffisant le Bâle limité aux parkings : [plan révisé](PLAN_BALE_ENRICHISSEMENT.md). Publication différée ; aucun push/déploiement exécuté par cette sauvegarde. Les mentions « aucun commit autorisé » ci-dessous décrivent l'autorisation initiale de préparation, désormais complétée pour le commit seulement.

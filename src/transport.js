@@ -4,6 +4,7 @@ import { BoundingSphere, Cartesian3, Cartographic, ClassificationType, Color, Cu
   sampleTerrainMostDetailed, VerticalOrigin } from 'cesium';
 import { prepareTransportLines, TRANSPORT_LINE_TOLERANCE_METERS, TRANSPORT_RENDER_RADIUS_METERS } from './transport-geometry.js';
 import { loadBaselTransit } from './basel-transit-data.js';
+import { createTransportImagery } from './transport-imagery.js';
 
 const BLUE = Color.fromCssColorString('#086d9c');
 const PURPLE = Color.fromCssColorString('#763b9c');
@@ -57,7 +58,7 @@ function lineMaterial(item, selected = false) {
 }
 
 export function createTransportLayer(viewer, { config, getPlace, onSelect, onGroup, onClear, onState = () => {} }) {
-  const basel=config.kind==='basel-transit';let sourceInfo;
+  const basel=config.kind==='basel-transit';let sourceInfo;let imagery;
   const base = `${import.meta.env.BASE_URL}${config.base??''}`;
   const [west, south, east, north] = config.bounds;
   const events = new AbortController();
@@ -104,6 +105,18 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     onState();
   }
   function styleSelection(id, selected) {
+    const selectedItem = byId.get(id);
+    if (basel && imagery && selected && selectedItem?.kind === 'line') {
+      lineGeometry(selectedItem).forEach((line, i) => {
+        const overlayId = `${id}#${i}#highlight`;
+        source.entities.add({ id: overlayId, name: nameOf(selectedItem), polyline: {
+          positions: line.map(p => Cartesian3.fromDegrees(p[0], p[1])), width: 7,
+          material: lineMaterial(selectedItem, true), clampToGround: true,
+          classificationType: ClassificationType.TERRAIN, zIndex: 4 } });
+        byEntity.set(overlayId, selectedItem);
+      });
+      return;
+    }
     for (const [entityId, item] of [...byEntity]) {
       if (item.feature.id !== id) continue;
       const entity = source?.entities.getById(entityId); if (!entity) continue;
@@ -133,6 +146,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
   }
   function removeSource() {
     clearSelection(); removeCluster?.(); removeCluster = undefined;
+    imagery?.destroy(); imagery = undefined;
     if (source) viewer.dataSources.remove(source, true); source = undefined; byEntity.clear();
     geometryStats = { sourceLineVertices: 0, renderedLineVertices: 0, renderedLineParts: 0 };
   }
@@ -173,6 +187,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
   function rebuild() {
     if (destroyed || !records || !toggle.checked) return;
     onClear();
+    imagery?.destroy(); imagery = undefined;
     const place = sector.value === 'active' ? getPlace() : null;
     const visible = { stop: stopsToggle.checked, line: linesToggle.checked, zone: zonesToggle.checked };
     filtered = records.filter((item) => visible[item.kind] && geometryNear(item.kind, item.feature, place)
@@ -194,6 +209,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     }
     source.entities.removeAll(); byEntity.clear();
     geometryStats = { sourceLineVertices: 0, renderedLineVertices: 0, renderedLineParts: 0 };
+    const rasterLines = [];
     for (const item of filtered) {
       const feature = item.feature;
       const add = (id, options) => { source.entities.add({ id, name: nameOf(item), ...options }); byEntity.set(id, item); };
@@ -207,7 +223,8 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
         geometryStats.sourceLineVertices += feature.geometry.coordinates.reduce((count, line) => count + line.length, 0);
         geometryStats.renderedLineVertices += lines.reduce((count, line) => count + line.length, 0);
         geometryStats.renderedLineParts += lines.length;
-        lines.forEach((line, i) => add(`${feature.id}#${i}`, { polyline: {
+        if (basel) rasterLines.push({ id: feature.id, parts: lines, color: baseColor(item).toCssColorString(), night: item.display.nightOnly });
+        else lines.forEach((line, i) => add(`${feature.id}#${i}`, { polyline: {
           positions: line.map((p) => Cartesian3.fromDegrees(p[0], p[1])), width: 5, material: lineMaterial(item),
           clampToGround: true, classificationType: ClassificationType.TERRAIN, zIndex: 3 } }));
       } else {
@@ -217,6 +234,13 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
           material: PURPLE.withAlpha(.14), heightReference: HeightReference.CLAMP_TO_TERRAIN,
           classificationType: ClassificationType.TERRAIN, zIndex: 0 } }));
       }
+    }
+    if (rasterLines.length) {
+      const owner = createTransportImagery(viewer, rasterLines, config.credit, () => queueMicrotask(() => {
+        if (destroyed || imagery !== owner) return;
+        removeSource(); setState('error', 'Tracés indisponibles. Réessayez le chargement.');
+      }));
+      imagery = owner;
     }
     updateChoices();
     const count = (kind) => filtered.filter((i) => i.kind === kind).length;
@@ -277,6 +301,23 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
   setState('off', 'Transports masqués.');
   function pickedItem(picked) { return source && toggle.checked && picked?.id && source.entities.contains(picked.id) ? byEntity.get(picked.id.id) : null; }
   function linesAt(position) {
+    if (basel && imagery) {
+      const scene = viewer.scene, world = scene.globe.pick(viewer.camera.getPickRay(position), scene);
+      if (!world) return [];
+      const c = Cartographic.fromCartesian(world), point = [CesiumMath.toDegrees(c.longitude), CesiumMath.toDegrees(c.latitude)];
+      const offsets = [{ x: position.x + 8, y: position.y }, { x: position.x, y: position.y + 8 }];
+      const radius = Math.max(1, ...offsets.map(p => {
+        const neighbor = scene.globe.pick(viewer.camera.getPickRay(p), scene);
+        return neighbor ? Cartesian3.distance(world, neighbor) : 0;
+      }));
+      return imagery.nearby(point, radius).filter(match => {
+        const cartographic = Cartographic.fromDegrees(...match.position);
+        const height = scene.globe.getHeight(cartographic);
+        if (!Number.isFinite(height)) return false;
+        const screen = scene.cartesianToCanvasCoordinates(Cartesian3.fromDegrees(...match.position, height));
+        return screen && Math.hypot(screen.x - position.x, screen.y - position.y) <= 8;
+      }).map(match => byId.get(match.id));
+    }
     const items = new Map();
     for (const picked of viewer.scene.drillPick(position, 64)) {
       const item = pickedItem(picked);
@@ -307,7 +348,13 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
       if (Array.isArray(picked?.id) && picked.id.length > 1 && picked.id.every((entity) => source.entities.contains(entity) && byEntity.get(entity.id)?.kind === 'stop')) {
         onGroup(picked.id.map((entity) => byEntity.get(entity.id)), 'stop'); return true;
       }
-      const item = pickedItem(picked); if (!item) return false;
+      const item = pickedItem(picked);
+      if (basel && imagery && (!picked || item?.kind === 'line')) {
+        const lines = linesAt(position);
+        if (lines.length > 1) { onGroup(lines, 'line'); return true; }
+        if (lines.length === 1) { select(lines[0].feature.id); return true; }
+      }
+      if (!item) return false;
       if (item.kind === 'line') {
         const lines = linesAt(position);
         if (lines.length > 1) { onGroup(lines, 'line'); return true; }
@@ -317,7 +364,8 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     snapshot: () => ({ enabled: toggle.checked, state: status.dataset.state, total: records?.length ?? 0,
       filtered: filtered.map((item) => ({ id: item.feature.id, kind: item.kind, name: nameOf(item) })), entityCount: source?.entities.values.length ?? 0,
       sourceCount: viewer.dataSources.length, selectedId, sector: sector.value, offer: offer.value,
-      ...(basel?{mode:modeFilter.value,sourceInfo}:{}),
+      ...(basel?{mode:modeFilter.value,sourceInfo,renderer:'terrain-imagery',imagery:imagery?.snapshot()??null,
+        imageryLayerCount:viewer.imageryLayers.length,highlightCount:[...byEntity.keys()].filter(id=>id.endsWith('#highlight')).length}:{}),
       geometry: { ...geometryStats, toleranceMeters: TRANSPORT_LINE_TOLERANCE_METERS,
         clipRadiusMeters: sector.value === 'active' ? TRANSPORT_RENDER_RADIUS_METERS : null } }),
     focusing: () => focusPending || focusFlight,
@@ -333,6 +381,13 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
         for (const [dx,dy] of offsets) {
           const x=Math.round(point.x+dx);const y=Math.round(point.y+dy);
           if (document.elementFromPoint(x,y)!==viewer.scene.canvas) continue;
+          if (basel && imagery && item.kind === 'line') {
+            const picked = viewer.scene.pick({ x, y });
+            if (picked && pickedItem(picked)?.kind !== 'line') continue;
+            const hits = linesAt({ x, y });
+            if (hits.some(line => line.feature.id === id)) return { x, y, id, kind: 'line', ids:hits.map(line=>line.feature.id) };
+            continue;
+          }
           const visible = pickedItem(viewer.scene.pick({x,y},1,1));
           const hit = pickedItem(viewer.scene.pick({x,y}));
           // A probe target must be the topmost object for both the exact pixel

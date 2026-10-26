@@ -21,7 +21,7 @@ try{
   assert.equal(await p.locator('#transport-offer').isVisible(),false);assert.equal(await p.locator('#transport-zones').isVisible(),false);
  });
  await phase('Filtres modes, secteurs et géométrie',async()=>{
-  await p.locator('#transport-lines').check();await p.locator('#transport-sector').selectOption('');
+  await p.locator('#transport-lines').check();assert.equal((await state(p)).renderer,'terrain-imagery');assert.equal((await state(p)).imageryLayerCount,2);await p.locator('#transport-sector').selectOption('');
   assert.equal((await state(p)).filtered.length,821);
   for(const[mode,count]of[['tram',397],['bus',443]]){await p.locator('#transport-mode').selectOption(mode);assert.equal((await state(p)).filtered.length,count);}
   await p.locator('#transport-mode').selectOption('');await p.locator('#transport-sector').selectOption('active');
@@ -38,7 +38,10 @@ try{
   await p.screenshot({path:`${root}/transit-stop.png`});await p.locator('#clear-selection').click();
   const target=await p.evaluate(id=>window.__jura3dTransportTarget(id),sample.id);assert.ok(target);await p.mouse.click(target.x,target.y);assert.equal((await state(p)).selectedId,sample.id);await p.locator('#clear-selection').click();
   await p.locator('#transport-lines').check();await p.locator('#transport-kind').selectOption('line');const line=await p.locator('#transport-place option').first().getAttribute('value');await p.locator('#transport-place').selectOption(line);await p.locator('#transport-open').click();await p.waitForFunction(()=>!window.__jura3dTransport().focusing);await ready(p);
-  assert.match(await p.locator('#selection-title').textContent(),/Tram|Bus/);assert.match(await p.locator('#transport-properties').textContent(),/Opérateur source|Numéro de ligne/);await p.screenshot({path:`${root}/transit-line.png`});await p.locator('#clear-selection').click();
+  assert.match(await p.locator('#selection-title').textContent(),/Tram|Bus/);assert.match(await p.locator('#transport-properties').textContent(),/Opérateur source|Numéro de ligne/);assert.ok((await state(p)).highlightCount>0);await p.screenshot({path:`${root}/transit-line.png`});await p.locator('#clear-selection').click();assert.equal((await state(p)).highlightCount,0);
+  const lineTarget=await p.evaluate(id=>window.__jura3dTransportTarget(id),line);assert.ok(lineTarget,'Tracé réellement touchable');await p.mouse.click(lineTarget.x,lineTarget.y);
+  if(lineTarget.ids.length>1){assert.match(await p.locator('#selection-title').textContent(),/tracés sous le clic/);assert.equal(await p.locator('#selection-group button').count(),lineTarget.ids.length);assert.doesNotMatch(await p.locator('#selection-group').textContent(),/undefined/);await p.locator(`#selection-group button[data-transport-id="${line}"]`).click();}
+  assert.equal((await state(p)).selectedId,line);assert.ok((await state(p)).highlightCount>0);report.linePick={id:line,matches:lineTarget.ids.length};await p.locator('#clear-selection').click();
   assert.ok(await p.locator('[data-layer-credit="transport"] a[href="https://www.openstreetmap.org/copyright"]').count());
   assert.equal(await p.locator('#basel-active-credit a').isVisible(),true);
   await p.locator('#transport-lines').uncheck();await p.locator('[data-place="basel-centre"]').click();await p.waitForFunction(()=>!window.__jura3dCamera().flyingTo);await ready(p);
@@ -49,23 +52,28 @@ try{
   await p.locator('#selection-group button').first().click();assert.equal(await p.locator('#selection-title').textContent(),expected);await p.locator('#clear-selection').click();report.group={count:group.count,chosenId:choice};
  });
  await phase('Cache, bascules et coexistence avec parkings',async()=>{
-  const count=requests.length;await p.locator('#transport').uncheck();assert.equal((await state(p)).entityCount,0);await p.locator('#transport').check();await loaded(p);assert.equal(requests.length,count);
+  const count=requests.length;await p.locator('#transport').uncheck();assert.equal((await state(p)).entityCount,0);assert.equal((await state(p)).imageryLayerCount,1);await p.locator('#transport').check();await loaded(p);assert.equal(requests.length,count);
   await p.locator('#parking-settings').evaluate(e=>{e.open=true;});await p.locator('#parking').check();await p.waitForFunction(()=>window.__jura3dParking().state==='ready');assert.equal((await state(p)).sourceCount,2);await p.locator('#parking').uncheck();assert.equal((await state(p)).sourceCount,1);
  });await p.close();
  await phase('Erreur, réponse partielle, réessai et destruction pendant requête',async()=>{
-  const q=await browser.newPage();let mode='error',held=0,release;const gate=new Promise(r=>release=r);
+  const q=await browser.newPage();q.on('pageerror',e=>report.errors.push(e.message));let mode='error',held=0,release;const gate=new Promise(r=>release=r);
   await q.route(source,async route=>{const u=route.request().url();if(!u.includes('/records?'))return route.continue();
     if(mode==='held'){held++;await gate;try{await route.continue();}catch{}return;}
     return route.fulfill(mode==='error'?{status:503,body:'Panne injectée'}:{contentType:'application/json',body:JSON.stringify({total_count:2,results:[]})});});
   try{await q.goto(url.href);await ready(q);await q.locator('#transport-settings').evaluate(e=>{e.open=true;});await q.locator('#transport').check();await q.waitForFunction(()=>window.__jura3dTransport().state==='error');assert.equal((await state(q)).entityCount,0);
     await q.locator('#toggle-controls').click();assert.equal(await q.locator('#layer-alert-retry').isVisible(),true);mode='partial';await q.locator('#layer-alert-retry').click();await q.waitForFunction(()=>window.__jura3dTransport().state==='error');assert.equal((await state(q)).total,0);
-    await q.unroute(source);await q.locator('#layer-alert-retry').click();await loaded(q);assert.equal((await state(q)).total,821);await q.evaluate(()=>window.__jura3dLayers.destroy());assert.equal((await state(q)).sourceCount,0);
+    await q.unroute(source);await q.locator('#layer-alert-retry').click();await loaded(q);assert.equal((await state(q)).total,821);
+    await q.locator('#toggle-controls').click();
+    await q.evaluate(()=>{const prototype=HTMLCanvasElement.prototype;window.__restore2d=prototype.getContext;prototype.getContext=function(type,...args){if(type==='2d'&&this.width===512&&this.height===512)throw new Error('Panne raster injectée');return window.__restore2d.call(this,type,...args);};});
+    await q.locator('#transport-lines').check();await q.waitForFunction(()=>window.__jura3dTransport().state==='error');assert.equal((await state(q)).imageryLayerCount,1);
+    await q.evaluate(()=>{HTMLCanvasElement.prototype.getContext=window.__restore2d;delete window.__restore2d;});await q.locator('#layer-alert-retry').click();await loaded(q);await ready(q);assert.equal((await state(q)).imageryLayerCount,2);
+    await q.evaluate(()=>window.__jura3dLayers.destroy());assert.equal((await state(q)).sourceCount,0);assert.equal((await state(q)).imageryLayerCount,1);
   }finally{release();await q.close();}
-  const t=await browser.newPage();let unblock,started=0;const pending=new Promise(r=>unblock=r);await t.route(source,async route=>{started++;await pending;try{await route.continue();}catch{}});
+  const t=await browser.newPage();t.on('pageerror',e=>report.errors.push(e.message));let unblock,started=0;const pending=new Promise(r=>unblock=r);await t.route(source,async route=>{started++;await pending;try{await route.continue();}catch{}});
   try{await t.goto(url.href);await ready(t);await t.locator('#transport-settings').evaluate(e=>{e.open=true;});await t.locator('#transport').check();while(!started)await t.waitForTimeout(50);await t.evaluate(()=>window.__jura3dLayers.destroy());unblock();await t.waitForTimeout(800);assert.equal((await state(t)).total,0);assert.equal((await state(t)).sourceCount,0);}finally{unblock();await t.close();}
  });
  await phase('Fiches et panneau tactiles simulés portrait/paysage',async()=>{
-  const q=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true});await q.goto(url.href);await ready(q);await q.locator('#quality').selectOption('low',{force:true});await q.locator('#toggle-controls').tap();await activate(q);
+  const q=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true});q.on('pageerror',e=>report.errors.push(e.message));await q.goto(url.href);await ready(q);await q.locator('#quality').selectOption('low',{force:true});await q.locator('#toggle-controls').tap();await activate(q);
   for(const size of[{width:390,height:844},{width:722,height:274}]){await q.setViewportSize(size);if(await q.locator('#controls-body').isHidden())await q.locator('#toggle-controls').tap();await q.locator('#transport-kind').selectOption('stop');const id=await q.locator('#transport-place option').first().getAttribute('value');await q.locator('#transport-place').selectOption(id);await q.locator('#transport-open').tap();await q.waitForFunction(()=>!window.__jura3dTransport().focusing);
     await q.locator('#selection-content').evaluate(e=>e.scrollTop=e.scrollHeight);for(const sel of ['#clear-selection','#selection-credit','.credit'])assert.ok(await q.locator(sel).evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),sel);
     await q.screenshot({path:`${root}/transit-touch-${size.width}.png`});await q.locator('#clear-selection').tap();}

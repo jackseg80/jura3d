@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-26 — Optimiser le fond des tracés Bâle
+
+- Tuiles transparentes calculées localement sur le terrain, même géométrie1m et identités source, quais/groupes/fiches conservés, surbrillance vectorielle du tracé choisi ; rendu Jura P6 conservé.
+- Cache de canvas borné, retrait sur filtre/désactivation/destruction, erreur de génération et réessai ; tests géométriques/pixels/jointures/pointillés et parcours compilés réussis.
+- Comparaisons Intel/RTX à vues égales, limites et reprise documentées dans [OPTIMISATION_B1.md](docs/OPTIMISATION_B1.md). A53 et retour utilisateur intégré ouverts, B2/B3 différés. Aucun réglage GPU Windows, push ou déploiement.
+
 ## 2026-10-26 — B1 : diagnostic des tracés sur Intel et RTX
 
 - Lire le GPU de l'onglet réellement utilisé dans ChatGPT : Intel UHD, AutoFaible, baisse avec les tracés confirmée. Comparer Bâle/Delémont et Intel/RTX par temps GPU, CPU de soumission et géométrie ; les anciens résultats RTX ne qualifient pas cet onglet.

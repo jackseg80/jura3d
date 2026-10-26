@@ -1,5 +1,7 @@
 # Bâle — passer de l'essai technique à un explorateur utile
 
+**26 octobre au soir — optimisation B1 réalisée et contrôlée sur Intel/RTX.** Fond des tracés Bâle calculé en tuiles locales, mêmes géométries1m/identités et fiches, quais/groupes et surbrillance conservés ; le Jura garde son rendu P6. Comparaisons compilées, probes Bâle/Jura/site et tests de tuiles réussis. [Mesures et limites](OPTIMISATION_B1.md). **Qualification physique A53 et retour subjectif du propriétaire encore ouverts**, B2/B3 différés ; aucun réglage GPU Windows changé, aucun push/déploiement.
+
 **Complément du 26 octobre au soir :** B1 attend d'abord une optimisation des tracés sur GPU intégré, puis la qualification A53. Le navigateur ChatGPT du propriétaire utilise Intel UHD ; son coût de rendu ne peut pas être qualifié par les seuls résultats RTX. [Diagnostic comparatif](DIAGNOSTIC_B1_TRACES.md). Garder B2/B3 différés pendant cette résolution.
 
 26 octobre 2026 — demande et ordre confirmés par le propriétaire : **transports, lieux et patrimoine, services pratiques**. Ce document distingue les livrables encore prévus de l'avancement effectivement vérifié.

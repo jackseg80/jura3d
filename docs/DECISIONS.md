@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-26 — Rasteriser localement le fond des tracés Bâle
+
+Après diagnostic du coût GPU des nombreuses polylignes plaquées au terrain, remplacer seulement le fond du réseau bâlois par des tuiles transparentes calculées dans l'onglet. Conserver la géométrie1m, les quais/groupes, toutes les identités et fiches, les filtres et les couleurs ; rechercher au clic les tracés proches et garder une surbrillance vectorielle pour la ligne choisie. Le Jura conserve son rendu P6. Ce choix vise le coût du rendu, sans forcer un GPU/preset ou retirer des données ; il ajoute un cache de canvas borné et un rendu dont l'épaisseur dépend du niveau de tuile. Les conditions des données dérivées et crédits restent explicites. Variante retenue pour qualification après gain net dans le prototype ; [mesures finales, interactions et limites](OPTIMISATION_B1.md) conditionnent son bilan. Qualification A53 toujours distincte ; aucun changement GPU Windows ni publication implicite.
+
 ## 2026-10-26 — Qualifier B1 avec le GPU réellement utilisé
 
 Après signalement de ralentissement, lire l'onglet intégré ChatGPT lui-même : Intel UHD, pas la RTX installée dans le PC. Le rendu commun P6 ne suffit pas à qualifier Bâle, qui contient environ dix fois plus de points de tracés que la vue Delémont mesurée. Garder les contrôles fonctionnels, borner les résultats RTX à leur environnement et remettre l'optimisation Intel/RTX **avant l'A53 puis B2/B3**. Ne pas modifier les réglages GPU Windows par déduction, forcer un preset ou retirer silencieusement des tracés. Aucune variante de rendu retenue à ce stade ; matériau uni mesuré sans gain utile. [Diagnostic et suites](DIAGNOSTIC_B1_TRACES.md).
