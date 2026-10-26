@@ -67,6 +67,8 @@
         <label class="checkbox"><input id="transport-stops" type="checkbox" checked disabled /> Arrêts</label>
         <label class="checkbox"><input id="transport-lines" type="checkbox" checked disabled /> Tracés des lignes</label>
         <label class="checkbox"><input id="transport-zones" type="checkbox" disabled /> Zones Noctambus · Ajoie</label>
+        <label for="transport-mode" hidden>Mode de transport</label>
+        <select id="transport-mode" hidden disabled><option value="">Tram et bus</option><option value="tram">Tram</option><option value="bus">Bus</option></select>
         <label for="transport-kind">Objet à consulter</label>
         <select id="transport-kind" disabled><option value="stop">Arrêt</option><option value="line">Tracé</option><option value="zone">Zone Noctambus</option></select>
         <select id="transport-place" aria-label="Arrêt, tracé ou zone à consulter" disabled></select>
@@ -144,7 +146,7 @@
         <dl id="transport-properties"></dl>
         <div id="transport-links"></div>
         <p id="transport-link-status" class="help"></p>
-        <p class="help">Source : <a href="https://opendata.swiss/en/dataset/lignes-de-bus" target="_blank" rel="noopener noreferrer">Réseau de bus · Service du développement territorial / SIT-Jura</a>. Données du 13.09.2026. Horaires sur les sites officiels, connexion nécessaire ; vérifiez-y les dates et changements.</p>
+        <p id="transport-source-note" class="help">Source : <a href="https://opendata.swiss/en/dataset/lignes-de-bus" target="_blank" rel="noopener noreferrer">Réseau de bus · Service du développement territorial / SIT-Jura</a>. Données du 13.09.2026. Horaires sur les sites officiels, connexion nécessaire ; vérifiez-y les dates et changements.</p>
       </div>
       <div id="selection-parking" hidden>
         <p id="parking-freshness" class="help"></p>

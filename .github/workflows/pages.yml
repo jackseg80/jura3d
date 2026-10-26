@@ -24,6 +24,7 @@ jobs:
       - run: npm ci
       - run: node scripts/test-territory.mjs
       - run: node scripts/test-parking.mjs
+      - run: node scripts/test-basel-transit.mjs
       - run: node scripts/test-transport-geometry.mjs
       - run: npm run build:site
         env:

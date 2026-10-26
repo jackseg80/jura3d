@@ -8,6 +8,9 @@ import { createLayerCollection } from '../src/layers.js';
 assert.equal(validateTerritory(jura), jura);
 assert.equal(validateTerritory(control), control);
 assert.equal(validateTerritory(basel), basel);
+for(const mutate of [t=>{t.layers.find(l=>l.kind==='basel-transit').datasets[0].id='other';},t=>{t.layers.find(l=>l.kind==='basel-transit').licenses[0].url='http://example.org/';}]){
+  const t=structuredClone(basel);mutate(t);assert.throws(()=>validateTerritory(t),/transports Bâle/);
+}
 const invalid = (mutate) => { const value = structuredClone(jura); mutate(value); assert.throws(() => validateTerritory(value), /Configuration territoriale/); };
 invalid(t => { t.initialPlace = 'absent'; });
 invalid(t => { t.places.delemont.latitude = NaN; });

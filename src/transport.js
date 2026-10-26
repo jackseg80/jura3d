@@ -3,6 +3,7 @@ import { BoundingSphere, Cartesian3, Cartographic, ClassificationType, Color, Cu
   PinBuilder, PolygonHierarchy, PolylineDashMaterialProperty, PolylineOutlineMaterialProperty,
   sampleTerrainMostDetailed, VerticalOrigin } from 'cesium';
 import { prepareTransportLines, TRANSPORT_LINE_TOLERANCE_METERS, TRANSPORT_RENDER_RADIUS_METERS } from './transport-geometry.js';
+import { loadBaselTransit } from './basel-transit-data.js';
 
 const BLUE = Color.fromCssColorString('#086d9c');
 const PURPLE = Color.fromCssColorString('#763b9c');
@@ -41,21 +42,23 @@ function geometryNear(kind, feature, center) {
   if (kind === 'stop') return Math.hypot(...xy(feature.geometry.coordinates[0], center)) <= 5000;
   return feature.geometry.coordinates.some((line) => line.some((p, i) => i && segmentNear(line[i - 1], p, center)));
 }
-const nameOf = ({ kind, feature }) => feature.properties[kind === 'stop' ? 'nomarret' : kind === 'line' ? 'nomcadrehoraire' : 'nom_zone']?.trim()
+const nameOf = ({ kind, feature, display }) => (display?.name ?? feature.properties[kind === 'stop' ? 'nomarret' : kind === 'line' ? 'nomcadrehoraire' : 'nom_zone']?.trim())
   || (kind === 'stop' ? 'Arrêt sans nom fourni' : kind === 'line' ? 'Tracé sans nom fourni' : 'Zone sans nom fournie');
 const dayNight = ({ kind, feature }) => {
   const p = feature.properties;
   return { day: p[kind === 'stop' ? 'arret_jour' : 'ligne_jour'] === 'Oui', night: p[kind === 'stop' ? 'arret_nocturne' : 'ligne_nocturne'] === 'Oui' };
 };
-function baseColor(item) { const flags = dayNight(item); return flags.day ? BLUE : flags.night ? PURPLE : GREY; }
+function baseColor(item) { if(item.display)return Color.fromCssColorString(item.display.modes.includes('tram')?'#9a3150':'#086d9c');const flags = dayNight(item); return flags.day ? BLUE : flags.night ? PURPLE : GREY; }
+const pinText=item=>item.display?(item.display.modes.length===2?'T/B':item.display.modes[0]==='tram'?'T':'B'):'B';
 function lineMaterial(item, selected = false) {
   const flags = dayNight(item);
-  if (!selected && !flags.day && flags.night) return new PolylineDashMaterialProperty({ color: PURPLE, dashLength: 14 });
+  if (!selected && (item.display ? item.display.nightOnly : !flags.day && flags.night)) return new PolylineDashMaterialProperty({ color: baseColor(item), dashLength: 14 });
   return new PolylineOutlineMaterialProperty({ color: selected ? SELECTED : baseColor(item), outlineColor: selected ? GREY : Color.WHITE, outlineWidth: 1 });
 }
 
 export function createTransportLayer(viewer, { config, getPlace, onSelect, onGroup, onClear, onState = () => {} }) {
-  const base = `${import.meta.env.BASE_URL}${config.base}`;
+  const basel=config.kind==='basel-transit';let sourceInfo;
+  const base = `${import.meta.env.BASE_URL}${config.base??''}`;
   const [west, south, east, north] = config.bounds;
   const events = new AbortController();
   const listen = (target, type, callback) => target.addEventListener(type, callback, { signal: events.signal });
@@ -63,6 +66,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
   const toggle = document.querySelector('#transport');
   const sector = document.querySelector('#transport-sector');
   const offer = document.querySelector('#transport-offer');
+  const modeFilter = document.querySelector('#transport-mode');
   const stopsToggle = document.querySelector('#transport-stops');
   const linesToggle = document.querySelector('#transport-lines');
   const zonesToggle = document.querySelector('#transport-zones');
@@ -95,7 +99,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
   function setState(state, message) {
     status.dataset.state = state; status.textContent = message; retry.hidden = state !== 'error';
     const ready = state === 'ready' && toggle.checked;
-    for (const control of [sector, offer, stopsToggle, linesToggle, zonesToggle, kindSelect]) control.disabled = !ready;
+    for (const control of [sector, offer, modeFilter, stopsToggle, linesToggle, zonesToggle, kindSelect]) control.disabled = !ready;
     choices.disabled = open.disabled = !ready || !choices.options.length;
     onState();
   }
@@ -103,7 +107,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     for (const [entityId, item] of [...byEntity]) {
       if (item.feature.id !== id) continue;
       const entity = source?.entities.getById(entityId); if (!entity) continue;
-      if (entity.billboard) entity.billboard.image = pinImage('B', selected ? SELECTED : baseColor(item));
+      if (entity.billboard) entity.billboard.image = pinImage(pinText(item), selected ? SELECTED : baseColor(item));
       if (entity.polyline) {
         if (entityId.endsWith('#highlight')) {
           if (!selected) { source.entities.remove(entity); byEntity.delete(entityId); }
@@ -162,8 +166,8 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     for (const option of kindSelect.options) option.disabled = !kinds[option.value];
     if (!kinds[kindSelect.value]) kindSelect.value = Object.keys(kinds).find((key) => kinds[key]) ?? 'stop';
     choices.replaceChildren();
-    const items = filtered.filter((item) => item.kind === kindSelect.value).sort((a, b) => nameOf(a).localeCompare(nameOf(b), 'fr') || a.feature.properties.id - b.feature.properties.id);
-    for (const item of items) choices.add(new Option(`${item.kind === 'line' ? `Tracé ${item.feature.properties.id} · ` : ''}${nameOf(item)}`, item.feature.id));
+    const items = filtered.filter((item) => item.kind === kindSelect.value).sort((a, b) => nameOf(a).localeCompare(nameOf(b), 'fr') || a.feature.properties.id - b.feature.properties.id || a.feature.id.localeCompare(b.feature.id));
+    for (const item of items) choices.add(new Option(`${item.kind === 'line' && !basel ? `Tracé ${item.feature.properties.id} · ` : ''}${nameOf(item)}`, item.feature.id));
     choices.disabled = open.disabled = status.dataset.state !== 'ready' || !items.length;
   }
   function rebuild() {
@@ -172,15 +176,15 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     const place = sector.value === 'active' ? getPlace() : null;
     const visible = { stop: stopsToggle.checked, line: linesToggle.checked, zone: zonesToggle.checked };
     filtered = records.filter((item) => visible[item.kind] && geometryNear(item.kind, item.feature, place)
-      && (item.kind === 'zone' || !offer.value || dayNight(item)[offer.value]));
+      && (basel ? !modeFilter.value||item.display.modes.includes(modeFilter.value) : item.kind === 'zone' || !offer.value || dayNight(item)[offer.value]));
     if (!source) {
       source = new CustomDataSource(config.sourceName);
       source.clustering.enabled = true; source.clustering.pixelRange = 22; source.clustering.minimumClusterSize = 3;
       removeCluster = source.clustering.clusterEvent.addEventListener((entities, cluster) => {
         cluster.label.show = cluster.point.show = false; cluster.billboard.show = true;
         const items = entities.map((entity) => byEntity.get(entity.id));
-        const color = items.some((item) => dayNight(item).day) ? BLUE : items.some((item) => dayNight(item).night) ? PURPLE : GREY;
-        cluster.billboard.image = pinImage(`B${entities.length}`, color); cluster.billboard.id = entities;
+        const color = basel?baseColor(items[0]):items.some((item) => dayNight(item).day) ? BLUE : items.some((item) => dayNight(item).night) ? PURPLE : GREY;
+        cluster.billboard.image = pinImage(`${basel?'R':'B'}${entities.length}`, color); cluster.billboard.id = entities;
         cluster.billboard.heightReference = HeightReference.CLAMP_TO_TERRAIN;
         cluster.billboard.verticalOrigin = VerticalOrigin.BOTTOM; cluster.billboard.disableDepthTestDistance = 5000;
         cluster.billboard.distanceDisplayCondition = new DistanceDisplayCondition(0, 80000);
@@ -195,7 +199,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
       const add = (id, options) => { source.entities.add({ id, name: nameOf(item), ...options }); byEntity.set(id, item); };
       if (item.kind === 'stop') {
         const [lon, lat] = feature.geometry.coordinates[0];
-        add(feature.id, { position: Cartesian3.fromDegrees(lon, lat), billboard: { image: pinImage('B', baseColor(item)),
+        add(feature.id, { position: Cartesian3.fromDegrees(lon, lat), billboard: { image: pinImage(pinText(item), baseColor(item)),
           heightReference: HeightReference.CLAMP_TO_TERRAIN, verticalOrigin: VerticalOrigin.BOTTOM,
           disableDepthTestDistance: 5000, distanceDisplayCondition: new DistanceDisplayCondition(0, 80000) } });
       } else if (item.kind === 'line') {
@@ -216,7 +220,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     }
     updateChoices();
     const count = (kind) => filtered.filter((i) => i.kind === kind).length;
-    setState('ready', `${count('stop')} arrêts · ${count('line')} tracés · ${count('zone')} zones. Réseau statique du ${config.date}.`);
+    setState('ready', basel?`${count('stop')} quais · ${count('line')} tracés tram/bus. Réseau statique ; dates source dans les fiches.`:`${count('stop')} arrêts · ${count('line')} tracés · ${count('zone')} zones. Réseau statique du ${config.date}.`);
     viewer.scene.requestRender();
   }
   async function load() {
@@ -224,8 +228,13 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     if (records) { rebuild(); return; }
     const controller = new AbortController(); request = controller;
     const timeout = setTimeout(() => controller.abort(), 20000);
-    setState('loading', 'Chargement du réseau de bus…');
+    setState('loading', basel?'Chargement des trams, bus et quais…':'Chargement du réseau de bus…');
     try {
+      if(basel){
+        const loaded=await loadBaselTransit(config,controller.signal);
+        if(destroyed||ticket!==generation||!toggle.checked)return;
+        records=loaded.records;sourceInfo={...loaded,records:undefined};records.forEach(item=>byId.set(item.feature.id,item));rebuild();return;
+      }
       const names = config.files;
       const values = await Promise.all(names.map(async (name) => {
         const response = await fetch(`${base}${name}`, { signal: controller.signal });
@@ -262,7 +271,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
   }
   listen(toggle, 'change', () => setEnabled(toggle.checked));
   listen(retry, 'click', () => void load());
-  for (const control of [sector, offer, stopsToggle, linesToggle, zonesToggle]) listen(control, 'change', rebuild);
+  for (const control of [sector, offer, modeFilter, stopsToggle, linesToggle, zonesToggle]) listen(control, 'change', rebuild);
   listen(kindSelect, 'change', () => { onClear(); updateChoices(); });
   listen(open, 'click', () => { const item = byId.get(choices.value); if (item && filtered.includes(item)) { select(item.feature.id); void focus(item); } });
   setState('off', 'Transports masqués.');
@@ -287,7 +296,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
       events.abort();
       toggle.checked = false;
       removeSource();
-      records = undefined; filtered = []; checks.clear(); byId.clear();
+      records = undefined; sourceInfo=undefined; filtered = []; checks.clear(); byId.clear();
       choices.replaceChildren(); byEntity.clear(); pins.clear();
       setState('off', 'Transports masqués.');
     },
@@ -308,6 +317,7 @@ export function createTransportLayer(viewer, { config, getPlace, onSelect, onGro
     snapshot: () => ({ enabled: toggle.checked, state: status.dataset.state, total: records?.length ?? 0,
       filtered: filtered.map((item) => ({ id: item.feature.id, kind: item.kind, name: nameOf(item) })), entityCount: source?.entities.values.length ?? 0,
       sourceCount: viewer.dataSources.length, selectedId, sector: sector.value, offer: offer.value,
+      ...(basel?{mode:modeFilter.value,sourceInfo}:{}),
       geometry: { ...geometryStats, toleranceMeters: TRANSPORT_LINE_TOLERANCE_METERS,
         clipRadiusMeters: sector.value === 'active' ? TRANSPORT_RENDER_RADIUS_METERS : null } }),
     focusing: () => focusPending || focusFlight,

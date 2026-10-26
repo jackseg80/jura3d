@@ -22,6 +22,12 @@ export function validateTerritory(territory) {
   if (!Array.isArray(territory.layers) || new Set(territory.layers.map(l => l.id)).size !== territory.layers.length) fail('couches dupliquées ou absentes');
   const safePath = (p) => typeof p === 'string' && /^[a-zA-Z0-9_./-]+$/.test(p) && !p.startsWith('/') && !p.split('/').includes('..');
   for (const layer of territory.layers) {
+    if(layer.kind==='basel-transit'){
+      if(layer.id!=='transport'||!layer.sourceName||!layer.credit||!remote(layer.conditions)||!bounds(layer.bounds)
+        ||JSON.stringify(layer.datasets)!==JSON.stringify([{id:'100064',order:'l_nr'},{id:'100065',order:'thst_nr'}])
+        ||!Array.isArray(layer.licenses)||layer.licenses.length!==2||layer.licenses.some(l=>!l.label||!remote(l.url)))fail('configuration transports Bâle invalide');
+      continue;
+    }
     if (layer.kind === 'basel-parking') {
       if (layer.id !== 'parking' || !remote(layer.url) || !remote(layer.catalog) || !remote(layer.conditions)
         || !layer.credit || !bounds(layer.bounds) || !Number.isFinite(layer.refreshMs) || layer.refreshMs < 60000
@@ -64,6 +70,24 @@ export function configureTerritoryUi(territory, root = document, base = '/') {
     const option = root.createElement('option'); option.textContent = place.name; locality.append(option);
   }
   for (const id of ['heritage', 'transport', 'parking']) root.querySelector(`#${id}-settings`).hidden = !territory.layers.some(l => l.id === id);
+  const baselTransit=territory.layers.some(l=>l.kind==='basel-transit');
+  for(const selector of ['#transport-mode','label[for="transport-mode"]'])root.querySelector(selector).hidden=!baselTransit;
+  if(baselTransit){
+    root.querySelector('#transport-settings summary').textContent='Tram, bus et horaires';
+    root.querySelector('#transport').parentNode.lastChild.textContent=' Afficher les trams et bus';
+    root.querySelector('#transport-zones').checked=false;root.querySelector('#transport-zones').closest('label').hidden=true;
+    root.querySelector('#transport-lines').checked=false; // Quais d'abord ; tracés activables séparément.
+    root.querySelector('#transport-stops').parentNode.lastChild.textContent=' Quais / points d’arrêt';
+    root.querySelector('#transport-offer').hidden=true;root.querySelector('label[for="transport-offer"]').hidden=true;
+    root.querySelector('#transport-kind option[value="zone"]').remove();
+    root.querySelector('#transport-kind option[value="stop"]').textContent='Quai / point d’arrêt';
+    root.querySelector('#transport-sector option[value=""]').textContent='Tout le réseau tram/bus fourni';
+    root.querySelector('.transport-legend').textContent='Bordeaux : tram ; bleu : bus ; pointillés : tracés nocturnes. T/B : quai mixte, R + nombre : groupe de quais. Les quais d’un même arrêt restent distincts. Secteur ~5 km, tracés découpés à 5,25 km ; le réseau fourni dépasse Bâle. Données statiques, aucune position de véhicule ou perturbation en direct. Les bâtiments restent limités au secteur étudié.';
+    const note=root.querySelector('#transport-source-note');note.replaceChildren();
+    note.append('Sources : ');
+    for(const[id,label]of[['100064','Tracés'],['100065','Quais']]){const a=root.createElement('a');a.href=`https://data.bs.ch/explore/dataset/${id}/`;a.textContent=label;a.target='_blank';a.rel='noopener noreferrer';note.append(a,' · ');}
+    note.append('CC BY 4.0 + OpenStreetMap (ODbL). La date annoncée au catalogue ne garantit pas la date de chaque tracé ; une lecture récente ne rend pas le réseau actuel.');
+  }
   const scope = root.querySelector('#territory-scope');
   scope.hidden = !territory.sources.buildings.scope; scope.textContent = territory.sources.buildings.scope ?? '';
   const buildingCredit = root.querySelector('#buildings-source');
@@ -79,5 +103,17 @@ export function configureTerritoryUi(territory, root = document, base = '/') {
     span.append(`${layer.credit} · `);
     const link = root.createElement('a'); link.href = layer.conditions.startsWith('https://') ? layer.conditions : `${base}${layer.conditions}`; link.textContent = 'Conditions';
     link.target = '_blank'; link.rel = 'noopener noreferrer'; span.append(link); root.querySelector('#heritage-credit').append(span);
+    for(const license of layer.licenses??[]){const a=root.createElement('a');a.href=license.url;a.textContent=license.label;a.target='_blank';a.rel='noopener noreferrer';span.append(' · ',a);}
+  }
+  if(baselTransit){
+    // Les attributions restent visibles ; les liens détaillés défilent avec le panneau.
+    const details=root.createElement('details');details.id='basel-sources';const summary=root.createElement('summary');summary.textContent='Sources et conditions';
+    details.append(summary,buildingCredit,root.querySelector('#heritage-credit'));root.querySelector('#controls-body').append(details);
+    const footer=root.querySelector('.data-credits'),canton=root.createElement('span');canton.textContent=' · Quelle: Geodaten Kanton Basel-Stadt';footer.append(canton);
+    const active=root.createElement('div');active.id='basel-active-credit';active.hidden=true;
+    const parking=root.createElement('span');parking.dataset.compactLayer='parking';parking.textContent='Parkhäuser Basel-Stadt';
+    const separator=root.createElement('span');separator.id='basel-credit-separator';separator.textContent=' · ';
+    const osm=root.createElement('a');osm.dataset.compactLayer='transport';osm.href='https://www.openstreetmap.org/copyright';osm.textContent='© OpenStreetMap contributors';osm.target='_blank';osm.rel='noopener noreferrer';
+    active.append(parking,separator,osm);footer.append(active);root.querySelector('.controls').classList.add('basel-compact-credits');
   }
 }

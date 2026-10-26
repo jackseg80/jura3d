@@ -1,5 +1,12 @@
 # Historique
 
+## 2026-10-26 — B1 : tram et bus à Bâle, qualification mobile ouverte
+
+- Quais et tracés du réseau officiel, modes tram/bus, secteur/réseau fourni, groupes et fiches avec attributs source ; quais affichés à l'activation, tracés séparément activables. 660 quais et 161 tracés retenus au contrôle.
+- Lecture API paginée à la demande, cache/annulation/réessai, propriétés intactes et rendu P6 partagé. Dates de catalogue explicites, anciens liens horaires indisponibles signalés et pages officielles générales vérifiées, crédits Basel-Stadt/OSM et conditions visibles.
+- Tests de données/chargement et parcours PC, régression Jura, toucher simulé et relevé court PC documentés. [Qualification B1](docs/VALIDATION_B1.md). A53 encore à tester ; B2/B3 non commencés, aucun push/déploiement.
+- Conditions détaillées regroupées dans le panneau défilant de Bâle, attributions visibles ; commandes accessibles en paysage avec les deux couches actives. Les listes de tracés utilisent la référence source bâloise.
+
 ## 2026-10-26 — Plan Bâle enrichi après revue du contenu
 
 - Clarifier que P8 validait une preuve technique bâtiments/parkings et non un Bâle terminé. Ajouter les lots confirmés : transports, lieux/patrimoine, services pratiques, avec sorties et sources candidates distinctes des fonctionnalités livrées.

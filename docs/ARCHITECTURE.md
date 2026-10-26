@@ -1,5 +1,13 @@
 # Architecture du prototype
 
+## B1 — Adaptation du réseau bâlois
+
+`basel-transit-data.js` lit les deux API 100064/100065 à la première activation, vérifie licence/pagination/identifiants/géométries/listes et normalise Point/LineString/MultiLineString pour le renderer commun. Les propriétés restent natives ; nom, modes et date de catalogue sont séparés dans `display`. Pas de copie du schéma Jura dans les attributs bâlois, pas de données réseau livrées dans le build. Cache mémoire jusqu'au rechargement, délai/abort/génération du contrat existant ; aucun polling.
+
+`transport.js` partage la géométrie P6, le regroupement, le picking, les surbrillances et le cycle de vie. Branche `basel-transit` : modes tram/bus, pas de zones Noctambus ou filtre jour/nuit supposé ; quais seuls au départ, tracés à la demande. `main.js` rend des fiches adaptées aux attributs bâlois et des liens horaires généraux vérifiés ; `territory.js` configure champs/légende et crédits CC BY/ODbL. Source/configuration Jura conservées ; régression contrôlée par le probe complet. [Qualification B1](VALIDATION_B1.md).
+
+Sur Bâle, les conditions détaillées sont placées dans la rubrique défilante « Sources et conditions ». Le pied du panneau conserve l'attribution swisstopo/Basel-Stadt et les crédits des couches actives, dont OpenStreetMap. Cette présentation évite que les textes de licence occupent presque toute la hauteur en paysage ; les liens détaillés gardent une cible tactile de 44 px. La présentation du Jura est conservée.
+
 ## Assemblage du site commun — PUB2
 
 `site/index.html` et `site/site.css` constituent un accueil statique sans Cesium ni données distantes. `scripts/build-site.mjs` assemble deux builds indépendants dans le dossier fixe ignoré `dist-site/` : `jura/` et `bale/`, chacun avec ses ressources Cesium, données et marqueur ; même révision pour l'accueil et les enfants. Le build par territoire existant reste disponible. Aucun changement de configuration en cours d'exécution ni deux Viewer simultanés dans la page.

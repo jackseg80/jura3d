@@ -1,0 +1,46 @@
+{
+  "verifiedOn": "2026-10-26T13:44:07.912Z",
+  "datasets": [
+    {
+      "id": "100064",
+      "catalog": "https://data.bs.ch/explore/dataset/100064/",
+      "metadata": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100064",
+      "count": 187,
+      "license": "CC BY 4.0 + OpenStreetMap",
+      "licenseDocument": "https://data-bs.ch/stata/dataspot/permalinks/20240822-osm-vektordaten.pdf",
+      "attribution": [
+        "Geodaten Kanton Basel-Stadt"
+      ],
+      "recordsSha256": "44f843f7ea30295dfd8b2cdd7322beb6b3071363717d6a303d7e28b586bf5228",
+      "catalogModified": "2026-02-09T00:00:00+00:00",
+      "dateMeaning": "Date declared in metas.default.modified; not a per-record observation timestamp",
+      "modifiedUpdatesOnDataChange": false
+    },
+    {
+      "id": "100065",
+      "catalog": "https://data.bs.ch/explore/dataset/100065/",
+      "metadata": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100065",
+      "count": 660,
+      "license": "CC BY 4.0 + OpenStreetMap",
+      "licenseDocument": "https://data-bs.ch/stata/dataspot/permalinks/20240822-osm-vektordaten.pdf",
+      "attribution": [
+        "Geodaten Kanton Basel-Stadt"
+      ],
+      "recordsSha256": "f183054c0dcafe6db203eb7ba1dfe549610279267988d03e123fb4f0dc28a14d",
+      "catalogModified": "2026-02-09T00:00:00+00:00",
+      "dateMeaning": "Date declared in metas.default.modified; not a per-record observation timestamp",
+      "modifiedUpdatesOnDataChange": false
+    }
+  ],
+  "usage": "Lecture API au premier affichage, cache en memoire; aucun instantane de reseau livre dans le site.",
+  "osmCopyright": "https://www.openstreetmap.org/copyright",
+  "licenseDocumentRead": "Permission to Incorporate CC BY Data Into OpenStreetMap, Basel 22.08.2024",
+  "oldLinksChecked404": [
+    "https://www.bvb.ch/fahrplan-netz/haltestellenfahrplan",
+    "https://www.tnw.ch/assets/files/haltestellenfahrplaene/Bahnhof_StJohann_64_B.pdf"
+  ],
+  "verifiedGeneralPages": [
+    "https://www.bvb.ch/de/fahrplan/haltestellen-fahrplan/",
+    "https://www.bvb.ch/de/fahrplan/liniennetz/"
+  ]
+}

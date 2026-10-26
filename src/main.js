@@ -10,6 +10,7 @@ import './style.css';
 import { createParkingLayer } from './parking.js';
 import { parkingFreshness, parkingDate } from './parking-data.js';
 import { createTransportLayer, officialTransportUrl } from './transport.js';
+import { BASEL_TIMETABLE, BASEL_NETWORK, BASEL_OLD_LINKS } from './basel-transit-data.js';
 import { createHeritageLayer, officialPdfUrl } from './heritage.js';
 
 import territoryConfig from '#territory';
@@ -573,6 +574,11 @@ function startScene() {
     if (phoneLayout.matches) { controlsUsed = true; setControlsExpanded(false); }
   }
   function updateCantonCredit() {
+    const compact=document.querySelector('#basel-active-credit');
+    if(compact){const parkingOn=document.querySelector('#parking').checked,transportOn=document.querySelector('#transport').checked;
+      compact.hidden=!parkingOn&&!transportOn;compact.querySelector('[data-compact-layer="parking"]').hidden=!parkingOn;compact.querySelector('[data-compact-layer="transport"]').hidden=!transportOn;
+      document.querySelector('#basel-credit-separator').hidden=!(parkingOn&&transportOn);
+    }
     const credits = document.querySelector('#heritage-credit');
     credits.hidden = !territory.layers.some(layer => document.querySelector(`#${layer.id}`).checked);
     for (const span of credits.children) {
@@ -610,7 +616,37 @@ function startScene() {
     },
   }));
 
+  function showBaselTransport(item) {
+    clearSelection();selectionKind=`transport-${item.kind}`;selectionPanel.classList.add('is-heritage');
+    const p=item.feature.properties,d=item.display;
+    document.querySelector('#selection-title').textContent=d.name;
+    document.querySelector('#selection-description').textContent=item.kind==='stop'
+      ? 'Quai / point d’arrêt dans un sens donné. Les attributs d’accès sont ceux de la source, sans vérification sur place. Aucun départ en direct.'
+      : 'Tracé du réseau statique, avec sens et offre source. Plusieurs tracés peuvent représenter une même ligne commerciale ; aucun véhicule suivi en direct.';
+    const position=item.kind==='stop'?item.feature.geometry.coordinates[0]:null;
+    document.querySelector('#selection-position').textContent=position?`${position[1].toFixed(5)}° N · ${position[0].toFixed(5)}° E · position source du quai`:'Géométrie de tracé, pas une position de véhicule.';
+    const pairs=item.kind==='stop'?
+      [['ID quai source',p.thst_nr],['Pôle d’arrêt source',p.hst_nr],['Sens / destination',p.richtung],['Type source',p.typ],['Catégorie source',p.art],
+       ['Trams',d.tramLines.join(', ')],['Bus',d.busLines.join(', ')],['Lignes nocturnes',d.nightLines.join(', ')],['Accès tram · source',p.tramzugang],['Accès bus · source',p.buszugang]]:
+      [['ID tracé source',p.l_nr],['Numéro de ligne',p.liniennmr],['Mode source',p.fahrzeug],['Sens source',p.hinrueck],['Opérateur source',p.tu],['Offre source',d.offer.join(', ')]];
+    pairs.push(['Date annoncée au catalogue',d.sourceDate?new Date(d.sourceDate).toLocaleDateString('fr-CH',{timeZone:'Europe/Zurich'}):null]);
+    const properties=document.querySelector('#transport-properties');properties.replaceChildren();
+    for(const[label,value]of pairs){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value===null||value===undefined||!String(value).trim()?'Non renseigné':String(value);properties.append(dt,dd);}
+    const links=document.querySelector('#transport-links');
+    for(const[url,label]of[[BASEL_TIMETABLE,'Horaires officiels · choisir l’arrêt'],[BASEL_NETWORK,'Plans du réseau · BVB']]){
+      const a=document.createElement('a');a.className='selection-link';a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=label;links.append(a);
+    }
+    if(d.sourceUrl&&!BASEL_OLD_LINKS.includes(d.sourceUrl)){
+      const a=document.createElement('a');a.className='selection-link';a.href=d.sourceUrl;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Lien horaire fourni par la source';links.append(a);
+    }
+    document.querySelector('#transport-link-status').textContent=(d.sourceUrl&&BASEL_OLD_LINKS.includes(d.sourceUrl)?'Ancien lien source indisponible au contrôle du 26.10.2026. ':'')
+      +'Les pages officielles ci-dessus sont générales : cherchez le nom de l’arrêt ou le numéro de ligne. Aucun préremplissage ou départ actuel promis.';
+    document.querySelector('#selection-transport').hidden=false;document.querySelector('#selection-credit').textContent=layerConfig.transport.credit;
+    selectionPanel.hidden=false;document.querySelector('#selection-content').scrollTop=0;
+    if(phoneLayout.matches){controlsUsed=true;setControlsExpanded(false);}
+  }
   function showTransport(item, checks) {
+    if(item.display)return showBaselTransport(item);
     clearSelection();
     selectionKind = `transport-${item.kind}`;
     selectionPanel.classList.add('is-heritage');
@@ -665,14 +701,14 @@ function startScene() {
     onClear: () => { if (selectionKind?.startsWith('transport-')) clearSelection(); },
     onGroup: (items, kind) => {
       clearSelection(); selectionKind = 'transport-group'; selectionPanel.classList.add('is-heritage');
-      document.querySelector('#selection-title').textContent = kind === 'line' ? `${items.length} tracés sous le clic` : `${items.length} arrêts regroupés`;
+      document.querySelector('#selection-title').textContent = kind === 'line' ? `${items.length} tracés sous le clic` : `${items.length} ${layerConfig.transport.kind==='basel-transit'?'quais':'arrêts'} regroupés`;
       document.querySelector('#selection-description').textContent = kind === 'line' ? 'Plusieurs tracés se superposent dans la vue. Choisissez celui dont vous souhaitez consulter le cadre horaire.' : 'Choisissez un arrêt pour consulter sa fiche et ses liens horaires.';
       document.querySelector('#selection-position').textContent = '';
       const list = document.querySelector('#selection-group');
-      const itemName = (item) => (kind === 'line' ? item.feature.properties.nomcadrehoraire : item.feature.properties.nomarret)?.trim() || 'Nom non fourni';
+      const itemName = (item) => item.display?.name ?? (kind === 'line' ? item.feature.properties.nomcadrehoraire : item.feature.properties.nomarret)?.trim() ?? 'Nom non fourni';
       for (const item of [...items].sort((a, b) => itemName(a).localeCompare(itemName(b), 'fr'))) {
         const button = document.createElement('button'); button.type = 'button'; button.dataset.transportId = item.feature.id;
-        button.textContent = `${kind === 'line' ? `Tracé ${item.feature.properties.id} · ` : ''}${itemName(item)}`; button.addEventListener('click', () => transport.select(item.feature.id)); list.append(button);
+        button.textContent = `${kind === 'line' ? (item.display ? `Réf. source ${item.feature.properties.l_nr} · ` : `Tracé ${item.feature.properties.id} · `) : ''}${itemName(item)}`; button.addEventListener('click', () => transport.select(item.feature.id)); list.append(button);
       }
       list.hidden = false; document.querySelector('#selection-credit').textContent = layerConfig.transport.credit;
       selectionPanel.hidden = false; document.querySelector('#selection-content').scrollTop = 0;

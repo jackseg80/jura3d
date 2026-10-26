@@ -23,7 +23,8 @@ try {
     assert.equal((await page.evaluate(()=>window.__jura3dTerritory())).id,'basel');
     const source=await page.evaluate(()=>window.__jura3dBuildings());assert.equal(source.inverse,true);assert.deepEqual(source.clipBounds,[7.57,47.54,7.615,47.57]);
     assert.equal(requests.some(u=>u.includes('swissbuildings3d')),false);assert.equal(requests.some(u=>u.includes('/100088/records')),false);
-    assert.equal(await page.locator('#heritage-settings').isVisible(),false);assert.equal(await page.locator('#transport-settings').isVisible(),false);
+    assert.equal(await page.locator('#heritage-settings').isVisible(),false);assert.equal(await page.locator('#transport-settings').isVisible(),true);
+    assert.equal(await page.locator('#transport').isChecked(),false);
     assert.match(await page.locator('#buildings-source').textContent(),/Basel-Stadt/);
     assert.ok((await page.evaluate(()=>window.__jura3dPerformance())).triangles>0);
     report.gpu=(await page.evaluate(()=>window.__jura3dCamera())).quality.gpu;report.buildings=source;

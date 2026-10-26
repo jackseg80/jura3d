@@ -1,5 +1,13 @@
 # Décisions techniques
 
+## 2026-10-26 — B1 via API, rendu partagé et fiches propres à Bâle
+
+Après autorisation de commencer B1, intégrer les quais et tracés tram/bus de Basel-Stadt, en conservant le composant de rendu/cycle de vie Jura. Normaliser seulement la géométrie et les champs d'affichage ; garder les attributs source, exclure explicitement rail/bateaux, vérifier la pagination complète et la mention de licence avant affichage. API à la demande et cache en mémoire ; pas de snapshot distribué ni polling. Quais seuls à l'activation, tracés optionnels et secteur local par défaut, même simplification/découpe P6. Le choix réseau entier reste explicite ; pas d'extension des bâtiments.
+
+Les anciens liens horaires source sont404 ; proposer les pages BVB actuelles vérifiées en indiquant qu'elles sont générales, sans URL d'arrêt ou ligne devinée. Distinguer date déclarée au catalogue, date de lecture et actualité de chaque objet. Crédit Basel-Stadt et OpenStreetMap, liens CC BY/ODbL ; aucune relicence MIT des données. [Preuves](VALIDATION_B1.md). Réalisation PC ne clôt pas la qualification A53, ni Bâle enrichi ; B2/B3 et publication restent différés.
+
+Pour B1, regrouper les conditions détaillées dans une rubrique défilante et conserver les attributions visibles en pied de panneau. Motif : préserver l'accès aux commandes en paysage lorsque parkings et transports sont simultanément actifs. Contrôle final à 722×274 : zone de commandes de 126 px, défilement et liens de conditions touchables. Ce choix ne retire pas les mentions obligatoires ni leurs liens.
+
 ## 2026-10-26 — Distinguer preuve technique Bâle et richesse du produit
 
 Le propriétaire relève que Bâle ne propose que les parkings et veut beaucoup plus d'informations. Clarifier la clôture P8 : fonctionnement/rendu/performance de la preuve bâtiments/parkings validés, contenu du produit encore incomplet. Les transports, lieux/patrimoine et services n'étaient pas des livrables explicites du plan Bâle existant ; les ajouter dans cet ordre, confirmé par le propriétaire, sous les lots B1/B2/B3. [Sources, limites et sorties](PLAN_BALE_ENRICHISSEMENT.md). Préférer ces informations à de nouvelles villes ou à des seuls ajouts visuels. Aucun résultat de recherche de source ne vaut intégration ou droit d'usage uniforme.

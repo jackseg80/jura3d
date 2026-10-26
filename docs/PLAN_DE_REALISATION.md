@@ -1,6 +1,6 @@
 # Plan de réalisation — Jura 3D
 
-**Date : 26 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 validé sur PC, PUB1 publié. P8 technique qualifié avec réserves ; Bâle enrichi reste ouvert : B1 transports, B2 lieux/patrimoine, B3 services ajoutés dans cet ordre confirmé. PUB2 accueil préparé et contrôlé localement, publication différée ; docs et commit de sauvegarde autorisés, aucun push/déploiement dans ce lot ; S23 non testé et P9 non commencé.**
+**Date : 26 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 validé sur PC, PUB1 publié. P8 technique qualifié avec réserves ; B1 transports réalisé sur PC, qualification A53 ouverte ; B2 lieux/patrimoine et B3 services restent à réaliser dans cet ordre confirmé. PUB2 accueil préparé et contrôlé localement, publication différée ; docs et commit de sauvegarde autorisés, aucun push/déploiement dans ce lot ; S23 non testé et P9 non commencé.**
 
 **Sauvegarde historique à 13:13 Europe/Zurich :** Tab S8 Faible terminé à 13:04:07, 13 min 27 s, 28 phases/616 lectures sans erreur/coupure, nettoyage confirmé par Wi-Fi appairé. Moyen en cours après repos, aucun résultat achevé à ce point ; manuel/récupération réseau encore ouverts. Vérifier le [rapport et processus consignés dans le relais](RELAIS.md) avant toute relance. P5 non clos, P6 non proposé ou commencé.
 
@@ -113,6 +113,8 @@ Cette étape manquait au plan initial : le dépôt et sa compilation ne constitu
 - **Sortie :** lien utilisable depuis les appareils sans câble ni serveur PC, version et contrôles publics documentés. Aucun nouveau benchmark Android revendiqué ; P8 reste séparé. [Procédure](PUBLICATION.md).
 
 ### P8 — Bâle comme preuve multicité
+
+**B1 réalisé localement le 26 octobre :** 660 quais et 161 tracés tram/bus disponibles via API à la demande, filtres modes/secteur, regroupements, fiches et liens horaires généraux vérifiés. Contrôles PC et régression Jura réussis ; [validation B1](VALIDATION_B1.md). Qualification A53 B1 ouverte ; B2/B3 non commencés. La preuve technique P8 n'est pas la validation physique de ces ajouts ; Bâle enrichi reste incomplet.
 
 **Clarification du 26 octobre après revue du propriétaire :** la clôture ci-dessous concerne l'essai technique bâtiments/parkings et ses contrôles, pas un produit Bâle terminé. L'ancien plan ne spécifiait pas de livrables transports/lieux/services pour Bâle. Ces besoins sont maintenant ajoutés, dans l'ordre confirmé : **B1 transports, B2 lieux/patrimoine, B3 services pratiques**. Bâle enrichi reste ouvert. [Plan détaillé, sources examinées et sorties par lot](PLAN_BALE_ENRICHISSEMENT.md). Priorité à ces informations avant une autre ville ; arbres/forêts/ponts restent des compléments visuels ultérieurs.
 

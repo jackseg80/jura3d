@@ -1,6 +1,8 @@
 # Bâle — passer de l'essai technique à un explorateur utile
 
-26 octobre 2026 — demande et ordre confirmés par le propriétaire : **transports, lieux et patrimoine, services pratiques**. Ce document révise le plan ; il n'annonce pas ces couches comme réalisées.
+26 octobre 2026 — demande et ordre confirmés par le propriétaire : **transports, lieux et patrimoine, services pratiques**. Ce document distingue les livrables encore prévus de l'avancement effectivement vérifié.
+
+**Avancement après mise en œuvre B1 :** quais et tracés tram/bus réalisés localement et vérifiés sur PC, filtres/fiches/groupes/liens et erreurs/réessais disponibles. [Qualification B1](VALIDATION_B1.md). La validation A53 reste ouverte ; B2 lieux/patrimoine et B3 services ne sont pas commencés. Bâle enrichi et publication restent ouverts/différés, sans nouvelle ville.
 
 ## Ce qui était prévu et ce qui est ajouté
 
@@ -22,9 +24,9 @@ Chaque lot commence par les données et conditions, puis un ajout local borné, 
 
 L'emprise des bâtiments P8 ne s'élargit pas automatiquement. Distinguer la couverture de chaque source, les objets affichés dans le secteur et la zone contenant des bâtiments ; annoncer toute limite dans l'interface. Mesurer un éventuel élargissement séparément.
 
-## Sources réellement examinées le 26 octobre
+## Repérage initial des sources le 26 octobre, complété depuis par B1
 
-Métadonnées officielles et un enregistrement de chaque jeu reçus HTTP 200, CORS `*`. Ce contrôle prouve l'accès et les champs ci-dessous, pas encore la conversion de l'ensemble, le rendu, la justesse de tous les objets ou une permission identique pour toutes les couches. Preuve locale `.vite/planning/basel-info-sources.json`.
+Au repérage initial : métadonnées officielles et un enregistrement de chaque jeu reçus HTTP 200, CORS `*`, preuve locale `.vite/planning/basel-info-sources.json`. B1 a ensuite lu les deux jeux de transports en entier, leurs conditions et les liens horaires : voir [les nouveaux contrôles](VALIDATION_B1.md). Les sources patrimoine/services restent candidates ; aucune permission uniforme entre couches ni garantie de justesse/exhaustivité n'en découle.
 
 | Usage | Source et contenu observé | Conditions annoncées / vérification restante |
 | --- | --- | --- |
@@ -38,6 +40,6 @@ Les liens de catalogue ci-dessus exposent les métadonnées ; API correspondante
 
 ## État, Git et publication
 
-Cette révision documentaire et le commit de sauvegarde du travail testé sont autorisés par le propriétaire. Elle n'ajoute aucune couche dans l'application. **Bâle fonctionnellement enrichi reste ouvert**, B1/B2/B3 non implémentés ; prochaine action : qualification complète des données B1 puis ajout local des transports.
+La révision documentaire et les sauvegardes locales par commit sont autorisées par le propriétaire. B1 a ensuite été autorisé et implémenté localement ; **Bâle fonctionnellement enrichi reste ouvert**. B1 attend sa qualification A53, B2/B3 ne sont pas commencés. Prochaine action : essai B1 en Faible sur A53 lorsqu'il sera disponible, puis qualification des sources B2.
 
 PUB2 est prêt techniquement pour une revue locale, mais sa publication est différée pendant l'enrichissement : le propriétaire conteste justement l'intérêt d'un Bâle limité aux parkings. Aucun push ou déploiement exécuté dans ce lot de sauvegarde. Une éventuelle mise en ligne de l'essai limité doit être présentée comme telle, sans annoncer ces fonctionnalités futures comme présentes.

@@ -1,5 +1,7 @@
 # PUB2 — Accueil commun Jura et Bâle
 
+**Après B1, 26 octobre :** la preview commune4306 sert désormais l'assemblage `.vite/b1/site-delivery/` avec les transports Bâle. Les builds et rapports PUB2 ci-dessous sont conservés comme références antérieures ; [B1](VALIDATION_B1.md) donne les nouvelles vérifications, empreintes et limites. Aucun nouveau déploiement, qualification A53 B1 ouverte.
+
 **Revue du 26 octobre :** mise à jour des documents et commit de sauvegarde autorisés. Le propriétaire confirme l'ordre transports → lieux/patrimoine → services et juge insuffisant le Bâle limité aux parkings : [plan révisé](PLAN_BALE_ENRICHISSEMENT.md). Publication différée ; aucun push/déploiement exécuté par cette sauvegarde. Les mentions « aucun commit autorisé » ci-dessous décrivent l'autorisation initiale de préparation, désormais complétée pour le commit seulement.
 
 26 octobre 2026. Préparation locale autorisée par « ok » après la proposition d'un accès commun. **Aucun commit, push ou déploiement autorisé par cette préparation.** PUB1 reste le seul site effectivement publié : Jura `29a4089`, à l'adresse https://jackseg80.github.io/jura3d/. Les modifications P8 et les preuves PC/A53 sont préservées ; P9 non commencé.

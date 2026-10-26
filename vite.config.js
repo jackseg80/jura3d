@@ -18,7 +18,7 @@ const { default: configuration } = await import(pathToFileURL(territoryFile).hre
 const territory = validateTerritory(configuration);
 const dataFiles = new Map();
 for (const layer of territory.layers) {
-  if (layer.kind === 'basel-parking') continue; // Service distant, aucun instantané livré.
+  if (['basel-parking','basel-transit'].includes(layer.kind)) continue; // Services distants, aucun instantané livré.
   layer.files.forEach((name, index) => dataFiles.set(`${layer.base}${name}`,
     index === layer.files.length - 1 ? layer.checksSource : `data/${layer.base}${name}`));
   dataFiles.set(layer.conditions, `data/${layer.conditions}`);
