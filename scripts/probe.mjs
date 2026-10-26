@@ -264,6 +264,11 @@ try {
   assert.ok(Math.abs(touchAfter.height - touchBefore.height) > 10, 'bouton zoom tactile');
   assert.ok(Math.abs(touchAfter.heading - touchBefore.heading) > .1, 'bouton rotation tactile');
   assert.ok(Math.abs(touchAfter.pitch - touchBefore.pitch) > .2, 'bouton inclinaison tactile');
+  // Gestes sur la carte : le panneau ouvert peut couvrir les coordonnées du test.
+  await touchPage.locator('#toggle-controls').tap();
+  assert.equal(await touchPage.locator('#controls-body').isVisible(), false);
+  assert.ok(await touchPage.evaluate(() => [140, 240, 295].every(x => document.elementFromPoint(x, 550)?.tagName === 'CANVAS')),
+    'zone de geste réellement sur le canvas');
   const client = await touchContext.newCDPSession(touchPage);
   const gesture = async (frames) => {
     await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: frames[0] });
@@ -281,6 +286,7 @@ try {
   await gesture(Array.from({ length: 12 }, (_, i) => [{ x: 140 - i * 3, y: 560, id: 1 }, { x: 240 + i * 3, y: 560, id: 2 }]));
   const pinchAfter = await touchPage.evaluate(() => window.__jura3dCamera());
   assert.ok(Math.abs(pinchAfter.height - dragAfter.height) > 5, 'pincement tactile');
+  await touchPage.locator('#toggle-controls').tap();
   await touchPage.locator('#home').tap();
   await touchPage.waitForFunction(() => window.__jura3dCamera().activePlace === 'delemont' && !window.__jura3dCamera().flyingTo);
   await waitReady(touchPage);

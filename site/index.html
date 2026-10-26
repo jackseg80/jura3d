@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Explorez le Jura et le centre de Bâle en 3D : bâtiments, patrimoine, bus et observations de parkings." />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="{{BASE}}site.css" />
+    <title>Jura & Bâle — explorer en 3D</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#territoires">Choisir un territoire</a>
+    <header class="masthead"><span class="brand">Jura & Bâle <span>en 3D</span></span><span class="edition">Site d’exploration</span></header>
+    <main>
+      <div class="intro">
+        <p class="eyebrow">Un autre regard sur les lieux</p>
+        <h1>Choisissez votre<br />territoire.</h1>
+        <p class="lead">Parcourez le relief et les bâtiments, puis découvrez les informations qui les accompagnent.</p>
+      </div>
+      <div class="territories" id="territoires">
+        <article class="territory jura" aria-labelledby="jura-title">
+          <div class="card-top"><span class="tag">4 destinations</span><span class="number" aria-hidden="true">01</span></div>
+          <svg class="illustration" viewBox="0 0 420 100" aria-hidden="true" focusable="false"><path d="M0 96 75 40 126 70 211 12 300 75 352 43 420 96M0 96h420M98 96l65-42M242 34l-15 62M352 43l-13 53" /></svg>
+          <h2 id="jura-title">Le Jura</h2>
+          <p class="places">Delémont · Porrentruy · Saignelégier · Saint-Ursanne</p>
+          <p class="description">Explorez les bâtiments, consultez le patrimoine et retrouvez les arrêts, les lignes de bus et leurs horaires officiels.</p>
+          <a class="explore" data-territory="jura" href="{{BASE}}jura/">Explorer le Jura <span aria-hidden="true">↗</span></a>
+          <p class="note">Le réseau de bus est un instantané, sans suivi des véhicules en direct.</p>
+        </article>
+        <article class="territory basel" aria-labelledby="basel-title">
+          <div class="card-top"><span class="tag">Essai du centre</span><span class="number" aria-hidden="true">02</span></div>
+          <svg class="illustration" viewBox="0 0 420 100" aria-hidden="true" focusable="false"><path d="M0 65h420M0 80h420M35 65V33h350v32M60 65V45M360 65V45M80 65q25-42 50 0M155 65q25-42 50 0M230 65q25-42 50 0M305 65q25-42 50 0M35 33V20M385 33V20" /></svg>
+          <h2 id="basel-title">Bâle</h2>
+          <p class="places">Centre · Gare CFF · Messe</p>
+          <p class="description">Découvrez les bâtiments du secteur étudié et les parkings, avec leurs observations datées et leurs fiches officielles.</p>
+          <a class="explore" data-territory="basel" href="{{BASE}}bale/">Explorer Bâle <span aria-hidden="true">↗</span></a>
+          <p class="note">Les relevés de parkings peuvent être anciens. Leur date figure dans chaque fiche.</p>
+        </article>
+      </div>
+      <p class="practical">Une connexion Internet est nécessaire. Sur téléphone, vous pouvez choisir la qualité « Faible » dans les réglages de la carte.</p>
+    </main>
+    <footer><span>Prototype exploratoire</span><span>Données © swisstopo · Sources et conditions détaillées dans chaque carte.</span></footer>
+  </body>
+</html>

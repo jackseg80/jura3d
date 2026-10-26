@@ -1,14 +1,16 @@
 # Publication de test sur GitHub Pages
 
+**26 octobre 2026 — PUB2 préparé localement :** accueil commun, accès Jura/Bâle et retour au choix ; assemblage et workflow manuel adaptés sans envoi ni déploiement. [État, revue et procédure PUB2](PUBLICATION_PUB2.md). Le site effectivement publié reste PUB1 Jura `29a4089`. La suite de ce document conserve la preuve historique de cette première publication.
+
 25 octobre 2026 — étape ajoutée entre P7 et P8 à la demande du propriétaire. La publication n'était pas un lot explicite du plan ; le dépôt avait seulement un contrôle de compilation GitHub Actions. Le propriétaire autorise les commits, l'envoi et le déploiement nécessaires à cette publication. L'ancienne consigne « aucun commit/push/déploiement » reste historique pour P1–P7 ; elle ne bloque pas cette opération autorisée.
 
 ## État
 
-**Site public disponible et vérifié : [https://jackseg80.github.io/jura3d/](https://jackseg80.github.io/jura3d/).** Première publication terminée le 25 octobre 2026 à **21:40:13 Europe/Zurich**, contrôle Chrome public terminé à **21:41:01**. Commit servi : `29a4089a94bd5a3a5626da5c33cf1c1276a497ae`. P8 Bâle non commencé.
+**Site public disponible et vérifié : [https://jackseg80.github.io/jura3d/](https://jackseg80.github.io/jura3d/).** Première publication terminée le 25 octobre 2026 à **21:40:13 Europe/Zurich**, contrôle Chrome public terminé à **21:41:01**. Commit servi : `29a4089a94bd5a3a5626da5c33cf1c1276a497ae`. P8 Bâle non commencé au moment de PUB1, depuis qualifié localement avec réserves.
 
 Le lien fonctionne depuis un navigateur connecté à Internet, sans serveur PC ni câble. Aucun nouveau parcours sur appareil Android physique n'a été effectué lors de la publication ; les réserves P6 restent applicables.
 
-## Configuration et mise à jour
+## Configuration PUB1 et historique de mise à jour
 
 - Source : dépôt public `jackseg80/jura3d`, branche `main`.
 - `.github/workflows/build.yml` vérifie les push et pull requests sans publier.
@@ -18,7 +20,7 @@ Le lien fonctionne depuis un navigateur connecté à Internet, sans serveur PC n
 - La licence CesiumJS et son inventaire tiers sont livrés sous `cesiumStatic/LICENSE.md` et `cesiumStatic/ThirdParty.json`.
 - `build-info.json` identifie le commit Actions, la base et le territoire servis. En build local, la révision vaut `null` pour ne pas attribuer des modifications non committées à un ancien commit.
 
-Commandes, après autorisation d'une future publication et vérification des changements :
+Commandes historiques PUB1. Pour la préparation actuelle à deux territoires et sa future publication, suivre [PUB2](PUBLICATION_PUB2.md), notamment le nouveau probe de site commun :
 
 ```powershell
 git push origin main

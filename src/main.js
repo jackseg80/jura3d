@@ -1,12 +1,14 @@
 import {
   BoundingSphere, Cartesian2, Cartesian3, Cartographic, CameraEventType,
-  Cesium3DTileFeature, Cesium3DTileset, CesiumTerrainProvider, Color,
+  Cesium3DTileFeature, Cesium3DTileset, CesiumTerrainProvider, Color, ClippingPolygon, ClippingPolygonCollection,
   HeadingPitchRange, ImageryLayer, JulianDate, Math as CesiumMath, Matrix4,
   MouseButton, Rectangle, ShadowMode, ScreenSpaceEventType,
   ScreenSpaceTiltOrbitCameraController, UrlTemplateImageryProvider, Viewer,
 } from 'cesium';
 import 'cesium/Build/Cesium/Widgets/widgets.css';
 import './style.css';
+import { createParkingLayer } from './parking.js';
+import { parkingFreshness, parkingDate } from './parking-data.js';
 import { createTransportLayer, officialTransportUrl } from './transport.js';
 import { createHeritageLayer, officialPdfUrl } from './heritage.js';
 
@@ -136,6 +138,7 @@ function startScene() {
   let selectionKind = null;
   let heritage;
   let transport;
+  let parking;
   let qualityProfile = 'high';
   let screenSpaceError = 16;
   let autoReadings = [];
@@ -158,7 +161,9 @@ function startScene() {
   const resourceNames = { terrain: 'Relief', imagery: 'Fond de carte', buildings: 'Bâtiments' };
 
   function reportError(kind, error) {
-    errors.set(kind, `${resourceNames[kind]} indisponible. Vérifiez la connexion puis réessayez.`);
+    errors.set(kind, error?.code === 'CLIPPING_UNSUPPORTED'
+      ? 'Ce navigateur ne permet pas la découpe de la zone 3D. Essayez un navigateur compatible WebGL 2.'
+      : `${resourceNames[kind]} indisponible. Vérifiez la connexion puis réessayez.`);
     console.warn(resourceNames[kind], error);
     updateStatus();
   }
@@ -196,6 +201,7 @@ function startScene() {
     selectionPanel.classList.remove('is-heritage');
     document.querySelector('#selection-extra').hidden = true;
     document.querySelector('#selection-transport').hidden = true;
+    document.querySelector('#selection-parking').hidden = true;
     document.querySelector('#transport-links').replaceChildren();
     const groupList = document.querySelector('#selection-group');
     groupList.hidden = true;
@@ -263,6 +269,15 @@ function startScene() {
     try {
       const tileset = await Cesium3DTileset.fromUrl(territory.sources.buildings.url, { credit: territory.sources.buildings.credit, maximumScreenSpaceError: screenSpaceError });
       if (generation !== buildingGeneration) { tileset.destroy(); return; }
+      if (territory.sources.buildings.clipBounds) {
+        if (!ClippingPolygonCollection.isSupported(viewer.scene)) {
+          tileset.destroy(); const error = new Error('Découpe des bâtiments non prise en charge par ce navigateur');
+          error.code = 'CLIPPING_UNSUPPORTED'; throw error;
+        }
+        const [w,s,e,n] = territory.sources.buildings.clipBounds;
+        tileset.clippingPolygons = new ClippingPolygonCollection({ inverse: true,
+          polygons: [new ClippingPolygon({ positions: Cartesian3.fromDegreesArray([w,s,e,s,e,n,w,n]) })] });
+      }
       buildings = tileset;
       buildingRequest = false;
       buildings.shadows = ShadowMode.ENABLED;
@@ -665,6 +680,40 @@ function startScene() {
     },
   }));
 
+  function showParking(record, metadata, updateOnly = false) {
+    if (updateOnly && (selectionKind !== 'parking' || selectionPanel.hidden)) return;
+    if (!updateOnly) { clearSelection(); selectionKind = 'parking'; }
+    document.querySelector('#selection-title').textContent = record.name;
+    document.querySelector('#selection-description').textContent = record.address || 'Adresse non fournie.';
+    document.querySelector('#selection-position').textContent = `${record.latitude.toFixed(5)}° N · ${record.longitude.toFixed(5)}° E · position fournie par le service`;
+    const freshness = parkingFreshness(record, Date.now(), layerConfig.parking.staleMs);
+    const note = metadata.failed ? 'Actualisation indisponible · dernière observation conservée.'
+      : freshness === 'stale' ? 'Observation ancienne · disponibilité actuelle inconnue.'
+        : freshness === 'unknown' ? 'Date d’observation absente ou incohérente · disponibilité actuelle inconnue.' : 'Observation récente · la disponibilité peut changer.';
+    const freshnessElement = document.querySelector('#parking-freshness');
+    freshnessElement.textContent = note; freshnessElement.dataset.freshness = freshness;
+    const properties = document.querySelector('#parking-properties'); properties.replaceChildren();
+    for (const [label,value] of [['Places libres au relevé',record.free],['Capacité fournie',record.total],
+      ['État au relevé',({offen:'Ouvert',geschlossen:'Fermé'})[record.status] ?? record.status],['Observation',parkingDate(record.observedAt)],['Dernière lecture du service',parkingDate(metadata.fetchedAt)]]) {
+      const dt = document.createElement('dt'); const dd = document.createElement('dd');dt.textContent = label;
+      dd.textContent = value === null || value === '' ? 'Non renseigné' : String(value);properties.append(dt,dd);
+    }
+    const link = document.querySelector('#parking-link');link.removeAttribute('href');link.setAttribute('aria-disabled',String(!record.url));
+    if (record.url) link.href = record.url;
+    document.querySelector('#parking-catalog').href = layerConfig.parking.catalog;
+    document.querySelector('#selection-parking').hidden = false;
+    document.querySelector('#selection-credit').textContent = layerConfig.parking.credit;
+    selectionPanel.classList.add('is-heritage'); selectionPanel.hidden = false;
+    if (!updateOnly) {
+      document.querySelector('#selection-content').scrollTop = 0;
+      if (phoneLayout.matches) { controlsUsed = true; setControlsExpanded(false); }
+    }
+  }
+  if (layerConfig.parking) parking = layers.register('parking', createParkingLayer(viewer, {
+    config: layerConfig.parking, onSelect: showParking, onState: updateCantonCredit,
+    onClear: () => { if (selectionKind === 'parking') clearSelection(); },
+  }));
+
   function selectAt(position) {
     const picked = viewer.scene.pick(position);
     if (layers.pick(picked, position)) return;
@@ -682,12 +731,17 @@ function startScene() {
       const name = ['NAME_KOMPLETT', 'name', 'Name', 'NAME', 'nom', 'NOM']
         .map((key) => picked.getProperty(key)).find((value) => typeof value === 'string' && value.trim());
       const egid = picked.getProperty('EGID') ?? picked.getProperty('egid');
+      const address = (territory.sources.buildings.addressFields ?? []).map(key => picked.getProperty(key))
+        .filter(value => typeof value === 'string' && value.trim()).map(value => value.trim().slice(0, 160));
       title = name ? name.trim() : 'Bâtiment 3D';
-      description = name ? 'Nom fourni par les données swisstopo.' : 'Nom et adresse non fournis par les données de cet objet.';
+      description = name ? `Nom fourni par les données ${territory.sources.buildings.attributionName ?? 'swisstopo'}.`
+        : address.length ? 'Nom de lieu non fourni par le modèle.' : 'Nom et adresse non fournis par les données de cet objet.';
+      if (address.length) description += ` Adresse source : ${address.join(', ')}.`;
       if (egid !== undefined && egid !== null && String(egid).trim() && String(egid) !== '0') {
         description += ` EGID fourni : ${String(egid).slice(0, 80)}.`;
       }
       selectionKind = 'building';
+      document.querySelector('#selection-credit').textContent = territory.sources.buildings.credit;
     } else if (world) {
       title = 'Point sur la carte';
       description = 'Position choisie sur le terrain. Aucun nom de lieu ni fiche disponible.';
@@ -709,6 +763,10 @@ function startScene() {
   addEventListener('pagehide', (event) => { if (!event.persisted) layers.destroy(); });
   if (probeParameters.has('probe')) {
     window.__jura3dLayers = layers;
+    window.__jura3dParking = () => parking?.snapshot();
+    window.__jura3dParkingTarget = id => parking?.target(id);
+    window.__jura3dBuildings = () => ({ url: territory.sources.buildings.url, credit: territory.sources.buildings.credit,
+      clipBounds: territory.sources.buildings.clipBounds ?? null, inverse: buildings?.clippingPolygons?.inverse ?? null });
     window.__jura3dTerritory = () => ({ id: territory.id, places: Object.keys(PLACES), layers: territory.layers.map(l => l.id) });
     window.__jura3dHeritage = () => heritage?.snapshot();
     window.__jura3dHeritageTarget = (id) => heritage?.target(id);

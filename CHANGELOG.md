@@ -1,5 +1,29 @@
 # Historique
 
+## 2026-10-26 — Plan Bâle enrichi après revue du contenu
+
+- Clarifier que P8 validait une preuve technique bâtiments/parkings et non un Bâle terminé. Ajouter les lots confirmés : transports, lieux/patrimoine, services pratiques, avec sorties et sources candidates distinctes des fonctionnalités livrées.
+- Différer la publication pendant l'enrichissement ; documents et commit de sauvegarde autorisés, aucune nouvelle couche implémentée par cette révision. [Plan Bâle](docs/PLAN_BALE_ENRICHISSEMENT.md).
+
+## 2026-10-26 — PUB2 : accueil Jura/Bâle préparé localement
+
+- Accueil statique en français, deux entrées et lien « Choisir un territoire » dans chaque carte ; clavier et affichage étroit, aucune donnée 3D chargée à l'accueil.
+- Assemblage dédié `build:site`, applications autonomes par sous-dossier, marqueurs et contrôles de fichiers cohérents ; CI et publication manuelle préparées pour les deux territoires, sans déclenchement de publication.
+- Parcours navigateur et contrôles adaptés aux nouveaux chemins ; preuves P8 préservées, limites Android inchangées. [Préparation PUB2](docs/PUBLICATION_PUB2.md). Aucun commit/push/déploiement.
+
+## 2026-10-26 — P8 qualifié sur A53 et clos avec réserves
+
+- Parcours Bâle Faible 24 étapes/600 lectures sur 12 min 29 s, référence Delémont au même preset et sélections tactiles sur l'appareil. FPS variables et pauses documentés ; 30 FPS constants non acquis, aucun coût causal unique des parkings déduit.
+- Propriétaire satisfait de l'usage, des fiches et liens ; portrait/paysage vérifiés, léger ralentissement au changement d'orientation puis récupération. S23 non testé et observations toujours anciennes.
+- Préférences restaurées et relues, seuls onglets et tunnels créés retirés. Sources/builds PC conservés sans modification ; [preuves et limites](docs/VALIDATION_P8.md), relais synchronisé. Aucun commit/push/déploiement ; Bâle reste local, P9 non commencé.
+
+## 2026-10-25 — P8 Bâle réalisé localement, validation mobile ouverte
+
+- Configuration Bâle réutilisant la scène : trois cadrages, modèle cantonal limité au cadre central, aucun doublon de bâtiments swisstopo, crédits/conditions et adresses source adaptés.
+- Parkings : seize positions et fiches, observations reçues du 21 octobre clairement anciennes ; date de lecture séparée, inconnu distinct de zéro, réessai et conservation du cache sur panne. Rafraîchissement visible par minute, requêtes/cadrages annulables et destruction complète de la couche.
+- Contrôles de fraîcheur/liens/compteurs/réponse complète, rendu/sélection, pannes et toucher simulé ; relevés PC courts avec conditions et limites documentées. A53 indisponible, aucun nouveau test Android ni clôture P8.
+- Aide bus locale alignée sur la découpe P6. Builds Jura/Bâle et sous-dossier contrôlés ; [validation P8](docs/VALIDATION_P8.md). Site public Jura inchangé, aucun commit/push/déploiement P8.
+
 ## 2026-10-25 — Première publication de test sur GitHub Pages
 
 - Étape PUB1 ajoutée avant Bâle, autorisée par le propriétaire avec commits/envoi/déploiement nécessaires.

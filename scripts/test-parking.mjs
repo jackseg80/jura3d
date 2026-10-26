@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {parseParkingResponse,parkingFreshness,officialParkingUrl} from '../src/parking-data.js';
+import basel from '../src/territories/basel.js';
+import {validateTerritory} from '../src/territory.js';
+validateTerritory(basel);
+const now=Date.parse('2026-10-25T20:00:00Z');const bounds=basel.layers[0].bounds;
+const value=(changes={})=>({id:'city',title:'Parkhaus City',geo_point_2d:{lon:7.5824076,lat:47.561101},free:0,total:100,
+  published:'2026-10-25T19:59:00+00:00',last_downloaded:'2026-10-25T20:00:00Z',status:'offen',link:'https://www.parkleitsystem-basel.ch/parkhaus/city',...changes});
+const parse=p=>parseParkingResponse({total_count:1,results:[p]},bounds)[0];
+assert.equal(parse(value()).free,0);
+assert.equal(parkingFreshness(parse(value()),now,300000),'recent');
+assert.equal(parkingFreshness(parse(value({published:'2026-10-21T13:46:00Z'})),now,300000),'stale');
+assert.equal(parkingFreshness(parse(value({published:null})),now,300000),'unknown');
+assert.equal(parkingFreshness(parse(value({published:'2026-10-25T20:00:00'})),now,300000),'unknown');
+assert.equal(parkingFreshness(parse(value({published:'2026-10-25T20:03:00Z'})),now,300000),'unknown');
+assert.equal(parse(value({free:null})).free,null);
+assert.equal(parse(value({total:null,free:77})).free,77);
+assert.equal(parse(value({free:101})).free,null);
+assert.equal(parse(value({free:-1})).free,null);
+assert.equal(parse(value({free:'3'})).free,null);
+assert.equal(parse(value({link:'javascript:alert(1)'})).url,null);
+assert.equal(officialParkingUrl('https://www.parkleitsystem-basel.ch.evil.test/parkhaus/city'),null);
+assert.equal(officialParkingUrl('https://www.parkleitsystem-basel.ch/parkhaus/city?redirect=evil'),null);
+assert.throws(()=>parse(value({geo_point_2d:{lon:0,lat:0}})),/invalide/);
+assert.throws(()=>parseParkingResponse({total_count:2,results:[value()]},bounds),/incomplète/);
+assert.throws(()=>parseParkingResponse({total_count:2,results:[value(),value()]},bounds),/invalide/);
+const invalid=structuredClone(basel);invalid.layers[0].refreshMs=1000;assert.throws(()=>validateTerritory(invalid),/parkings/);
+console.log('Parkings : 18 contrôles de configuration, fraîcheur, compteurs, liens et réponse complète réussis.');

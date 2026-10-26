@@ -5,13 +5,16 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const browser = await chromium.launch({ executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', headless: true,
   args: ['--no-sandbox', ...(process.env.JURA3D_PROBE_GPU === 'high' ? ['--force_high_performance_gpu'] : [])] });
 const report = { checkedAt: new Date().toISOString(), completed: false, errors: [], checks: [] };
+const output = process.env.JURA3D_PROBE_OUTPUT ?? '.vite/p7';
+await mkdir(output, { recursive: true });
 const url = new URL(process.env.JURA3D_URL ?? 'http://127.0.0.1:4300/'); url.searchParams.set('probe', '1');
 const ready = p => p.waitForFunction(() => document.querySelector('#status').dataset.state === 'ready', undefined, { timeout: 90000 });
 try {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
   page.on('pageerror', e => report.errors.push(e.message));
   const requests = [];
-  page.on('request', r => { if (r.url().includes('/jura/')) requests.push(r.url()); });
+  const dataPrefix = new URL('jura/', url).href;
+  page.on('request', r => { if (r.url().startsWith(dataPrefix)) requests.push(r.url()); });
   await page.goto(url.href); await ready(page);
   const territory = await page.evaluate(() => window.__jura3dTerritory());
   report.territory = territory;
@@ -59,7 +62,7 @@ try {
     const pending = await browser.newPage();
     pending.on('pageerror', e => report.errors.push(e.message));
     let release; const gate = new Promise(resolve => { release = resolve; }); let intercepted = 0;
-    await pending.route('**/jura/*', async route => {
+    await pending.route(requestUrl => requestUrl.href.startsWith(dataPrefix), async route => {
       intercepted++; await gate;
       try { await route.continue(); } catch { /* Le client peut avoir annulé la requête. */ }
     });
@@ -78,10 +81,9 @@ try {
   }
   assert.equal(await page.locator('.credit').textContent(), 'Données © swisstopo');
   assert.deepEqual(report.errors, []); report.completed = true;
-  await page.screenshot({ path: `.vite/p7/${territory.id}.png` });
+  await page.screenshot({ path: `${output}/${territory.id}.png` });
 } catch (error) { report.failure = error.stack; process.exitCode = 1; }
 finally {
-  await mkdir('.vite/p7', { recursive: true });
-  await writeFile(`.vite/p7/probe-${report.territory?.id ?? 'failed'}.json`, JSON.stringify(report, null, 2));
+  await writeFile(`${output}/probe-${report.territory?.id ?? 'failed'}.json`, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report)); await browser.close();
 }

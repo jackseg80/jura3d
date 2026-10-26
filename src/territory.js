@@ -22,6 +22,12 @@ export function validateTerritory(territory) {
   if (!Array.isArray(territory.layers) || new Set(territory.layers.map(l => l.id)).size !== territory.layers.length) fail('couches dupliquées ou absentes');
   const safePath = (p) => typeof p === 'string' && /^[a-zA-Z0-9_./-]+$/.test(p) && !p.startsWith('/') && !p.split('/').includes('..');
   for (const layer of territory.layers) {
+    if (layer.kind === 'basel-parking') {
+      if (layer.id !== 'parking' || !remote(layer.url) || !remote(layer.catalog) || !remote(layer.conditions)
+        || !layer.credit || !bounds(layer.bounds) || !Number.isFinite(layer.refreshMs) || layer.refreshMs < 60000
+        || !Number.isFinite(layer.staleMs) || layer.staleMs < layer.refreshMs) fail('configuration parkings invalide');
+      continue;
+    }
     if (!['jura-heritage', 'jura-transport'].includes(layer.kind) || layer.id !== (layer.kind === 'jura-heritage' ? 'heritage' : 'transport')) fail('adaptateur de couche inconnu');
     if (!safePath(layer.base) || !safePath(layer.checksSource) || !safePath(layer.conditions) || !layer.credit || !layer.sourceName || !bounds(layer.bounds)) fail('source de couche invalide');
     if (!Array.isArray(layer.files) || layer.files.length !== (layer.id === 'heritage' ? 2 : 4) || !layer.files.every(safePath)) fail('fichiers de couche invalides');
@@ -29,6 +35,9 @@ export function validateTerritory(territory) {
     if (layer.id === 'transport' && (!layer.date || !Array.isArray(layer.specs) || layer.specs.length !== 3
       || layer.specs.some((s, i) => s[0] !== ['stop', 'line', 'zone'][i] || s[1] !== ['MultiPoint', 'MultiLineString', 'MultiPolygon'][i] || !Number.isInteger(s[2]) || s[2] <= 0))) fail('effectifs transports invalides');
   }
+  if (sources.buildings.clipBounds && (!bounds(sources.buildings.clipBounds) || !remote(sources.buildings.conditions))) fail('cadre bâtiments invalide');
+  if (sources.buildings.addressFields && (!Array.isArray(sources.buildings.addressFields)
+    || !sources.buildings.addressFields.every(f => typeof f === 'string' && /^[A-Za-z_][A-Za-z0-9_]*$/.test(f)))) fail('champs d’adresse invalides');
   return territory;
 }
 
@@ -54,12 +63,21 @@ export function configureTerritoryUi(territory, root = document, base = '/') {
   for (const place of Object.values(territory.places)) {
     const option = root.createElement('option'); option.textContent = place.name; locality.append(option);
   }
-  for (const id of ['heritage', 'transport']) root.querySelector(`#${id}-settings`).hidden = !territory.layers.some(l => l.id === id);
+  for (const id of ['heritage', 'transport', 'parking']) root.querySelector(`#${id}-settings`).hidden = !territory.layers.some(l => l.id === id);
+  const scope = root.querySelector('#territory-scope');
+  scope.hidden = !territory.sources.buildings.scope; scope.textContent = territory.sources.buildings.scope ?? '';
+  const buildingCredit = root.querySelector('#buildings-source');
+  buildingCredit.hidden = territory.sources.buildings.credit === territory.sources.credit;
+  buildingCredit.replaceChildren(); buildingCredit.append(territory.sources.buildings.credit + ' ');
+  if (territory.sources.buildings.conditions) {
+    const link = root.createElement('a'); link.href = territory.sources.buildings.conditions; link.textContent = 'Conditions';
+    link.target = '_blank'; link.rel = 'noopener noreferrer'; buildingCredit.append(link);
+  }
   root.querySelector('#heritage-credit').replaceChildren();
   for (const layer of territory.layers.filter((l, i, all) => all.findIndex(x => x.credit === l.credit && x.conditions === l.conditions) === i)) {
     const span = root.createElement('span'); span.dataset.layerCredit = layer.id;
     span.append(`${layer.credit} · `);
-    const link = root.createElement('a'); link.href = `${base}${layer.conditions}`; link.textContent = 'Conditions';
+    const link = root.createElement('a'); link.href = layer.conditions.startsWith('https://') ? layer.conditions : `${base}${layer.conditions}`; link.textContent = 'Conditions';
     link.target = '_blank'; link.rel = 'noopener noreferrer'; span.append(link); root.querySelector('#heritage-credit').append(span);
   }
 }

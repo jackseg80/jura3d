@@ -1,6 +1,6 @@
 # Plan de réalisation — Jura 3D
 
-**Date : 25 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 réalisé et validé sur PC ; PUB1 (publication de test) réalisée et vérifiée avant P8 ; P8–P9 non commencés.**
+**Date : 26 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 validé sur PC, PUB1 publié. P8 technique qualifié avec réserves ; Bâle enrichi reste ouvert : B1 transports, B2 lieux/patrimoine, B3 services ajoutés dans cet ordre confirmé. PUB2 accueil préparé et contrôlé localement, publication différée ; docs et commit de sauvegarde autorisés, aucun push/déploiement dans ce lot ; S23 non testé et P9 non commencé.**
 
 **Sauvegarde historique à 13:13 Europe/Zurich :** Tab S8 Faible terminé à 13:04:07, 13 min 27 s, 28 phases/616 lectures sans erreur/coupure, nettoyage confirmé par Wi-Fi appairé. Moyen en cours après repos, aucun résultat achevé à ce point ; manuel/récupération réseau encore ouverts. Vérifier le [rapport et processus consignés dans le relais](RELAIS.md) avant toute relance. P5 non clos, P6 non proposé ou commencé.
 
@@ -8,7 +8,7 @@
 
 Rendre le site exploratoire du canton du Jura utile : relief et bâtiments 3D, navigation entre localités, patrimoine et transports. Conserver CesiumJS comme base tant que les mesures ne justifient pas une autre solution. Le jeu reste une expérimentation distincte. Genève est une référence fonctionnelle ; Bâle est le premier essai multicité conseillé, Berne et Zurich des alternatives, Rennes une candidate française ultérieure.
 
-Preuves actuelles : navigation quatre localités, patrimoine P3 et bus P4 intégrés, P5/P6 mesurés sur PC/Tab S8/A53 avec réserves, configuration et contrat de couches P7 validés sur PC. Les accès aux racines 3D Tiles et API de parkings de Bâle ont été explorés, sans rendu ni intégration. Limites : 30 FPS A53 constants non acquis, S23 absent, conditions et coût d'une nouvelle ville à revalider. Voir [l'état vérifié](ETAT_DU_PROJET.md), les validations P5/P6/P7 et [l'étude des sources](ETUDE_VILLES_COUCHES_MOTEURS.md).
+Preuves actuelles : navigation quatre localités, patrimoine P3 et bus P4 intégrés, P5/P6 mesurés sur PC/Tab S8/A53 avec réserves, configuration et contrat de couches P7 validés sur PC. Bâle intégré localement, rendu et parkings contrôlés sur PC, mesures et usage A53 portrait/paysage ajoutés le 26 octobre. Limites : 30 FPS A53 constants non acquis, S23 non testé, observations anciennes, conditions et coût d'une autre ville à revalider. Voir [l'état vérifié](ETAT_DU_PROJET.md), les validations P5/P6/P7/P8 et [l'étude des sources](ETUDE_VILLES_COUCHES_MOTEURS.md).
 
 ## Modèles, effort et continuité du travail
 
@@ -114,9 +114,24 @@ Cette étape manquait au plan initial : le dépôt et sa compilation ne constitu
 
 ### P8 — Bâle comme preuve multicité
 
+**Clarification du 26 octobre après revue du propriétaire :** la clôture ci-dessous concerne l'essai technique bâtiments/parkings et ses contrôles, pas un produit Bâle terminé. L'ancien plan ne spécifiait pas de livrables transports/lieux/services pour Bâle. Ces besoins sont maintenant ajoutés, dans l'ordre confirmé : **B1 transports, B2 lieux/patrimoine, B3 services pratiques**. Bâle enrichi reste ouvert. [Plan détaillé, sources examinées et sorties par lot](PLAN_BALE_ENRICHISSEMENT.md). Priorité à ces informations avant une autre ville ; arbres/forêts/ponts restent des compléments visuels ultérieurs.
+
+**26 octobre 2026 — bilan P8 clos avec réserves :** mesures Bâle A53 Faible 24/24 étapes et 600 lectures, référence courte Jura, sélections et usage réel portrait/paysage réussis. Propriétaire satisfait, ralentissement transitoire à la rotation puis récupération. Préférences/onglets/tunnels nettoyés. Pauses/FPS variables conservés, 30 FPS constants non acquis, aucun coût causal unique des parkings déduit ; S23 non testé et observations anciennes. Base scène/navigation/réglages/cycle de vie commune, sources/attributions/attributs/fraîcheur propres à Bâle. Pas d'extension du cadre ou de publication déduite de ces contrôles. Suite proposée avant une autre ville : décider du mode d'accès public Jura/Bâle (choix aujourd'hui au build), préparer et valider le packaging, puis publication distinctement autorisée. Aucun lot de publication Bâle ni P9 démarré.
+
+**25 octobre 2026 :** implémentation locale réalisée via la configuration P7, bâtiments cantonaux découpés et parkings avec dates/ancienneté/panne. Rendu PC, fiches, source, absence de doublon et toucher simulé contrôlés ; mesures PC courtes sans conclusion Android. Probes Bâle à 22:28:50 et complet Jura à 22:34:36 Europe/Zurich réussis, zéro erreur ; contrôles finaux consignés dans [VALIDATION_P8.md](VALIDATION_P8.md). A53 indisponible selon le propriétaire, S23 absent : qualification mobile et bilan P8 ouverts, aucun passage à P9 comme lot clos. Essai Bâle non publié, site Jura conservé.
+
 - Confirmer les conditions des modèles et de l'API, charger une zone limitée de bâtiments bâlois, éviter le doublon avec les bâtiments swisstopo. Ajouter les parkings avec observation horodatée et traitement des données périmées ou indisponibles.
 - Ajouter arbres et forêts séparément, comme options, après mesure ; ponts si utiles à la zone. Aucun flux GPS BVB validé à ce stade.
 - **Sortie :** scène réellement rendue, crédits corrects, positions et fiches des parkings vérifiées sur un échantillon ; mesures A53/S23 comparables au Jura ; décision sur ce qui est commun et ce qui reste propre à Bâle.
+
+### PUB2 — Accès commun Jura/Bâle après P8
+
+**Revue du propriétaire, 26 octobre :** docs et commit de sauvegarde autorisés ; publication différée pendant l'enrichissement B1/B2/B3, car l'essai avec parkings ne suffit pas au produit attendu. La validation technique de l'accueil ne valide pas la richesse du contenu. Aucun push/déploiement décidé par ce lot.
+
+**26 octobre 2026 : préparation locale autorisée, réalisée et vérifiée sur PC ; publication en attente d'autorisation.** Accueil statique et deux applications compilées sous `jura/` / `bale/`, lien de retour au choix dans le panneau de chaque carte, configuration de publication manuelle adaptée. Vérification des assemblages racine et Pages ; parcours normal commun, probes Bâle et complet Jura, cycle de vie et clavier/toucher simulé réussis. [Procédure et preuves PUB2](PUBLICATION_PUB2.md). Aucun commit/push/déploiement, site public PUB1 inchangé ; aucun nouveau test Android physique.
+
+- **Sortie avant publication :** accueil lisible au clavier/toucher, chargement des deux cartes et de leurs seules sources, fiches/crédits/conditions, liens de retour et marqueurs de révision/bases cohérents ; documents synchronisés, limites physiques P8 conservées sans nouveau benchmark Android.
+- Après revue et autorisation distincte : commit/push examinés, déclenchement manuel Pages et contrôle HTTPS réel des deux territoires et de la révision servie. Aucune extension du cadre, couche ou ville supplémentaire déduite de PUB2.
 
 ### P9 — Extension facultative
 

@@ -18,6 +18,7 @@
       </div>
       <div id="controls-body" class="controls-content" tabindex="0" aria-label="Commandes défilantes">
       <p class="controls-scroll-hint">Commandes · Faites défiler ↕</p>
+      <!-- site-navigation -->
       <nav class="destinations" aria-label="Localités">
         <button data-place="delemont" aria-pressed="true">Delémont</button>
         <button data-place="porrentruy" aria-pressed="false">Porrentruy</button>
@@ -25,6 +26,7 @@
         <button data-place="saint-ursanne" aria-pressed="false">Saint-Ursanne</button>
       </nav>
       <button id="home" class="wide">Vue initiale · Delémont</button>
+      <p id="territory-scope" class="help" hidden></p>
       <div class="camera-tools" role="group" aria-label="Caméra">
         <button data-camera="zoom-out" aria-label="Éloigner la caméra" title="Éloigner">−</button>
         <button data-camera="zoom-in" aria-label="Rapprocher la caméra" title="Rapprocher">+</button>
@@ -73,8 +75,19 @@
           <p><span class="legend-day" aria-hidden="true"></span> Bleu : jour ou jour/nuit. <span class="legend-night" aria-hidden="true"></span> Violet tireté : nocturne seul. Gris : offre non renseignée.</p>
           <p>« B » = arrêt ; « B » avec un nombre = groupe d’arrêts consultable. Aplats violets = zones Noctambus, indépendantes du secteur et du filtre jour/nuit.</p>
           <p>Touchez un tracé pour son cadre horaire ; choisissez dans la liste si plusieurs se superposent.</p>
-          <p>Réseau statique du 13.09.2026. Les tracés entiers touchant le secteur sont conservés ; leur nombre n’est pas celui des lignes commerciales. Aucun véhicule ou retard en direct.</p>
+          <p>Réseau statique du 13.09.2026. Le secteur affiche les portions voisines des tracés ; « Tout le réseau » conserve les tracés entiers. Leur nombre n’est pas celui des lignes commerciales. Aucun véhicule ou retard en direct.</p>
         </div>
+      </details>
+      <details id="parking-settings" hidden>
+        <summary>Parkings · observations</summary>
+        <label class="checkbox"><input id="parking" type="checkbox" /> Afficher les parkings</label>
+        <p id="parking-status" class="help" role="status" aria-live="polite" data-state="off">Parkings masqués.</p>
+        <button id="parking-retry" class="wide" hidden>Réessayer les parkings</button>
+        <button id="parking-refresh" class="wide" disabled>Actualiser les observations</button>
+        <label for="parking-place">Parking à consulter</label>
+        <select id="parking-place" disabled></select>
+        <button id="parking-open" class="wide" disabled>Voir la fiche et le lieu</button>
+        <p class="help">Le service est consulté chaque minute au premier plan. L’heure du relevé est celle de l’exploitant : une nouvelle lecture ne rend pas une ancienne observation actuelle. Les repères bruns signalent les relevés anciens ou indisponibles.</p>
       </details>
       <details id="settings" open>
       <summary>Qualité, fond et heure</summary>
@@ -114,6 +127,7 @@
       <button id="layer-alert-retry" class="wide" hidden>Réessayer les couches indisponibles</button>
       <div class="data-credits">
       <small class="credit">Données © swisstopo</small>
+      <small id="buildings-source" hidden></small>
       <small id="heritage-credit" hidden>© Géodonnées de la République et Canton du Jura · <a href="%BASE_URL%jura/Conditions_utilisation_geodonnees.pdf" target="_blank" rel="noopener noreferrer">Conditions</a></small>
       </div>
     </aside>
@@ -131,6 +145,12 @@
         <div id="transport-links"></div>
         <p id="transport-link-status" class="help"></p>
         <p class="help">Source : <a href="https://opendata.swiss/en/dataset/lignes-de-bus" target="_blank" rel="noopener noreferrer">Réseau de bus · Service du développement territorial / SIT-Jura</a>. Données du 13.09.2026. Horaires sur les sites officiels, connexion nécessaire ; vérifiez-y les dates et changements.</p>
+      </div>
+      <div id="selection-parking" hidden>
+        <p id="parking-freshness" class="help"></p>
+        <dl id="parking-properties"></dl>
+        <a id="parking-link" class="selection-link" target="_blank" rel="noopener noreferrer">Consulter le parking sur le site officiel</a>
+        <p class="help"><a id="parking-catalog" target="_blank" rel="noopener noreferrer">Source et données du service</a>. Les observations peuvent être anciennes, absentes ou interrompues ; vérifiez la signalisation sur place.</p>
       </div>
       <div id="selection-extra" hidden>
         <dl id="selection-properties"></dl>

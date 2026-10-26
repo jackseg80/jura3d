@@ -1,5 +1,24 @@
 # Données et conditions d'usage
 
+**Plan Bâle enrichi — 26 octobre 2026 :** sources candidates vérifiées jusqu'aux métadonnées et un enregistrement, sans intégration : réseau100064/arrêts100065 (**CC BY 4.0 + OpenStreetMap**), sanitaires100031 (**CC BY 4.0**), fontaines100008 (**conditions IWB, utilisation commerciale soumise à autorisation**). Ne pas réutiliser la licence des parkings pour ces couches. Source patrimoine/musées non encore retenue ; [périmètre, liens et limites](PLAN_BALE_ENRICHISSEMENT.md). Les attributions et modalités précises seront contrôlées avant conversion/redistribution.
+
+**PUB2 — 26 octobre 2026 :** assemblage local de deux cartes aux sources P8 inchangées. Aucun modèle bâlois téléchargé pour redistribution, aucun instantané de parking ajouté. Accueil sans données distantes, illustrations vectorielles décoratives créées dans le projet ; sources et crédits complets dans chaque carte, mention « © swisstopo » aussi à l'accueil. Publication non effectuée, conditions et limites de diffusion conservées.
+
+**Complément du 26 octobre 2026 :** l'A53 reçoit les seize observations de parkings toujours datées du 21 octobre 13:46 UTC, correctement marquées anciennes ; une lecture récente ne constitue pas une nouvelle observation. Sources, droits et fichiers inchangés depuis la vérification du 25 octobre. [Qualification physique et limites P8](VALIDATION_P8.md).
+
+## Sources Bâle de l'essai local P8 — 25 octobre 2026
+
+| Donnée | Origine / usage | Conditions et limites |
+| --- | --- | --- |
+| Bâtiments | [3D Tiles cantonaux](https://3d.geo.bs.ch/cesium/tiles/av-gebaeude-basel-stadt/tileset.json), entrée officielle du [service 3D](https://www.bs.ch/en/node/28694) | Service gratuit dont l'intégration dans un globe est explicitement décrite ; crédit « Quelle: Geodaten Kanton Basel-Stadt » et lien aux [conditions](https://www.bs.ch/en/node/29871). Champ de licence du tileset absent ; ne pas lui attribuer la licence des parkings. Pas de redistribution des fichiers du modèle. |
+| Parkings | [Jeu 100088](https://data.bs.ch/explore/dataset/100088/), API JSON v2.1, seize points reçus | Métadonnées CC BY 4.0, attribution Parkhäuser Basel-Stadt. Champs source et dates enregistrés dans [basel-sources.json](../data/basel-sources.json). API interrogée à l'activation, puis au plus une fois par minute en onglet visible ; aucun instantané de secours livré. |
+
+Terrain et fonds restent swisstopo, crédit conservé. Seul le modèle bâlois est actif dans cet essai, aucun bâtiment national superposé. Cadre de rendu `[7.57,47.54,7.615,47.57]`, sans promesse de frontière administrative, de précision d'altitude ni d'exhaustivité. Adresses de bâtiments affichées uniquement si fournies par les attributs configurés `STR_HAUSNR`/`ORT` ; aucun nom patrimonial ou EGID inféré.
+
+Toutes les observations parkings reçues sont du **21 octobre 2026 à 13:46 UTC** malgré le catalogue annonçant un flux à la minute. Le champ `published` pilote l'ancienneté, pas la date de lecture ni `last_downloaded`. Le seuil local de cinq minutes n'est pas une garantie du fournisseur. Position et trois fiches comparées à l'API et regardées sur orthophoto/modèle, sans validation géodésique indépendante d'une entrée. Deux consultations de pages parkings renvoient 429 : liens de format valide conservés, disponibilité non confirmée et aucun contournement.
+
+Les fichiers source bruts des contrôles restent dans `.vite/p8/sources/`, hors site/Git ; seule la provenance est documentée dans `data/basel-sources.json`. La licence MIT du projet ne s'étend pas aux données. Bâle n'est pas publié ; droits et coût à revoir si portée/diffusion ou redistribution changent. [Preuves, politique de fraîcheur et points ouverts](VALIDATION_P8.md).
+
 ## Publication de test — 25 octobre 2026
 
 GitHub Pages sert les mêmes instantanés et conditions sous `/jura3d/jura/`, les crédits restent visibles. Aucun PDF de fiche patrimoniale ni contenu de page d'horaire externe recopié. Les services swisstopo restent contactés par chaque navigateur. Conditions FSDI relues, usage de test et limites de diffusion consignés dans [PUBLICATION.md](PUBLICATION.md). La licence CesiumJS et son inventaire tiers accompagnent le build. Aucune nouvelle source ni modification de droits ; les sources/configuration restent celles du Jura.

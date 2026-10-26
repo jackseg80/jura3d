@@ -7,6 +7,9 @@ const cesiumSource = 'node_modules/cesium/Build/Cesium';
 const cesiumBaseUrl = 'cesiumStatic';
 const base = process.env.JURA3D_BASE_PATH ?? '/';
 if (base !== '/' && !/^\/(?:[a-zA-Z0-9_-]+\/)+$/.test(base)) throw new Error('JURA3D_BASE_PATH invalide');
+const siteHome = process.env.JURA3D_SITE_HOME ?? null;
+if (siteHome && ((siteHome !== '/' && !/^\/(?:[a-zA-Z0-9_-]+\/)+$/.test(siteHome))
+  || base === siteHome || !base.startsWith(siteHome))) throw new Error('JURA3D_SITE_HOME invalide');
 
 const territoryId = process.env.VITE_TERRITORY ?? 'jura';
 if (!/^[a-z0-9-]+$/.test(territoryId)) throw new Error('VITE_TERRITORY invalide');
@@ -15,6 +18,7 @@ const { default: configuration } = await import(pathToFileURL(territoryFile).hre
 const territory = validateTerritory(configuration);
 const dataFiles = new Map();
 for (const layer of territory.layers) {
+  if (layer.kind === 'basel-parking') continue; // Service distant, aucun instantané livré.
   layer.files.forEach((name, index) => dataFiles.set(`${layer.base}${name}`,
     index === layer.files.length - 1 ? layer.checksSource : `data/${layer.base}${name}`));
   dataFiles.set(layer.conditions, `data/${layer.conditions}`);
@@ -29,10 +33,14 @@ export default defineConfig({
   plugins: [
     {
       name: 'jura3d-build-info',
+      transformIndexHtml(html) {
+        return html.replace('<!-- site-navigation -->', siteHome
+          ? `<a id="site-home" class="site-home" href="${siteHome}">← Choisir un territoire</a>` : '');
+      },
       generateBundle() {
         this.emitFile({ type: 'asset', fileName: 'build-info.json', source: JSON.stringify({
           revision: process.env.GITHUB_SHA ?? null, source: process.env.GITHUB_SHA ? 'github-actions' : 'local',
-          territory: territory.id, base,
+          territory: territory.id, base, siteHome,
         }, null, 2) + '\n' });
       },
     },

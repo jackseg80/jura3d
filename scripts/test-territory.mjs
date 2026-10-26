@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import jura from '../src/territories/jura.js';
 import control from '../src/territories/navigation-control.js';
+import basel from '../src/territories/basel.js';
 import { validateTerritory } from '../src/territory.js';
 import { createLayerCollection } from '../src/layers.js';
 
 assert.equal(validateTerritory(jura), jura);
 assert.equal(validateTerritory(control), control);
+assert.equal(validateTerritory(basel), basel);
 const invalid = (mutate) => { const value = structuredClone(jura); mutate(value); assert.throws(() => validateTerritory(value), /Configuration territoriale/); };
 invalid(t => { t.initialPlace = 'absent'; });
 invalid(t => { t.places.delemont.latitude = NaN; });

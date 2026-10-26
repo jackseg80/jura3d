@@ -1,5 +1,31 @@
 # Décisions techniques
 
+## 2026-10-26 — Distinguer preuve technique Bâle et richesse du produit
+
+Le propriétaire relève que Bâle ne propose que les parkings et veut beaucoup plus d'informations. Clarifier la clôture P8 : fonctionnement/rendu/performance de la preuve bâtiments/parkings validés, contenu du produit encore incomplet. Les transports, lieux/patrimoine et services n'étaient pas des livrables explicites du plan Bâle existant ; les ajouter dans cet ordre, confirmé par le propriétaire, sous les lots B1/B2/B3. [Sources, limites et sorties](PLAN_BALE_ENRICHISSEMENT.md). Préférer ces informations à de nouvelles villes ou à des seuls ajouts visuels. Aucun résultat de recherche de source ne vaut intégration ou droit d'usage uniforme.
+
+Autorisation actuelle : mettre à jour les docs et committer le travail local testé pour le conserver. Différer la publication du Bâle limité aux parkings pendant l'enrichissement ; aucun push/déploiement dans ce lot. Préserver les mesures et builds P8/PUB2 avec leur périmètre d'origine. Ne pas réécrire l'historique en présentant les nouveaux besoins comme déjà planifiés ou livrés.
+
+## 2026-10-26 — Préparer un accueil et deux applications statiques pour PUB2
+
+Après le bilan P8, le propriétaire autorise la préparation d'un accès commun. Choisir un accueil léger et des liens vers Jura/Bâle, avec retour dans le panneau de chaque carte, au lieu de reconfigurer une scène active. Cela conserve le contrat territorial et les sources propres à chaque build ; seules les données choisies sont demandées. L'ancienne URL d'accueil Jura deviendrait le choix des territoires ; accès directs prévus sous `jura/` et `bale/`. Accepter deux copies des ressources Cesium dans l'artefact pour garder les builds autonomes, sans modifier leur chargement ni leur cycle de vie.
+
+Conserver `npm run build`, ajouter l'assemblage dédié `npm run build:site`, marqueurs cohérents et contrôles racine/sous-dossier. La CI et la publication manuelle sont préparées pour cet assemblage ; aucune autorisation de commit/push/déploiement déduite du « ok » à la préparation. P9 non commencé, périmètre et réserves P8 inchangés. [Procédure PUB2](PUBLICATION_PUB2.md).
+
+## 2026-10-26 — Clore l'essai P8 limité avec réserves après usage A53
+
+Le propriétaire juge Bâle utilisable et fluide sur l'A53, confirme fiches/liens et l'usage paysage ; un ralentissement transitoire à la rotation récupère ensuite. Clore le périmètre centre/gare/Messe et parkings après PC/A53, sans masquer les pauses et les passages sous 30 FPS, le S23 non testé, les observations anciennes ou l'absence de mesure d'autonomie hors USB. La variabilité des répétitions ne permet pas un coût causal unique des parkings ni une comparaison intrinsèque des villes. Préserver les preuves et le bilan [P8](VALIDATION_P8.md).
+
+Conserver la scène/navigation/réglages/cycle de vie communs ; sources, attributions, attributs et règles de fraîcheur restent propres au territoire/adaptateur. Ces mesures ne justifient pas de migration de moteur ou d'élargissement immédiat du cadre et des couches. Prochaine décision : mode d'accès public Jura/Bâle, actuellement choisi au build ; sa préparation/publication reste distincte, aucune autorisation de commit/push/déploiement P8 déduite de l'essai. P9 non commencé.
+
+## 2026-10-25 — P8 local : Bâle sans doublon et parkings explicitement datés
+
+Après PUB1, le propriétaire autorise de continuer. Réaliser l'essai Bâle via la configuration P7, sans copier l'application ni changer CesiumJS : un seul fournisseur de bâtiments, rendu limité au cadre central par découpe, terrain/fonds nationaux conservés. Ne pas introduire arbres/forêts/ponts avant qualification du coût. Préserver la version publique Jura ; aucune autorisation de publication automatique des futurs lots déduite de PUB1.
+
+Le jeu parkings annonce une mise à jour par minute mais renvoie des observations du 21 octobre. Utiliser la date d'observation comme seule base temporelle, avec seuil local 5 min et tolérance 2 min pour une date future ; afficher ancienneté/inconnu et garder le dernier relevé lors d'une panne. Ne jamais assimiler téléchargement récent, zéro, état d'ouverture au relevé et disponibilité actuelle. Requête manuelle ou par minute visible, annulation et nettoyage explicites, réponse partielle refusée. Même identifiants : conserver la fiche lors du rafraîchissement. Date de lecture séparée, liens limités au site officiel.
+
+Les contrôles et relevés PC n'acceptent pas à eux seuls le coût mobile : médianes proches de 143 FPS, cache de bâtiments montant au fil du parcours et référence Jura variable. L'A53 est indisponible selon le propriétaire ; ne pas remplacer cette référence par la Tab S8 détectée ni clore P8/P9 sur ces chiffres. Aucun déploiement ou commit P8, documentation synchronisée pour la reprise physique.
+
 ## 2026-10-25 — Publier un prototype testable avant Bâle
 
 La publication manquait comme lot explicite. À la demande du propriétaire, ajouter PUB1 entre P7 et P8 et autoriser les commits, push et déploiement nécessaires à cette première mise en ligne. GitHub Pages sert uniquement le build statique du Jura ; mêmes données, crédits et réserves. Garder la compilation CI sur push et une publication manuelle distincte, pour éviter qu'un envoi documentaire ne remplace le site. Identifier le commit servi dans `build-info.json` et documenter le contrôle HTTPS après Actions. Cette autorisation porte sur la présente publication, pas sur une règle de publication automatique des futurs lots.

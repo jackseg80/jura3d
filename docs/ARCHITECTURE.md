@@ -1,5 +1,11 @@
 # Architecture du prototype
 
+## Assemblage du site commun — PUB2
+
+`site/index.html` et `site/site.css` constituent un accueil statique sans Cesium ni données distantes. `scripts/build-site.mjs` assemble deux builds indépendants dans le dossier fixe ignoré `dist-site/` : `jura/` et `bale/`, chacun avec ses ressources Cesium, données et marqueur ; même révision pour l'accueil et les enfants. Le build par territoire existant reste disponible. Aucun changement de configuration en cours d'exécution ni deux Viewer simultanés dans la page.
+
+La racine commune est `JURA3D_BASE_PATH` ; le constructeur fixe les bases enfants et `JURA3D_SITE_HOME`. Vite valide cette dernière, injecte un lien de retour dans le panneau défilant et l'enregistre au marqueur. Sans elle, l'application autonome garde sa présentation habituelle. Navigation par liens de pages, stockage de qualité partagé par origine comme auparavant ; cycle de vie P7 conservé. `check-site.mjs` vérifie l'accueil et les marqueurs/bases/ressources des deux enfants, puis réutilise `check-build.mjs`. `probe-site.mjs` contrôle les trajets sans paramètre diagnostic et le retour au choix, au clavier et au toucher simulé. [Détails et état de validation](PUBLICATION_PUB2.md).
+
 ## Composants
 
 | Fichier | Responsabilité |
@@ -24,6 +30,16 @@ Reprise P5 du 1er octobre : chaque onglet de mesure reçoit `__p5MeasurementStar
 Reprise du soir : la préférence initiale est gardée dans une clé `sessionStorage` propre à la session, conservée aux rechargements, puis enregistrée comme `originalQuality` dans le rapport dès sa lecture. Assertions après rechargement et navigation diagnostic ; la clé temporaire est retirée au nettoyage. Les rapports anciens sans ce champ gardent leur limite, aucune valeur d'origine n'est réinventée.
 
 Le projet est une application JavaScript côté navigateur, construite avec Vite. Aucune API ou base de données propre à Jura 3D n'existe encore. `npm run build` produit des fichiers statiques dans `dist/` ; ce répertoire n'est pas versionné.
+
+## Essai Bâle P8 — 25 octobre 2026
+
+`territories/basel.js` remplace uniquement la configuration : terrain/fonds swisstopo, bâtiments 3D Tiles cantonaux, trois cadrages et adaptateur `basel-parking`. Le build n'instancie qu'un tileset bâtiments ; aucun doublon swissBUILDINGS3D. Un `ClippingPolygonCollection` inverse découpe le rendu au cadre déclaré, avec contrôle de compatibilité WebGL 2 et message propre si indisponible. Pas de transformation verticale devinée. Attributions et conditions du modèle sont séparées du crédit swisstopo ; les adresses bâtiment utilisent les seuls champs source configurés, sans jointure ni nom de lieu inventé.
+
+`parking-data.js` valide réponse complète, identifiants, coordonnées du cadre, compteurs, date d'observation et liens officiels. `parking.js` possède requête annulable 20 s, source Cesium de repères ancrés au terrain, sélection/cadrage, écouteurs et minuteur. Chargement à l'activation puis toutes les 60 s lorsque l'onglet est visible ; aucune requête automatique en onglet caché, pas de stockage persistant. Échec : cache mémoire conservé et statut d'erreur. Réponse identique en identifiants : entités/fiche réutilisées et champs actualisés, sans vol/fermeture intempestive. Destruction définitive : générations, requête, cadrage en attente/vol, écouteurs, source et minuteur annulés.
+
+L'état de transport de la réponse (`off/loading/ready/error`) ne prouve pas sa fraîcheur. Celle-ci dépend de `published`, avec seuil local 5 min et tolérance de futur 2 min ; jamais de `last_downloaded` ni de la dernière lecture du client. Valeurs absentes/incohérentes : inconnues, sans zéro inventé. Repères bruns et fiche signalent ancienneté/indisponibilité ; le bleu de sélection ne représente pas une disponibilité. Les textes source restent des textes DOM, seuls les liens HTTPS du domaine/chemin permis sont activés.
+
+La fiche partagée ajoute une rubrique parkings. Le registre P7 distribue son picking avant bâtiments/terrain ; alertes/réessais et crédits tiennent compte des seules couches configurées. Panneaux Jura masqués dans Bâle et parkings masqués dans Jura. Vite ignore les assets locaux pour l'adaptateur distant ; seuls les GeoJSON déclarés des adaptateurs Jura sont copiés dans leur build. `check-build.mjs` accepte un territoire attendu facultatif, `jura` par défaut. `probe-territory.mjs` reçoit un dossier de sortie optionnel pour préserver les anciennes preuves. [Contrôles et limites](VALIDATION_P8.md).
 
 ## Publication GitHub Pages — 25 octobre 2026
 

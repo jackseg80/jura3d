@@ -55,6 +55,7 @@ button:disabled { opacity: .5; cursor: wait; }
 :focus-visible { outline: 3px solid #c65a00; outline-offset: 2px; }
 .destinations { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
 .wide { width: 100%; }
+.site-home { display: flex; align-items: center; min-height: 44px; margin-bottom: 6px; color: #215776; font-size: .85rem; font-weight: 600; }
 .camera-tools { display: grid; grid-template-columns: repeat(4, 1fr) 1.8fr; gap: 6px; margin: 6px 0; }
 .camera-tools button { font-weight: 700; }
 summary { display: flex; align-items: center; cursor: pointer; font-weight: 600; }
@@ -145,3 +146,6 @@ a { color: #215776; }
   }
   .controls:not(.is-collapsed) .controls-content { flex: 1; }
 }
+
+#parking-freshness[data-freshness="stale"], #parking-freshness[data-freshness="unknown"],
+#parking-status[data-freshness="stale"] { color: #78350f; }

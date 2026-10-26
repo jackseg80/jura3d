@@ -1,0 +1,108 @@
+{
+  "verifiedOn": "2026-10-25",
+  "buildings": {
+    "url": "https://3d.geo.bs.ch/cesium/tiles/av-gebaeude-basel-stadt/tileset.json",
+    "serviceDocumentation": "https://www.bs.ch/en/node/28694",
+    "productDocumentation": "https://www.bs.ch/bvd/grundbuch-und-vermessungsamt/vermessung/3d-stadtmodell-mapbs-3d",
+    "conditions": "https://www.bs.ch/en/node/29871",
+    "credit": "Quelle: Geodaten Kanton Basel-Stadt",
+    "useBasis": "Service public gratuit, intégration directe dans une application globe explicitement décrite par le fournisseur. Pas de copie ni redistribution des modèles.",
+    "individualTilesetLicenseField": null,
+    "rootSha256": "0a91388bd66ae0913fd677390dffae613dd53fce13b7bc010283d5502405dae8",
+    "clipBounds": [
+      7.57,
+      47.54,
+      7.615,
+      47.57
+    ],
+    "verticalOffsetApplied": false
+  },
+  "parking": {
+    "dataset": "100088",
+    "catalog": "https://data.bs.ch/explore/dataset/100088/",
+    "metadata": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100088",
+    "records": "https://data.bs.ch/api/explore/v2.1/catalog/datasets/100088/records?limit=100",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "credit": [
+      "Parkhäuser Basel-Stadt"
+    ],
+    "fields": [
+      {
+        "name": "title",
+        "type": "text"
+      },
+      {
+        "name": "published",
+        "type": "datetime"
+      },
+      {
+        "name": "free",
+        "type": "int"
+      },
+      {
+        "name": "total",
+        "type": "int"
+      },
+      {
+        "name": "anteil_frei",
+        "type": "double"
+      },
+      {
+        "name": "auslastung",
+        "type": "double"
+      },
+      {
+        "name": "auslastung_prozent",
+        "type": "int"
+      },
+      {
+        "name": "link",
+        "type": "text"
+      },
+      {
+        "name": "geo_point_2d",
+        "type": "geo_point_2d"
+      },
+      {
+        "name": "name",
+        "type": "text"
+      },
+      {
+        "name": "id2",
+        "type": "text"
+      },
+      {
+        "name": "id",
+        "type": "text"
+      },
+      {
+        "name": "status",
+        "type": "text"
+      },
+      {
+        "name": "last_downloaded",
+        "type": "datetime"
+      },
+      {
+        "name": "address",
+        "type": "text"
+      },
+      {
+        "name": "lot_type",
+        "type": "text"
+      }
+    ],
+    "observedCount": 16,
+    "observedTimes": [
+      "2026-10-21T13:46:00+00:00"
+    ],
+    "publishedFieldMeaning": "Observation fournie par la source ; last_downloaded et la date de lecture ne la remplacent pas.",
+    "refreshMs": 60000,
+    "staleMs": 300000,
+    "futureToleranceMs": 120000,
+    "recordsSha256": "ee0447f17df38a961a2065af80c5c0e50d7eb77d7032bd0b6f701f729b616db0",
+    "coordinateCheck": "Comparaison source API et affichage ; entrée automobile et précision terrain non validées indépendamment.",
+    "externalPagesCheck": "429 reçu sur deux pages parkleitsystem-basel.ch ; pas de contournement, disponibilité non confirmée."
+  }
+}

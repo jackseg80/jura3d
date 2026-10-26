@@ -16,8 +16,9 @@ export async function probeHeritage(browser, url) {
   const page = await context.newPage();
   const errors = [];
   const requests = [];
+  const dataPrefix = new URL('jura/', url).href;
   page.on('pageerror', (error) => errors.push(error.message));
-  page.on('request', (request) => { if (request.url().includes('/jura/')) requests.push(request.url()); });
+  page.on('request', (request) => { if (request.url().startsWith(dataPrefix)) requests.push(request.url()); });
   const activate = async (target, touch = false) => {
     if (!(await target.locator('#heritage-settings').getAttribute('open'))) {
       await target.locator('#heritage-settings summary')[touch ? 'tap' : 'click']();
