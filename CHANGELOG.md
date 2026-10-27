@@ -1,10 +1,10 @@
 # Historique
 
-## 2026-10-27 — B3 sanitaires en cours de qualification
+## 2026-10-27 — B3 sanitaires qualifié avec réserves
 
 - Ajouter100031 à la demande : WC/partenaires/urinoirs/douches, filtres type/Eurokey/secteur, fiches source et fermetures signalées, sans ouverture en direct ou montant inventé.
 - Extraire le renderer de points B2 commun aux services, loaders/schémas natifs distincts, conserver les références validées.
-- Tests purs/builds et contrôles PC B3/B2/Jura/Bâle/site réussis, comparaisons Intel/A53 terminées ; [mesures, pauses et limites B3](docs/VALIDATION_B3.md). Parcours manuel A53 et nettoyage final encore ouverts, aucune intégration des fontaines IWB ni publication.
+- Tests purs/builds et contrôles PC B3/B2/Jura/Bâle/site réussis, comparaisons Intel/A53 terminées ; [mesures, pauses et limites B3](docs/VALIDATION_B3.md). Retour propriétaire positif, portrait/paysage observés et nettoyage final confirmé ; gestes détaillés non capturés et coût mobile restent explicites. Aucune intégration des fontaines IWB ni publication.
 
 ## 2026-10-27 — B2 lieux à visiter qualifié avec réserves
 

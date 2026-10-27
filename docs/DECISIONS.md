@@ -2,7 +2,7 @@
 
 ## 2026-10-27 — B3 commence par les sanitaires officiels
 
-Après autorisation de poursuivre, retenir100031 pour WC, partenaires, urinoirs et douches, avec licence/attribution et données complètes contrôlées avant intégration. Garder catégories, états, tarifs et Eurokey comme indications source, sans promesse d'ouverture/accessibilité ni prix inventé ; conserver la divergence des cinq payants avec la page générale. Généraliser le seul renderer de points B2, sans copier les schémas source ; B2 requalifié sur PC pour cette extraction. Fontaines IWB conditionnelles, non incluses implicitement. [Critères et preuves B3](VALIDATION_B3.md), PC et mesures Intel/A53 terminés, acceptation tactile encore ouverte ; aucune clôture B3 ou publication implicite.
+Après autorisation de poursuivre, retenir100031 pour WC, partenaires, urinoirs et douches, avec licence/attribution et données complètes contrôlées avant intégration. Garder catégories, états, tarifs et Eurokey comme indications source, sans promesse d'ouverture/accessibilité ni prix inventé ; conserver la divergence des cinq payants avec la page générale. Généraliser le seul renderer de points B2, sans copier les schémas source ; B2 requalifié sur PC pour cette extraction. Fontaines IWB conditionnelles, non incluses implicitement. [Critères et preuves B3](VALIDATION_B3.md), B3 sanitaires clos avec réserves après contrôles PC/mesures Intel/A53 et retour global propriétaire positif en portrait/paysage. Ne pas attribuer au relevé des gestes sanitaires/liens détaillés absents ; garder coût mobile/pauses et absence de temps réel. Revue de livraison puis publication sur décision séparée.
 
 ## 2026-10-27 — B2 avec les lieux et repères de Basel Info
 
