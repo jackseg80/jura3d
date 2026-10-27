@@ -1,5 +1,10 @@
 # Historique
 
+## 2026-10-27 — Retour PC Bâle et extension Jura planifiée
+
+- Consigner le retour propriétaire positif sur PC ; qualification A53 conservée ouverte.
+- Ajouter le complément P6 pour étendre le rendu en tuiles aux tracés Jura, avec conservation des filtres/Noctambus/fiches et comparaison PC avant qualification mobile. [Plan](docs/OPTIMISATION_JURA.md). Aucun portage ou nouvelle mesure réalisé dans ce lot documentaire, aucun push/déploiement.
+
 ## 2026-10-26 — Optimiser le fond des tracés Bâle
 
 - Tuiles transparentes calculées localement sur le terrain, même géométrie1m et identités source, quais/groupes/fiches conservés, surbrillance vectorielle du tracé choisi ; rendu Jura P6 conservé.

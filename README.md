@@ -1,5 +1,7 @@
 # Jura 3D
 
+**27 octobre — retour PC positif et suite Jura :** le propriétaire indique que Bâle semble correct sur PC. La qualification A53 reste ouverte. L'extension du rendu optimisé aux tracés du Jura est [inscrite au plan](docs/OPTIMISATION_JURA.md), encore à implémenter et mesurer ; données, patrimoine et bâtiments ne sont pas à refaire.
+
 **26 octobre au soir — optimisation B1 réalisée et contrôlée sur Intel/RTX.** Fond des tracés Bâle calculé en tuiles locales, mêmes géométries1m/identités et fiches, quais/groupes et surbrillance conservés ; le Jura garde son rendu P6. Comparaisons compilées, probes Bâle/Jura/site et tests de tuiles réussis. [Mesures et limites](docs/OPTIMISATION_B1.md). **Qualification physique A53 et retour subjectif du propriétaire encore ouverts**, B2/B3 différés ; aucun réglage GPU Windows changé, aucun push/déploiement.
 
 **Complément du 26 octobre au soir : performance B1 à optimiser avant l'A53.** Le navigateur intégré ChatGPT utilisé par le propriétaire affiche **Intel UHD**, pas la RTX du PC ; 14–20FPS constatés avec les tracés. Le rendu partagé P6 reste beaucoup plus chargé à Bâle qu'à Delémont. La campagne RTX précédente ne qualifie pas cet onglet. [Diagnostic GPU et comparaison des deux villes](docs/DIAGNOSTIC_B1_TRACES.md). Fonctionnalités B1 conservées ; optimisation puis qualification A53 avant B2/B3.

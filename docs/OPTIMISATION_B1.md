@@ -1,5 +1,7 @@
 # B1 — Optimisation du fond des tracés Bâle
 
+**Retour du 27 octobre :** le propriétaire indique que cela semble correct sur PC. Retour global positif, sans mesure ou détail de gestes supplémentaire déduit. La qualification A53 reste ouverte ; [l'extension aux tracés Jura](OPTIMISATION_JURA.md) est désormais planifiée, non encore implémentée.
+
 26 octobre 2026, autorisée par « ok » après le [diagnostic Intel/RTX](DIAGNOSTIC_B1_TRACES.md). Base Git `60f78fe`, modèle/effort conservés, aucun sous-agent. **Ce lot change le rendu des tracés Bâle, pas les données ni le GPU Windows.** La qualification A53 reste à faire ; aucune nouvelle couche B2/B3 ou publication.
 
 ## Changement retenu
@@ -54,7 +56,7 @@ Rapports `.vite/b1-opt/paired-low.json` et `paired-high.json`, script `measure-f
 
 Après remplacement de la preview4306, rechargement du seul onglet Bâle existant avec la procédure computer-use et les API navigateur dédiées. Nouveau bundle `index-Cq63BSHA.js` relu dans le DOM, état « Scène 3D prête »,562quais/155tracés, GPU toujours Intel UHD0xA788. **Compteurs ponctuels43–48FPS avec les tracés**, Auto terminé en **Moyen**, dernière mesure Auto44FPS. L'ancien relevé14–17 était en Faible : cette observation positive n'est pas une comparaison instrumentée à preset constant, et ne remplace pas les campagnes ci-dessus. Pas de réglage GPU Windows ou de qualité forcé.
 
-La case Tracés était désactivée à la reprise de l'onglet. Elle a été activée pour le contrôle puis remise désactivée ; transports actifs, préférenceAuto et destination centre conservés. `.vite/b1-opt/iab-final.json`, capture choisie ci-dessous. Aucun onglet utilisateur fermé, aucun nouvel onglet ouvert. Retour subjectif du propriétaire encore à recueillir ; qualification A53 physique toujours ouverte.
+La case Tracés était désactivée à la reprise de l'onglet. Elle a été activée pour le contrôle puis remise désactivée ; transports actifs, préférenceAuto et destination centre conservés. `.vite/b1-opt/iab-final.json`, capture choisie ci-dessous. Aucun onglet utilisateur fermé, aucun nouvel onglet ouvert. Retour PC global positif reçu le27octobre ; qualification A53 physique toujours ouverte.
 
 ![Réseau complet dans l'onglet ChatGPT, compteur ponctuel43FPS](images/b1-optimisation-chatgpt-2026-10-26.jpg)
 

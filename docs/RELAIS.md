@@ -1,5 +1,12 @@
 # Relais de reprise
 
+**27 octobre — retour PC positif sur Bâle, extension Jura inscrite au plan.** Le propriétaire dit que cela semble correct sur PC et demande l'application de la méthode au Jura. [Périmètre et critères du complément P6](OPTIMISATION_JURA.md). Le code Jura est encore en polylignes terrain P6 ; aucun portage livré par cette mise à jour documentaire. Conserver données/identités/fiches, jour/nuit, arrêts/groupes, zones Noctambus et patrimoine ; généraliser le choix du renderer sans copier les règles bâloises dans les données Jura.
+
+- Prochaine action sans appareil : adaptation Jura, mesures avant/après à mêmes paramètres sur les quatre localités/Intel/RTX et contrôles des deux territoires. Ensuite A53 pour Bâle/Jura lorsqu'il sera disponible ; B1 physique et B2/B3 restent ouverts/différés. Les campagnes P6 historiques gardent leurs réserves et leurs versions.
+- BaseGit `2c8c6b2`, dépôt trouvé propre ; changement documentaire seulement, aucun build/probe refait sur les sources inchangées. Même modèle/effort, aucun sous-agent, sauvegarde locale autorisée, aucun push/déploiement. Lire Git à la reprise pour le commit documentaire exact ; aucun appareil ou serveur utilisé dans ce lot.
+
+---
+
 **Contrôle final dans l'onglet ChatGPT :** après remplacement de4306 et rechargement de l'onglet existant, nouveau bundleCq63, GPUIntel,562quais/155tracés, AutoMoyen/dernière mesure44FPS ; compteurs ponctuels43–48FPS avec les tracés. Capture `docs/images/b1-optimisation-chatgpt-2026-10-26.jpg`, lecture `.vite/b1-opt/iab-final.json`. Ancien relevé en Faible, nouveau en Moyen : pas de comparaison instrumentée de cet onglet ni de garantie générale. Case Tracés retrouvée désactivée, activée pour test puis restaurée désactivée ; transports actifs/préférenceAuto/destinationcentre conservés. Retour subjectif propriétaire et A53 restent ouverts.
 
 **26 octobre au soir — optimisation B1 réalisée sur PC, A53/retour intégré ouverts.** Autorisée par « ok », baseGit60f78fe, même modèle/effort, aucun sous-agent. Sauvegarde locale autorisée ; lire gitlog/status pour l'identifiant final. Aucun push/déploiement, B2/B3 différés.
