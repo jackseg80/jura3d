@@ -26,6 +26,12 @@ export default {
     licenses: [{ label: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' }],
     bounds: [5.5, 45.5, 11, 49], radiusMeters: 5000,
   },{
+    id:'services',kind:'basel-sanitary',sourceName:'Installations sanitaires · Basel-Stadt',
+    credit:'Quelle: Geodaten Kanton Basel-Stadt · CC BY 4.0',
+    conditions:'https://data.bs.ch/explore/dataset/100031/',
+    licenses:[{label:'CC BY 4.0',url:'https://creativecommons.org/licenses/by/4.0/'}],
+    bounds:[5.5,45.5,11,49],radiusMeters:5000,color:'#0f766e',
+  },{
     id: 'parking', kind: 'basel-parking', credit: 'Parkhäuser Basel-Stadt · CC BY 4.0',
     conditions: 'https://creativecommons.org/licenses/by/4.0/',
     catalog: 'https://data.bs.ch/explore/dataset/100088/',

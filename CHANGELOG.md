@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — B3 sanitaires en cours de qualification
+
+- Ajouter100031 à la demande : WC/partenaires/urinoirs/douches, filtres type/Eurokey/secteur, fiches source et fermetures signalées, sans ouverture en direct ou montant inventé.
+- Extraire le renderer de points B2 commun aux services, loaders/schémas natifs distincts, conserver les références validées.
+- Tests purs/builds et contrôles PC B3/B2/Jura/Bâle/site réussis, comparaisons Intel/A53 terminées ; [mesures, pauses et limites B3](docs/VALIDATION_B3.md). Parcours manuel A53 et nettoyage final encore ouverts, aucune intégration des fontaines IWB ni publication.
+
 ## 2026-10-27 — B2 lieux à visiter qualifié avec réserves
 
 - Ajouter les lieux culturels, points d’intérêt et repères remarquables de Basel Info, chargés à la demande après contrôle des licences ; propriétés/positions natives conservées, aucune jointure aux bâtiments.

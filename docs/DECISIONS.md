@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-27 — B3 commence par les sanitaires officiels
+
+Après autorisation de poursuivre, retenir100031 pour WC, partenaires, urinoirs et douches, avec licence/attribution et données complètes contrôlées avant intégration. Garder catégories, états, tarifs et Eurokey comme indications source, sans promesse d'ouverture/accessibilité ni prix inventé ; conserver la divergence des cinq payants avec la page générale. Généraliser le seul renderer de points B2, sans copier les schémas source ; B2 requalifié sur PC pour cette extraction. Fontaines IWB conditionnelles, non incluses implicitement. [Critères et preuves B3](VALIDATION_B3.md), PC et mesures Intel/A53 terminés, acceptation tactile encore ouverte ; aucune clôture B3 ou publication implicite.
+
 ## 2026-10-27 — B2 avec les lieux et repères de Basel Info
 
 Après clôture B1 avec réserves et autorisation de poursuivre, retenir les deux collections BIPO culture/intérêt et BIFO repères remarquables, annoncées CC-BY-4.0 et fournies en points. Préserver leurs propriétés/positions et distinguer les collections ; ne pas fusionner les doublons probables par proximité. Regrouper visuellement, y compris les paires proches (44px/min2), garder le secteur5km par défaut et les filtres, expliciter les champs absents. Pas de nom lié au bâtiment 3D, texte ou horaire inventé, ni statut de monument protégé attribué aux repères. Le registre DMVS reste un candidat séparé, pas intégré : première page seulement examinée, nombreuses désignations absentes, géométries et documents de nature juridique. [Provenance et critères de sortie](VALIDATION_B2.md). B2 clos avec réserves après contrôles PC, mesures et acceptation globale A53 portrait/paysage ; coût mobile,30FPS constants non acquis et gestes détaillés non observés restent explicites. B3 et publication différés.

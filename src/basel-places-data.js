@@ -34,11 +34,7 @@ export function parseBaselPlaces(features, dataset, bounds) {
         url: baselPlaceUrl(p.Link), source: `https://api.geo.bs.ch/geometa/v1/metadata_details/dataset/published/html/${dataset.product}` } };
   });
 }
-export function placeDistanceMeters(point, center) {
-  const radians = Math.PI / 180, a = center.latitude * radians, b = point[1] * radians;
-  const q = Math.sin((b - a) / 2) ** 2 + Math.cos(a) * Math.cos(b) * Math.sin((point[0] - center.longitude) * radians / 2) ** 2;
-  return 6371008.8 * 2 * Math.atan2(Math.sqrt(q), Math.sqrt(Math.max(0, 1 - q)));
-}
+export { placeDistanceMeters } from './point-geometry.js';
 export async function loadBaselPlaces(config, signal, fetcher = fetch) {
   const json = async url => { const r = await fetcher(url, { signal }); if (!r.ok) throw new Error(`Lieux : HTTP ${r.status}`); return r.json(); };
   const licenses = await Promise.all(['BIPO', 'BIFO'].map(async id => {

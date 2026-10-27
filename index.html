@@ -52,6 +52,22 @@
         <button id="heritage-open" class="wide" disabled>Voir la fiche et le lieu</button>
         <p class="help heritage-help">Repères « P » : lieux patrimoniaux. Touchez un nombre pour consulter les lieux du groupe ; le zoom peut séparer leurs repères.</p>
       </details>
+      <details id="services-settings" hidden>
+        <summary>Toilettes, douches et services</summary>
+        <label class="checkbox"><input id="services" type="checkbox" /> Afficher les installations sanitaires</label>
+        <p id="services-status" class="help" role="status" aria-live="polite" data-state="off">Services masqués.</p>
+        <button id="services-retry" class="wide" hidden>Réessayer les services</button>
+        <label for="services-locality">Secteur</label>
+        <select id="services-locality" disabled><option value="active">Autour de la destination · ~5 km</option><option value="">Toutes les installations fournies</option></select>
+        <label for="services-category">Type d'installation</label>
+        <select id="services-category" disabled><option value="">Tous les types</option></select>
+        <label for="services-eurokey">Équipement Eurokey déclaré</label>
+        <select id="services-eurokey" disabled><option value="">Toutes les indications</option><option value="yes">Oui selon la source</option><option value="no">Non selon la source</option><option value="unknown">Non renseigné</option></select>
+        <label for="services-place">Installation à consulter</label>
+        <select id="services-place" disabled></select>
+        <button id="services-open" class="wide" disabled>Voir la fiche et le lieu</button>
+        <p class="help">WC : installation ; W + nombre : groupe. Gris : fermeture signalée. État et accès statiques, sans ouverture en direct ni accessibilité garantie. Eurokey décrit un équipement, pas un accès universel. Vérifiez horaires, conditions et tarifs sur place. Les toilettes partenaires dépendent de l'établissement ; les douches peuvent être saisonnières.</p>
+      </details>
       <details id="transport-settings">
         <summary>Bus et horaires</summary>
         <label class="checkbox"><input id="transport" type="checkbox" /> Afficher le réseau de bus</label>

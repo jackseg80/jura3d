@@ -27,6 +27,7 @@ jobs:
       - run: node scripts/test-parking.mjs
       - run: node scripts/test-basel-transit.mjs
       - run: node scripts/test-basel-places.mjs
+      - run: node scripts/test-sanitary.mjs
       - run: node scripts/test-transport-raster.mjs
       - run: node scripts/test-transport-geometry.mjs
       - run: npm run build:site

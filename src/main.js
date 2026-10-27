@@ -13,6 +13,7 @@ import { createTransportLayer, officialTransportUrl } from './transport.js';
 import { BASEL_TIMETABLE, BASEL_NETWORK, BASEL_OLD_LINKS } from './basel-transit-data.js';
 import { createHeritageLayer, officialPdfUrl } from './heritage.js';
 import { createBaselPlacesLayer } from './basel-places.js';
+import { createSanitaryLayer } from './sanitary.js';
 
 import territoryConfig from '#territory';
 import { validateTerritory, configureTerritoryUi } from './territory.js';
@@ -117,7 +118,7 @@ try {
   status.dataset.state = 'error';
   retry.hidden = false;
   retry.addEventListener('click', () => location.reload());
-  document.querySelectorAll('nav button, #home, [data-camera], #settings input, #settings select, #quality-recheck, #heritage-settings input, #heritage-settings select, #heritage-open, #transport-settings input, #transport-settings select, #transport-open')
+  document.querySelectorAll('nav button, #home, [data-camera], #settings input, #settings select, #quality-recheck, #heritage-settings input, #heritage-settings select, #heritage-open, #transport-settings input, #transport-settings select, #transport-open, #services-settings input, #services-settings select, #services-open')
     .forEach((element) => { element.disabled = true; });
   console.error('Initialisation 3D', error);
 }
@@ -143,6 +144,7 @@ function startScene() {
   let heritage;
   let transport;
   let parking;
+  let services;
   let qualityProfile = 'high';
   let screenSpaceError = 16;
   let autoReadings = [];
@@ -584,25 +586,27 @@ function startScene() {
       span.hidden = !territory.layers.some(layer => layer.credit === config.credit && layer.conditions === config.conditions && document.querySelector(`#${layer.id}`).checked);
     }
   }
-  function showBaselPlace(record, info) {
-    clearSelection(); selectionKind = 'heritage';
+  function showBaselPlace(record, info, layerId = 'heritage') {
+    clearSelection(); selectionKind = layerId;
     const d = record.display;
     document.querySelector('#selection-title').textContent = d.name;
     document.querySelector('#selection-description').textContent = d.description || 'Description non fournie par la source.';
     const [lon, lat] = record.feature.geometry.coordinates;
     document.querySelector('#selection-position').textContent = `${lat.toFixed(5)}° N · ${lon.toFixed(5)}° E · repère cartographique source, sans liaison au bâtiment 3D`;
     const metadata = document.querySelector('#selection-properties'); metadata.replaceChildren();
-    for (const [label, value] of [['Catégorie', d.category], ...Object.entries(record.feature.properties).filter(([key]) => !['Name', 'Beschreibung', 'Link'].includes(key))]) {
+    for (const [label, value] of d.fields ?? [['Catégorie', d.category], ...Object.entries(record.feature.properties).filter(([key]) => !['Name', 'Beschreibung', 'Link'].includes(key))]) {
       if (value === null || value === undefined || !String(value).trim()) continue;
       const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = label; dd.textContent = String(value); metadata.append(dt, dd);
     }
     const link = document.querySelector('#selection-pdf'); link.textContent = 'Ouvrir le lien fourni par la source'; link.removeAttribute('href');
     link.setAttribute('aria-disabled', String(!d.url)); if (d.url) link.href = d.url;
-    document.querySelector('#selection-link-status').textContent = d.url ? 'Lien externe fourni par le canton ; il peut mener au lieu ou à un site de référence. Vérifiez les horaires et conditions sur place ou auprès du lieu.' : 'Aucun lien de visite fourni ; consultez la source cantonale ci-dessous.';
+    document.querySelector('#selection-link-status').textContent = layerId === 'services'
+      ? d.url ? 'Page générale du canton, pas une réservation ni un horaire individuel. Vérifiez la signalisation et les conditions sur place.' : 'Aucun lien utilisable fourni ; consultez la source ci-dessous.'
+      : d.url ? 'Lien externe fourni par le canton ; il peut mener au lieu ou à un site de référence. Vérifiez les horaires et conditions sur place ou auprès du lieu.' : 'Aucun lien de visite fourni ; consultez la source cantonale ci-dessous.';
     const note = document.querySelector('#selection-heritage-source'); note.replaceChildren('Source : ');
-    const a = document.createElement('a'); a.href = d.source; a.textContent = record.product === 'BIFO' ? 'Basel Info · repères remarquables' : 'Basel Info · points d’intérêt'; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    note.append(a, ` · lecture du ${new Date(info.fetchedAt).toLocaleString('fr-CH')}, sans date d’observation par lieu. Un repère remarquable ne certifie pas un statut de monument protégé.`);
-    document.querySelector('#selection-extra').hidden = false; document.querySelector('#selection-credit').textContent = layerConfig.heritage.credit;
+    const a = document.createElement('a'); a.href = d.source; a.textContent = d.sourceLabel ?? (record.product === 'BIFO' ? 'Basel Info · repères remarquables' : 'Basel Info · points d’intérêt'); a.target = '_blank'; a.rel = 'noopener noreferrer';
+    note.append(a, ` · lecture du ${new Date(info.fetchedAt).toLocaleString('fr-CH')}, sans date d’observation par lieu. ${d.note ?? 'Un repère remarquable ne certifie pas un statut de monument protégé.'}`);
+    document.querySelector('#selection-extra').hidden = false; document.querySelector('#selection-credit').textContent = layerConfig[layerId].credit;
     selectionPanel.classList.add('is-heritage'); selectionPanel.hidden = false; document.querySelector('#selection-content').scrollTop = 0;
     if (phoneLayout.matches) { controlsUsed = true; setControlsExpanded(false); }
   }
@@ -634,6 +638,21 @@ function startScene() {
       selectionPanel.hidden = false;
       document.querySelector('#selection-content').scrollTop = 0;
       if (phoneLayout.matches) { controlsUsed = true; setControlsExpanded(false); }
+    },
+  }));
+
+  if(layerConfig.services)services=layers.register('services',createSanitaryLayer(viewer,{
+    config:layerConfig.services,getPlace:()=>PLACES[activePlace],onState:updateCantonCredit,
+    onSelect:(record,info)=>showBaselPlace(record,info,'services'),
+    onClear:()=>{if(['services','services-group'].includes(selectionKind))clearSelection();},
+    onGroup:records=>{
+      clearSelection();selectionKind='services-group';selectionPanel.classList.add('is-heritage');
+      document.querySelector('#selection-title').textContent=`${records.length} installations regroupées`;
+      document.querySelector('#selection-description').textContent='Choisissez une installation ; un groupe peut réunir plusieurs types et états. Le nombre ne garantit pas des installations ouvertes.';
+      document.querySelector('#selection-position').textContent='';const list=document.querySelector('#selection-group');
+      for(const record of [...records].sort((a,b)=>a.display.name.localeCompare(b.display.name,'fr'))){const button=document.createElement('button');button.type='button';button.dataset.servicesId=record.id;button.textContent=`${record.display.name} · ${record.display.category}${record.display.closed?' · fermeture signalée':''}`;button.addEventListener('click',()=>services.select(record.id));list.append(button);}
+      list.hidden=false;document.querySelector('#selection-credit').textContent=layerConfig.services.credit;selectionPanel.hidden=false;document.querySelector('#selection-content').scrollTop=0;
+      if(phoneLayout.matches){controlsUsed=true;setControlsExpanded(false);}
     },
   }));
 
@@ -822,6 +841,9 @@ function startScene() {
     window.__jura3dLayers = layers;
     window.__jura3dParking = () => parking?.snapshot();
     window.__jura3dParkingTarget = id => parking?.target(id);
+    window.__jura3dServices = () => services?.snapshot();
+    window.__jura3dServicesTarget = id => services?.target(id);
+    window.__jura3dServicesGroupTarget = () => services?.groupTarget();
     window.__jura3dBuildings = () => ({ url: territory.sources.buildings.url, credit: territory.sources.buildings.credit,
       clipBounds: territory.sources.buildings.clipBounds ?? null, inverse: buildings?.clippingPolygons?.inverse ?? null,
       clippingMode: buildings?.clippingPlanes ? 'planes' : buildings?.clippingPolygons ? 'polygon' : 'none',

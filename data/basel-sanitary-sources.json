@@ -1,0 +1,17 @@
+{
+  "checkedOn":"2026-10-27",
+  "dataset":"100031",
+  "title":"Sanitäre Anlagen",
+  "catalog":"https://data.bs.ch/explore/dataset/100031/",
+  "api":"https://data.bs.ch/api/explore/v2.1/catalog/datasets/100031",
+  "license":"CC BY 4.0",
+  "licenseUrl":"https://creativecommons.org/licenses/by/4.0/",
+  "attribution":"Geodaten Kanton Basel-Stadt",
+  "officialInfo":"https://www.bs.ch/bvd/tiefbauamt/oeffentliche-toiletten",
+  "observedCount":159,
+  "observedTypes":{"wheelchairType":75,"nonWheelchairType":30,"urinalOnly":12,"showers":16,"partnerNonWheelchair":26},
+  "observedFlags":{"declaredInService":153,"declaredClosed":6,"eurokeyTrue":45,"eurokeyFalse":114,"paid":5,"free":154,"seasonalNote":12},
+  "catalogModified":"2026-08-10T00:00:00+00:00",
+  "modifiedUpdatesOnDataChange":false,
+  "caveats":["Static attributes, no individual opening hours or observation date; retrieval/processing dates are not per-record freshness.","Five paid flags conflict with the general official page stating public WCs are free; preserve source flags, no price amount supplied.","Eurokey equipment and wheelchair type are source indications, not a guarantee of universal access.","Partner access without obligation to consume is stated on the official page; no establishment opening hours supplied.","Showers are included; no drinking-water status inferred. IWB fountain dataset100008 is not integrated and retains its separate conditions."]
+}

@@ -1,5 +1,11 @@
 # Architecture du prototype
 
+## B3 — Sanitaires et composant de points partagé
+
+`sanitary-data.js` lit100031 à la demande, vérifie licence/attribution, compte/pagination/identifiants et concordance des deux positions natives. Les attributs restent dans `native`/`feature.properties`, champs français et conditions d'usage dans `display`. `point-places.js` généralise le renderer B2 par préfixe de contrôles, symbole, loader et filtres supplémentaires, avec le même cycle de vie/cache/annulation et regroupement44px/min2. `basel-places.js` reste le wrapper B2 ; `sanitary.js` fournit WC et filtre Eurokey, couleurs dont fermeture grise. Distance commune dans `point-geometry.js`, réexport B2 conservé.
+
+`main.js` rend les fiches et groupes de services avec états non temps réel, tarif sans montant inventé, accès source et compléments absents ; le registre possède une couche `services` indépendante. Pas de nouvelle source Jura ou modèle3D, les fontaines IWB restent hors lot. [État des contrôles et limites](VALIDATION_B3.md).
+
 ## B2 — Adaptateur Basel Info, 27 octobre 2026
 
 `basel-places-data.js` lit les licences BIFO/BIPO puis trois collections OGC publiques à la demande, avec compte/pagination complets, validation Point WGS84/nom/identifiants et préfixage par collection. Les attributs/géométries natifs restent dans `feature` ; noms normalisés, catégories françaises et URL contrôlées sont séparés dans `display`. Aucun instantané de positions livré, pas de polling ; cache de session seulement. Les index du service ne promettent pas une identité stable entre publications.

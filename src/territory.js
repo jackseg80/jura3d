@@ -22,6 +22,12 @@ export function validateTerritory(territory) {
   if (!Array.isArray(territory.layers) || new Set(territory.layers.map(l => l.id)).size !== territory.layers.length) fail('couches dupliquées ou absentes');
   const safePath = (p) => typeof p === 'string' && /^[a-zA-Z0-9_./-]+$/.test(p) && !p.startsWith('/') && !p.split('/').includes('..');
   for (const layer of territory.layers) {
+    if(layer.kind==='basel-sanitary'){
+      if(layer.id!=='services'||!layer.sourceName||!layer.credit||layer.conditions!=='https://data.bs.ch/explore/dataset/100031/'
+        ||!bounds(layer.bounds)||layer.radiusMeters!==5000||layer.color!=='#0f766e'
+        ||layer.licenses?.length!==1||layer.licenses[0].url!=='https://creativecommons.org/licenses/by/4.0/')fail('configuration sanitaires invalide');
+      continue;
+    }
     if (layer.kind === 'basel-places') {
       if (layer.id !== 'heritage' || !layer.sourceName || !layer.credit || !remote(layer.conditions) || !bounds(layer.bounds)
         || layer.radiusMeters !== 5000 || layer.licenses?.length !== 1
@@ -76,7 +82,7 @@ export function configureTerritoryUi(territory, root = document, base = '/') {
   for (const place of Object.values(territory.places)) {
     const option = root.createElement('option'); option.textContent = place.name; locality.append(option);
   }
-  for (const id of ['heritage', 'transport', 'parking']) root.querySelector(`#${id}-settings`).hidden = !territory.layers.some(l => l.id === id);
+  for (const id of ['heritage', 'transport', 'parking', 'services']) root.querySelector(`#${id}-settings`).hidden = !territory.layers.some(l => l.id === id);
   if (territory.layers.some(l => l.kind === 'basel-places')) {
     root.querySelector('#heritage-settings summary').textContent = 'Lieux à visiter et patrimoine';
     root.querySelector('#heritage').parentNode.lastChild.textContent = ' Afficher les lieux';
