@@ -1,5 +1,9 @@
 # Historique
 
+## 2026-10-27 — Retour PC après le portage Jura
+
+- Consigner le retour global positif du propriétaire (« tout semble ok ») ; qualification A53 Jura/Bâle conservée ouverte. Documentation seule, aucune nouvelle mesure ni publication.
+
 ## 2026-10-27 — Rendu des tracés Jura en tuiles locales
 
 - Étendre le fond des tracés optimisé à Jura, choix explicite du renderer par configuration, mêmes données et filtres ; arrêts/groupes/fiches/surbrillances et zones Noctambus distinctes conservés.

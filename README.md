@@ -1,5 +1,7 @@
 # Jura 3D
 
+**Retour PC du 27 octobre :** après l'adaptation des tracés Jura, le propriétaire indique « tout semble ok ». Retour global positif consigné ; validation A53 des deux territoires encore ouverte, publication différée.
+
 **27 octobre — tracés Jura adaptés au rendu en tuiles et vérifiés sur PC.** Données, filtres jour/nuit, arrêts/groupes, fiches et zones Noctambus conservés ; choix du renderer indépendant du territoire. Comparaisons Intel/RTX et parcours Jura/Bâle/site terminés. [Résultats et limites](docs/OPTIMISATION_JURA.md). Qualification A53 des deux territoires encore ouverte ; B2/B3 différés, aucun push/déploiement. Les étapes datées suivantes décrivent leurs versions antérieures.
 
 **26 octobre au soir — optimisation B1 réalisée et contrôlée sur Intel/RTX.** Fond des tracés Bâle calculé en tuiles locales, mêmes géométries1m/identités et fiches, quais/groupes et surbrillance conservés ; le Jura garde son rendu P6. Comparaisons compilées, probes Bâle/Jura/site et tests de tuiles réussis. [Mesures et limites](docs/OPTIMISATION_B1.md). **Qualification physique A53 et retour subjectif du propriétaire encore ouverts**, B2/B3 différés ; aucun réglage GPU Windows changé, aucun push/déploiement.

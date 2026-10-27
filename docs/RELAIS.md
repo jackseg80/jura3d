@@ -1,5 +1,7 @@
 # Relais de reprise
 
+**27 octobre — retour PC positif reçu après le portage Jura : « tout semble ok ».** Consigné comme appréciation globale de l'aperçu, sans inventer de parcours détaillé ni de nouvelle mesure. Base `2dba808`, dépôt trouvé propre ; suivi documentaire seulement, sources/builds inchangés. Même modèle/effort, sauvegarde locale autorisée, aucun push/déploiement. Prochaine action : validation A53 Faible de Jura et Bâle lorsqu'il est disponible ; B1 physique reste ouvert, B2/B3 différés. Les détails et preuves du lot PC suivent ci-dessous.
+
 **27 octobre — rendu des tracés Jura adapté et contrôles PC terminés.** Base582f666, dépôt trouvé propre, modèle/effort conservés, aucun sous-agent. Configurations Jura/Bâle explicites, mêmes données1m/5,25km, arrêts/groupes/filtres/fiches et polygones Noctambus conservés. Exception de résolution d'un groupe Cesium corrigée, régression ajoutée. [Bilan, tableaux Intel/RTX et limites](OPTIMISATION_JURA.md).
 
 - Dernier contrôle Jura 27.10.26 04:03:39, Bâle 27.10.26 04:05:28, site 27.10.26 04:06:35, Europe/Zurich : zéro erreur/problème. Deux campagnes terminées de 40 fenêtres/320 lectures chacune, paramètres/cadrages/identités/géométries appariés. Coût GPU Intel réduit sur les quatre vues ; RTX variable, sans gain uniforme démontré. Complément unique Delémont A/B/B/A de 20 fenêtres avec fréquences, terminé04:29:20, sans reproduire la forte différence initiale comme un écart stable ; conserver tous les relevés, variations et pauses. Aucun résultat Android ou de l'onglet utilisateur déduit.

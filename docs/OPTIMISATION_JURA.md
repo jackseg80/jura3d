@@ -95,6 +95,8 @@ Builds finaux : Jura **index-eTTQp0XO.js**, Bâle **index-Dcj5VX8M.js**, CSS ind
 
 ## Qualification physique et suite
 
+**Retour PC du propriétaire reçu le 27 octobre après ce lot : « tout semble ok ».** Appréciation globale positive, sans parcours détaillé ni nouvelle mesure déduit. La qualification A53 reste ouverte ; ce retour ne modifie pas les réserves des comparaisons RTX.
+
 Qualifier ensuite l'A53 en Faible pour Bâle et Jura lorsqu'il sera disponible, en recontrôlant identité/accès, gestes/groupes/fiches/liens, deux orientations, durée/chauffe et restauration des préférences/accès créés. Les simulations PC et anciennes campagnes P6/P8 ne remplacent pas cette qualification du nouveau rendu. B1 Bâle reste ouvert pour ce contrôle ; B2 lieux/patrimoine puis B3 services restent différés, P9 non commencé.
 
 Conserver `.vite/jura-opt/` et les références `.vite/b1-opt/`, `.vite/b1-perf/`, P5/P6/P7/P8/PUB2. Sauvegarde locale autorisée ; aucun push/déploiement ou réglage GPU Windows. La version publique n'est pas mise à jour par ce lot.
