@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — Publier Jura et Bâle enrichi sur GitHub Pages
+
+- Publier573e55c après accord explicite, push non forcé et CI réussie ; Pages build/deploy réussis.
+- Vérifier le SHA de l’accueil/deux cartes et le parcours HTTPS Jura/Bâle enrichi : quatre groupes, zéro erreur. Ressources Jura/licences et assets contrôlés.
+- [Site public](https://jackseg80.github.io/jura3d/) et [bilan](docs/REVUE_PUB2_BALE.md), réserves mobiles et données conservées ; aucun nouvel essai Android public.
+
 ## 2026-10-27 — Livraison Jura/Bâle enrichie revue localement
 
 - Préciser l’accueil Bâle : bâtiments limités au centre, informations de visite/sanitaires statiques et observations de parkings datées.

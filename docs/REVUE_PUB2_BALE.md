@@ -1,6 +1,6 @@
 # Revue locale PUB2 après enrichissement de Bâle
 
-27 octobre 2026. Base `6981792`, Git propre à la reprise ; commits locaux autorisés, aucun push ou déploiement. Revue des livrables B1/B2/B3 clos avec réserves, sans ajout de ville ou de couche. **Revue locale terminée avec succès ; publication en attente d’accord explicite.**
+27 octobre 2026. Base de revue `6981792`, Git propre à la reprise ; préparation locale puis commit573e55c. Le propriétaire a ensuite autorisé explicitement le push et la publication de cette version. Revue des livrables B1/B2/B3 clos avec réserves, sans ajout de ville ou de couche. **Revue locale puis publication autorisée/réalisée, contrôle HTTPS terminé22:39:32 Europe/Zurich.**
 
 ## Périmètre présenté au visiteur
 
@@ -51,8 +51,24 @@ $env:JURA3D_PROBE_GPU='high'
 npm run probe:site
 ```
 
-Vérifier les requêtes des couches depuis l'origine HTTPS publique : une réussite locale ne démontre pas ce CORS ni un déploiement. Consigner le résultat effectif et ses limites, distinguer panne fournisseur et défaut livré. Ne pas déclarer la publication acquise avant ce contrôle. PUB1 reste la référence publique tant qu'aucune opération autorisée ne l'a remplacée.
+Vérifier les requêtes des couches depuis l'origine HTTPS publique : une réussite locale ne démontre pas ce CORS ni un déploiement. Consigner le résultat effectif et ses limites, distinguer panne fournisseur et défaut livré. Ne pas déclarer la publication acquise avant ce contrôle. PUB1 était la référence publique avant le remplacement autorisé décrit ci-dessous.
 
 ![Accueil enrichi contrôlé sur PC](images/pub2-enrichi-accueil.png)
 
 [Accueil étroit contrôlé à 320 px](images/pub2-enrichi-320.png).
+
+## Résultat publié du27octobre
+
+Le propriétaire répond « ok » à la demande explicite de push et publication de573e55c. Branche main propre et distante24e42af ancêtre revérifiées ;33entrées du contrôle de revue inchangées. Push non forcé effectué, puis [CI40588048178](https://github.com/jackseg80/jura3d/actions/runs/40588048178) réussie (installation verrouillée, huit tests purs, builds autonome/site et contrôles). Déclenchement manuel puis [Pages40588202993](https://github.com/jackseg80/jura3d/actions/runs/40588202993) build/deploy réussis. Aucune configuration d’hébergement ou permission supplémentaire modifiée.
+
+**[Site public Jura/Bâle](https://jackseg80.github.io/jura3d/), commit servi573e55ca152996acbce07c9a92651ebcf7bc62f6.** Accueil et marqueurs enfants Jura/Bâle HTTP200, même SHA/source github-actions/bases attendues ; HTTPS imposé, mode workflow conservé. Root HTML conforme au template du commit ; quatre assets JS/CSS des cartes identiques à la livraison locale revue, licences/inventaires Cesium des deux cartes identiques au paquet. Sept ressources Jura (quatre GeoJSON, deux index de liens, PDF de conditions) identiques par SHA256 aux blobs Git du commit publié, y compris la normalisation des fins de ligne.
+
+Parcours public PC Chrome156.0.8078.48 sans diagnostic/interception,21:38:19–21:39:32UTC /22:38:19–22:39:32 Europe/Zurich : quatre groupes/zéro erreur JavaScript, HTTP ou requête relevée sur le parcours normal. Accueil statique/clavier, Jura quatre destinations/patrimoine/bus/fiches/PDF, Bâle trois destinations/parkings/lieux/sanitaires/quais/tracés/fiches/liens/crédits avec coexistence des quatre couches et retour à l’accueil ; tactile simulé320/390/722px réussi. Les sources Bâle ont effectivement répondu depuis l’origine Pages. Liens présents contrôlés, pas tous les sites externes ouverts ou leur contenu requalifié. Capture Bâle examinée ci-dessous, hors benchmark.
+
+Aucune nouvelle campagne Android physique ou performance publique : qualifications B1/B2/B3 conservées, pauses/FPS mobiles variables, S23/autonomie non qualifiés. Sanitaires/lieux/transports restent statiques, parkings datés, couverture des bâtiments limitée ; disponibilité future des fournisseurs non garantie, pas de diffusion importante annoncée. Fontaines IWB non intégrées. Maintien éveillé PC temporaire relâché en finally, aucun accès Android créé.
+
+Preuves ignorées .vite/publication-enriched/573e55c/ : before.json (ancien public29a4089), dispatch.json, ci-run.json/pages-run.json, public-probe/probe-site.json et captures, served-manifest.json, final-check.json completed. Bilan documentaire sauvegardé ensuite ; son commit peut être plus récent que le SHA public573e55c, les pushes ne redéploient pas automatiquement. Références locales4324/4325/B3/B2 conservées.
+
+![Bâle public, quatre couches actives, capture hors benchmark](images/pub2-public-bale-2026-10-27.png)
+
+Suite : retour du propriétaire sur la version publique et décision du prochain périmètre. Cette publication est terminée ; aucune nouvelle ville, fontaine ou extension de bâtiments ajoutée implicitement.

@@ -1,6 +1,6 @@
 # Jura 3D
 
-**27 octobre,22:27 Europe/Zurich — revue PUB2 enrichie terminée localement :** builds autonome/racine/Pages et parcours normal des deux territoires réussis sans erreur, dont les quatre couches Bâle et leurs fiches/liens/crédits. Accueil précisé, contrôle des versions accueil/cartes renforcé ;402fichiers Jura et395fichiers Bâle identiques à B3, preuves physiques conservées. [Essayer la livraison revue](http://127.0.0.1:4324/jura3d/), [bilan et procédure](docs/REVUE_PUB2_BALE.md). Git/public lus sans écriture distante : site public toujours PUB1 Jura29a4089, aucun push/déploiement. Prochaine action : décision explicite sur leur autorisation, puis contrôle HTTPS réel des deux cartes après publication.
+**27 octobre — Jura et Bâle enrichi sont publiés : [ouvrir le site](https://jackseg80.github.io/jura3d/).** Choisissez le Jura ou Bâle, désormais avec transports, lieux, sanitaires et observations de parkings. Version servie573e55c ; CI/Pages réussis, parcours HTTPS des deux cartes et couches Bâle terminé à22:39:32 Europe/Zurich, zéro erreur relevée. [Publication, preuves et limites](docs/REVUE_PUB2_BALE.md). Réserves mobiles/données B1/B2/B3 conservées, aucun nouvel essai Android public ; [aperçu local figé](http://127.0.0.1:4324/jura3d/) préservé.
 
 **27 octobre — B3 sanitaires clos avec réserves :**159installations publiques/partenaires, urinoirs et douches100031, filtres type/Eurokey/secteur et fiches source. [Essayer Bâle localement](http://127.0.0.1:4322/jura3d/bale/) → « Toilettes, douches et services ». Tests/builds/contrôles PC et mesures Intel/A53 terminés ; retour propriétaire « Tout m’a l’air OK », portrait/paysage observés. Usage accepté, pauses/coût mobile et gestes détaillés non observés restent des limites. [Preuves et réserves](docs/VALIDATION_B3.md). A53 nettoyé/débranchable, aperçu figé4322, B2 figé4320 préservé. Fontaines IWB non intégrées ; revue de livraison avant toute publication distincte, aucun push/déploiement.
 
@@ -58,7 +58,7 @@ Les services de données sont accessibles en ligne. Le prototype ne demande ni c
 
 ## Site de test public
 
-**[Ouvrir Jura 3D sur GitHub Pages](https://jackseg80.github.io/jura3d/)** — disponible depuis le 25 octobre 2026, sans serveur PC ni câble. Publication et contrôle du rendu public réussis après P7 : navigation, patrimoine, bus, fiches, conditions et crédits. Version servie `29a4089`, limites mobiles P6 conservées ; aucune nouvelle mesure Android. [Bilan, preuves et procédure](docs/PUBLICATION.md).
+**[Ouvrir le site Jura et Bâle sur GitHub Pages](https://jackseg80.github.io/jura3d/)** — version enrichie573e55c publiée et vérifiée le27octobre, sans serveur PC ni câble. [Bâle directement](https://jackseg80.github.io/jura3d/bale/) ; [Jura directement](https://jackseg80.github.io/jura3d/jura/). [Bilan PUB2 et limites](docs/REVUE_PUB2_BALE.md). La première publication Jura seule du25octobre/PUB1 est conservée comme historique dans [PUBLICATION.md](docs/PUBLICATION.md).
 
 Les mises à jour publiques sont déclenchées manuellement : envoyer du code ou de la documentation sur GitHub ne republie pas automatiquement le site. Le marqueur [build-info.json](https://jackseg80.github.io/jura3d/build-info.json) indique la révision effectivement servie.
 

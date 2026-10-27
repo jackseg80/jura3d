@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-27 — Publier la livraison enrichie examinée
+
+Le propriétaire répond « ok » à la demande explicite de push et publication de573e55c. Envoyer main sans forcer, attendre la CI puis déclencher Pages manuellement ; contrôler le SHA sur accueil/deux cartes et le parcours enrichi HTTPS avant de déclarer la publication acquise. Réalisé et vérifié, réserves mobiles/données conservées. Un commit documentaire de bilan peut ensuite dépasser le SHA servi sans redéploiement automatique. [Résultat et preuves](REVUE_PUB2_BALE.md).
+
 ## 2026-10-27 — Revoir PUB2 avec les couches Bâle effectivement livrées
 
 Après clôture B1/B2/B3 avec réserves, conserver les cartes qualifiées et revoir uniquement la présentation/assemblage et son contrôle de publication. Expliciter sur l’accueil le cadre des bâtiments et les données statiques ; étendre le parcours normal aux nouvelles couches et aux versions enfants, afin de détecter un chargement ou déploiement partiel après une future mise en ligne. Identité par empreintes établie avec B3, preuves physiques réutilisées. Push/déploiement restent sur accord distinct du propriétaire. [Revue et preuves](REVUE_PUB2_BALE.md).
