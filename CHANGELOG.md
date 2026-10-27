@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — B2 lieux à visiter qualifié avec réserves
+
+- Ajouter les lieux culturels, points d’intérêt et repères remarquables de Basel Info, chargés à la demande après contrôle des licences ; propriétés/positions natives conservées, aucune jointure aux bâtiments.
+- Groupes L, catégories et secteur5km/toutes les sources, fiches avec champs absents explicites et liens fournis distingués de la source officielle. Cadre des bâtiments conservé, pas de statut de protection ou d'ouverture déduit.
+- Tests de données/configuration, compilations et contrôles PC réussis ; regroupement44px/min2 pour conserver aussi les paires proches. A53 : coût en rotation conservé, usage accepté et portrait/paysage observés,30FPS constants non acquis ; préférence/onglet/accès propres nettoyés. [Contrôles et limites B2](docs/VALIDATION_B2.md). B3 reste à réaliser, aucun push/déploiement.
+
 ## 2026-10-27 — Correction candidate des bâtiments Bâle sur A53
 
 - Découper le cadre bâlois par quatre plans avec repli polygonal, mêmes source/informations/seuils ; approximation de bord explicitée et tests ajoutés aux deux workflows.

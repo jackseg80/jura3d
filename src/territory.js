@@ -22,6 +22,12 @@ export function validateTerritory(territory) {
   if (!Array.isArray(territory.layers) || new Set(territory.layers.map(l => l.id)).size !== territory.layers.length) fail('couches dupliquées ou absentes');
   const safePath = (p) => typeof p === 'string' && /^[a-zA-Z0-9_./-]+$/.test(p) && !p.startsWith('/') && !p.split('/').includes('..');
   for (const layer of territory.layers) {
+    if (layer.kind === 'basel-places') {
+      if (layer.id !== 'heritage' || !layer.sourceName || !layer.credit || !remote(layer.conditions) || !bounds(layer.bounds)
+        || layer.radiusMeters !== 5000 || layer.licenses?.length !== 1
+        || layer.licenses[0].url !== 'https://creativecommons.org/licenses/by/4.0/' || !layer.licenses[0].label) fail('configuration lieux Bâle invalide');
+      continue;
+    }
     if (layer.id === 'transport' && ![undefined, 'ground-polyline', 'terrain-imagery'].includes(layer.lineRenderer)) fail('rendu des tracés invalide');
     if(layer.kind==='basel-transit'){
       if(layer.id!=='transport'||!layer.sourceName||!layer.credit||!remote(layer.conditions)||!bounds(layer.bounds)
@@ -71,6 +77,18 @@ export function configureTerritoryUi(territory, root = document, base = '/') {
     const option = root.createElement('option'); option.textContent = place.name; locality.append(option);
   }
   for (const id of ['heritage', 'transport', 'parking']) root.querySelector(`#${id}-settings`).hidden = !territory.layers.some(l => l.id === id);
+  if (territory.layers.some(l => l.kind === 'basel-places')) {
+    root.querySelector('#heritage-settings summary').textContent = 'Lieux à visiter et patrimoine';
+    root.querySelector('#heritage').parentNode.lastChild.textContent = ' Afficher les lieux';
+    root.querySelector('#heritage-status').textContent = 'Lieux masqués.';
+    root.querySelector('#heritage-retry').textContent = 'Réessayer les lieux';
+    root.querySelector('label[for="heritage-locality"]').textContent = 'Secteur';
+    locality.replaceChildren();
+    for (const [value, label] of [['active', 'Autour de la destination · ~5 km'], ['', 'Tous les lieux fournis']]) {
+      const option = root.createElement('option'); option.value = value; option.textContent = label; locality.append(option);
+    }
+    root.querySelector('.heritage-help').textContent = 'L : lieu ; L + nombre : groupe. Noms et textes source conservés, souvent en allemand. Plusieurs sources peuvent décrire le même lieu. Les repères dépassent le cadre des bâtiments ; ils ne garantissent ni entrée, ni ouverture ou accès public. Les fontaines sont des points d’intérêt, sans indication de potabilité.';
+  }
   const baselTransit=territory.layers.some(l=>l.kind==='basel-transit');
   for(const selector of ['#transport-mode','label[for="transport-mode"]'])root.querySelector(selector).hidden=!baselTransit;
   if(baselTransit){

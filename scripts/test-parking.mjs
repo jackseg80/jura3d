@@ -3,7 +3,7 @@ import {parseParkingResponse,parkingFreshness,officialParkingUrl} from '../src/p
 import basel from '../src/territories/basel.js';
 import {validateTerritory} from '../src/territory.js';
 validateTerritory(basel);
-const now=Date.parse('2026-10-25T20:00:00Z');const bounds=basel.layers[0].bounds;
+const now=Date.parse('2026-10-25T20:00:00Z');const bounds=basel.layers.find(l=>l.kind==='basel-parking').bounds;
 const value=(changes={})=>({id:'city',title:'Parkhaus City',geo_point_2d:{lon:7.5824076,lat:47.561101},free:0,total:100,
   published:'2026-10-25T19:59:00+00:00',last_downloaded:'2026-10-25T20:00:00Z',status:'offen',link:'https://www.parkleitsystem-basel.ch/parkhaus/city',...changes});
 const parse=p=>parseParkingResponse({total_count:1,results:[p]},bounds)[0];
@@ -24,5 +24,5 @@ assert.equal(officialParkingUrl('https://www.parkleitsystem-basel.ch/parkhaus/ci
 assert.throws(()=>parse(value({geo_point_2d:{lon:0,lat:0}})),/invalide/);
 assert.throws(()=>parseParkingResponse({total_count:2,results:[value()]},bounds),/incomplète/);
 assert.throws(()=>parseParkingResponse({total_count:2,results:[value(),value()]},bounds),/invalide/);
-const invalid=structuredClone(basel);invalid.layers[0].refreshMs=1000;assert.throws(()=>validateTerritory(invalid),/parkings/);
+const invalid=structuredClone(basel);invalid.layers.find(l=>l.kind==='basel-parking').refreshMs=1000;assert.throws(()=>validateTerritory(invalid),/parkings/);
 console.log('Parkings : 18 contrôles de configuration, fraîcheur, compteurs, liens et réponse complète réussis.');

@@ -1,0 +1,18 @@
+{
+  "checkedOn": "2026-10-27",
+  "authority": "Geoinformation Basel-Stadt",
+  "catalog": "https://api.geo.bs.ch/stac/v1/collections",
+  "license": "CC-BY-4.0",
+  "attribution": "Quelle: Geodaten Kanton Basel-Stadt",
+  "conditions": "https://www.bs.ch/en/node/29871",
+  "api": "https://api.geo.bs.ch/ogc/v1/wfs3/collections/",
+  "collections": [
+    {"product":"BIPO","id":"ch.bs.basel_info_points_of_interest_bipo.kultur_unterhaltung","observedCount":72},
+    {"product":"BIPO","id":"ch.bs.basel_info_points_of_interest_bipo.sehenswuerdigkeiten","observedCount":70},
+    {"product":"BIFO","id":"ch.bs.basel_info_bifo.landmark","observedCount":44}
+  ],
+  "nativeGeometry": "Point, WGS84 longitude/latitude; no height or building association",
+  "scope": "Source coverage extends beyond Basel and the building study area; records from different collections may describe the same physical place.",
+  "freshness": "Counts at audit time; retrieval time is not a per-place observation date. BIPO metadata last publication: 2026-10-25, stated weekly cycle; no automatic freshness guarantee.",
+  "excludedCandidate": "DMVS: 1045 polygons advertised, first 1000 examined; not fully read or integrated. No protected-monument status inferred for BIFO/BIPO points."
+}

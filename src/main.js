@@ -12,6 +12,7 @@ import { parkingFreshness, parkingDate } from './parking-data.js';
 import { createTransportLayer, officialTransportUrl } from './transport.js';
 import { BASEL_TIMETABLE, BASEL_NETWORK, BASEL_OLD_LINKS } from './basel-transit-data.js';
 import { createHeritageLayer, officialPdfUrl } from './heritage.js';
+import { createBaselPlacesLayer } from './basel-places.js';
 
 import territoryConfig from '#territory';
 import { validateTerritory, configureTerritoryUi } from './territory.js';
@@ -22,6 +23,7 @@ const territory = validateTerritory(territoryConfig);
 configureTerritoryUi(territory, document, import.meta.env.BASE_URL);
 const PLACES = territory.places;
 const layerConfig = Object.fromEntries(territory.layers.map(layer => [layer.id, layer]));
+const baselPlaces = layerConfig.heritage?.kind === 'basel-places';
 const INITIAL_VIEW = {
   destination: Cartesian3.fromDegrees(territory.initialView.longitude, territory.initialView.latitude, territory.initialView.height),
   orientation: { heading: CesiumMath.toRadians(territory.initialView.heading), pitch: CesiumMath.toRadians(territory.initialView.pitch) },
@@ -582,11 +584,33 @@ function startScene() {
       span.hidden = !territory.layers.some(layer => layer.credit === config.credit && layer.conditions === config.conditions && document.querySelector(`#${layer.id}`).checked);
     }
   }
-  if (layerConfig.heritage) heritage = layers.register('heritage', createHeritageLayer(viewer, {
+  function showBaselPlace(record, info) {
+    clearSelection(); selectionKind = 'heritage';
+    const d = record.display;
+    document.querySelector('#selection-title').textContent = d.name;
+    document.querySelector('#selection-description').textContent = d.description || 'Description non fournie par la source.';
+    const [lon, lat] = record.feature.geometry.coordinates;
+    document.querySelector('#selection-position').textContent = `${lat.toFixed(5)}° N · ${lon.toFixed(5)}° E · repère cartographique source, sans liaison au bâtiment 3D`;
+    const metadata = document.querySelector('#selection-properties'); metadata.replaceChildren();
+    for (const [label, value] of [['Catégorie', d.category], ...Object.entries(record.feature.properties).filter(([key]) => !['Name', 'Beschreibung', 'Link'].includes(key))]) {
+      if (value === null || value === undefined || !String(value).trim()) continue;
+      const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = label; dd.textContent = String(value); metadata.append(dt, dd);
+    }
+    const link = document.querySelector('#selection-pdf'); link.textContent = 'Ouvrir le lien fourni par la source'; link.removeAttribute('href');
+    link.setAttribute('aria-disabled', String(!d.url)); if (d.url) link.href = d.url;
+    document.querySelector('#selection-link-status').textContent = d.url ? 'Lien externe fourni par le canton ; il peut mener au lieu ou à un site de référence. Vérifiez les horaires et conditions sur place ou auprès du lieu.' : 'Aucun lien de visite fourni ; consultez la source cantonale ci-dessous.';
+    const note = document.querySelector('#selection-heritage-source'); note.replaceChildren('Source : ');
+    const a = document.createElement('a'); a.href = d.source; a.textContent = record.product === 'BIFO' ? 'Basel Info · repères remarquables' : 'Basel Info · points d’intérêt'; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    note.append(a, ` · lecture du ${new Date(info.fetchedAt).toLocaleString('fr-CH')}, sans date d’observation par lieu. Un repère remarquable ne certifie pas un statut de monument protégé.`);
+    document.querySelector('#selection-extra').hidden = false; document.querySelector('#selection-credit').textContent = layerConfig.heritage.credit;
+    selectionPanel.classList.add('is-heritage'); selectionPanel.hidden = false; document.querySelector('#selection-content').scrollTop = 0;
+    if (phoneLayout.matches) { controlsUsed = true; setControlsExpanded(false); }
+  }
+  if (layerConfig.heritage) heritage = layers.register('heritage', (baselPlaces ? createBaselPlacesLayer : createHeritageLayer)(viewer, {
     config: layerConfig.heritage,
     onState: updateCantonCredit,
-    getPlace: () => PLACES[activePlace].name,
-    onSelect: showHeritage,
+    getPlace: () => baselPlaces ? PLACES[activePlace] : PLACES[activePlace].name,
+    onSelect: baselPlaces ? showBaselPlace : showHeritage,
     onClear: () => { if (['heritage', 'heritage-group'].includes(selectionKind)) clearSelection(); },
     onGroup: (records) => {
       clearSelection();
@@ -596,11 +620,12 @@ function startScene() {
       document.querySelector('#selection-description').textContent = 'Choisissez un lieu ci-dessous pour consulter sa fiche. Le zoom peut séparer les repères ; le groupe dépend des lieux proches à l’écran.';
       document.querySelector('#selection-position').textContent = '';
       const list = document.querySelector('#selection-group');
-      for (const record of [...records].sort((a, b) => a.properties.nom.localeCompare(b.properties.nom, 'fr'))) {
+      const label = record => baselPlaces ? record.display.name : record.properties.nom;
+      for (const record of [...records].sort((a, b) => label(a).localeCompare(label(b), 'fr'))) {
         const button = document.createElement('button');
         button.type = 'button';
         button.dataset.heritageId = record.id;
-        button.textContent = `${record.properties.nom} · ${record.properties.localite}`;
+        button.textContent = baselPlaces ? `${record.display.name} · ${record.display.category}` : `${record.properties.nom} · ${record.properties.localite}`;
         button.addEventListener('click', () => heritage.select(record.id));
         list.append(button);
       }

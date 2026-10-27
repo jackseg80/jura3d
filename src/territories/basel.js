@@ -20,6 +20,12 @@ export default {
     },
   },
   layers: [{
+    id: 'heritage', kind: 'basel-places', sourceName: 'Lieux à visiter · Basel Info',
+    credit: 'Quelle: Geodaten Kanton Basel-Stadt · CC BY 4.0',
+    conditions: 'https://www.bs.ch/en/node/29871',
+    licenses: [{ label: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' }],
+    bounds: [5.5, 45.5, 11, 49], radiusMeters: 5000,
+  },{
     id: 'parking', kind: 'basel-parking', credit: 'Parkhäuser Basel-Stadt · CC BY 4.0',
     conditions: 'https://creativecommons.org/licenses/by/4.0/',
     catalog: 'https://data.bs.ch/explore/dataset/100088/',

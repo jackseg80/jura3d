@@ -8,6 +8,9 @@ import { createLayerCollection } from '../src/layers.js';
 assert.equal(validateTerritory(jura), jura);
 assert.equal(validateTerritory(control), control);
 assert.equal(validateTerritory(basel), basel);
+for (const mutate of [t=>{t.layers.find(l=>l.kind==='basel-places').radiusMeters=Infinity;},t=>{t.layers.find(l=>l.kind==='basel-places').licenses[0].url='https://example.org/';}]) {
+  const t=structuredClone(basel);mutate(t);assert.throws(()=>validateTerritory(t),/lieux Bâle/);
+}
 for(const mutate of [t=>{t.layers.find(l=>l.kind==='basel-transit').datasets[0].id='other';},t=>{t.layers.find(l=>l.kind==='basel-transit').licenses[0].url='http://example.org/';}]){
   const t=structuredClone(basel);mutate(t);assert.throws(()=>validateTerritory(t),/transports Bâle/);
 }

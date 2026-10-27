@@ -1,5 +1,11 @@
 # Architecture du prototype
 
+## B2 — Adaptateur Basel Info, 27 octobre 2026
+
+`basel-places-data.js` lit les licences BIFO/BIPO puis trois collections OGC publiques à la demande, avec compte/pagination complets, validation Point WGS84/nom/identifiants et préfixage par collection. Les attributs/géométries natifs restent dans `feature` ; noms normalisés, catégories françaises et URL contrôlées sont séparés dans `display`. Aucun instantané de positions livré, pas de polling ; cache de session seulement. Les index du service ne promettent pas une identité stable entre publications.
+
+`basel-places.js` implémente le contrat du registre dans l'emplacement `heritage`, avec repères L et groupes ancrés au relief (44pixels, minimum2 pour inclure les paires proches de sources distinctes), filtrage catégorie/distance5km ou toutes les sources, surbrillance propre et vol annulable par génération. `main.js` choisit cet adaptateur pour `basel-places`, conserve le composant Jura et rend des fiches natives Bâle avec lien fourni et métadonnées officielles distincts. Désactivation/destruction retirent seulement la source et les écouteurs propres ; les réponses périmées sont ignorées. Jura garde son schéma et ses contrôles. [Vérifications et qualification avec réserves](VALIDATION_B2.md).
+
 ## Découpage Bâle A53 — 27 octobre 2026
 
 `building-clip.js` utilise quatre plans verticaux pour le petit rectangle géoréférencé de Bâle, dans le repère ENU central converti vers celui du tileset. Le chemin s'applique aux transformations racine/modèle identité et aux petites emprises ; les autres conventions gardent l'ancien polygone. Cadre, fournisseur, seuil de sélection et informations conservés ; approximation au bord explicitée et testée. [Implémentation et vérifications](CORRECTION_BALE_A53.md). B1 clos avec réserves après contrôles PC et acceptation A53 portrait/paysage ; les descriptions polygonales P8 suivantes restent celles de la référence antérieure.
