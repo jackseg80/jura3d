@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-27 — Découper le petit cadre bâlois par quatre plans
+
+Pour réduire le coût du rendu A53 sans changer de fournisseur ni retirer des groupes de bâtiments par un seuil plus élevé, utiliser quatre plans verticaux dans le repère local pour le petit rectangle géoréférencé à transformations identité. Garder le polygone pour les autres conventions. Source cantonale, mesh, seuil16×résolution et fiches conservés ; approximation au bord≈0,51m au maximum des points testés, sans précision globale garantie. Tests numériques et comparaison physique montrent un gain en rotation sur les trois vues A53, sans30FPS constants ni gain PC uniforme. [Méthode, contrôles et qualification](CORRECTION_BALE_A53.md). B1 clos avec ces réserves après contrôles PC et acceptation A53 portrait/paysage le soir ; lien confirmé par le propriétaire, pas capturé par l'observateur. B2 puis B3 restent à réaliser, aucun déploiement implicite.
+
 ## 2026-10-27 — Appliquer le rendu en tuiles aux tracés Jura
 
 Après autorisation de poursuivre, choisir explicitement le renderer dans chaque configuration de transport, indépendamment de son schéma source. Réutiliser le fournisseur Bâle pour le seul fond des lignes Jura ; garder les arrêts/groupes, filtres jour/nuit, fiches/liens et surbrillances. Les zones Noctambus restent des polygones distincts et ne doivent pas intercepter une ligne sous le clic. Les objets au premier plan conservent leur priorité. La voie vectorielle reste disponible par configuration. [Mesures, contrôles et limites](OPTIMISATION_JURA.md) ; les preuves mobiles P6 historiques ne qualifient pas cette nouvelle version et l'A53 reste à refaire sur les deux territoires.

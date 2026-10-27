@@ -1,5 +1,7 @@
 # Transports Jura/Bâle — qualification A53 du 27 octobre 2026
 
+**Complément du soir :** une correction du découpage des bâtiments a ensuite été mesurée sur l'A53, avec amélioration en mouvement et retour utilisateur positif ; [rapport séparé, limites et état du dernier parcours](CORRECTION_BALE_A53.md). La campagne initiale ci-dessous reste intacte et ne devient pas une validation de cette nouvelle version.
+
 **Campagne terminée ; fonctionnement contrôlé, performance Bâle non validée par le propriétaire.** Jura jugé correct pour l'A53 ; Bâle signalé à5–10FPS lorsque tout le réseau local est affiché. Correction à qualifier avant B2/B3. Base documentaire21db861, source applicative2dba808 ; modèle/effort conservés, aucun sous-agent, push ou déploiement. Les preuves P5/P6/P8 historiques gardent leurs versions et réserves.
 
 ## Appareil et méthode

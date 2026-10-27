@@ -21,7 +21,7 @@ try {
   await page.goto(url.href);await ready(page);await page.locator('#quality').selectOption('medium');await ready(page);
   await phase('Sources et absence de doublon',async()=>{
     assert.equal((await page.evaluate(()=>window.__jura3dTerritory())).id,'basel');
-    const source=await page.evaluate(()=>window.__jura3dBuildings());assert.equal(source.inverse,true);assert.deepEqual(source.clipBounds,[7.57,47.54,7.615,47.57]);
+    const source=await page.evaluate(()=>window.__jura3dBuildings());assert.equal(source.keepInside,true);assert.equal(source.clippingMode,'planes');assert.deepEqual(source.clipBounds,[7.57,47.54,7.615,47.57]);
     assert.equal(requests.some(u=>u.includes('swissbuildings3d')),false);assert.equal(requests.some(u=>u.includes('/100088/records')),false);
     assert.equal(await page.locator('#heritage-settings').isVisible(),false);assert.equal(await page.locator('#transport-settings').isVisible(),true);
     assert.equal(await page.locator('#transport').isChecked(),false);

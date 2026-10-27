@@ -1,5 +1,7 @@
 # B1 — Transports à Bâle
 
+**27octobre, soir — B1 clos avec réserves :** correction du découpage des bâtiments compilée, tests purs et probes complets Jura/Bâle/site réussis. Comparaison A53 en mouvement meilleure dans les trois vues ; propriétaire satisfait, portrait/paysage relevés et commandes/lien confirmés.30FPS constants/autonomie/S23 non qualifiés ; dernier parcours réseau entier non chronométré. Préférence initiale et seuls onglet/accès propres nettoyés à18:25, téléphone débranchable. [Rapport du correctif et limites](CORRECTION_BALE_A53.md). Les constats ci-dessous gardent leurs versions ; suite B2 puis B3, aucun push/déploiement.
+
 **27 octobre — A53 contrôlé : fonctions disponibles, performance Bâle non validée.** Jura jugé correct par le propriétaire ; Bâle complet local signalé à 5–10 FPS, cohérent avec les ralentissements mesurés. Diagnostic et correction du coût des bâtiments avant B2/B3 ; aucun correctif livré à ce stade. [Mesures et suite](VALIDATION_TRANSPORTS_A53.md). Auto et accès restaurés/nettoyés après reconnexion, appareil débranchable ; aucun push/déploiement.
 
 **27octobre2026 :** renderer choisi explicitement par configuration et résolution des groupes Cesium sécurisée lors du portage Jura. Probe B1 et parcours commun refaits avec succès sur le build partagé ; [bilan du lot](OPTIMISATION_JURA.md). Qualification A53 Bâle toujours ouverte ; ne pas déduire un résultat physique des mesures PC Jura.

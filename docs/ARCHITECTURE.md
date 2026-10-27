@@ -1,5 +1,9 @@
 # Architecture du prototype
 
+## Découpage Bâle A53 — 27 octobre 2026
+
+`building-clip.js` utilise quatre plans verticaux pour le petit rectangle géoréférencé de Bâle, dans le repère ENU central converti vers celui du tileset. Le chemin s'applique aux transformations racine/modèle identité et aux petites emprises ; les autres conventions gardent l'ancien polygone. Cadre, fournisseur, seuil de sélection et informations conservés ; approximation au bord explicitée et testée. [Implémentation et vérifications](CORRECTION_BALE_A53.md). B1 clos avec réserves après contrôles PC et acceptation A53 portrait/paysage ; les descriptions polygonales P8 suivantes restent celles de la référence antérieure.
+
 ## Complément P6 — Rendu des tracés Jura, 27 octobre 2026
 
 Les configurations Jura et Bâle déclarent désormais `lineRenderer: 'terrain-imagery'`. Le choix du rendu est indépendant du schéma de données ; l'absence de cette option ou `ground-polyline` conserve la voie vectorielle. Une valeur inconnue est rejetée à la validation. Les filtres et fiches propres aux deux territoires restent séparés.

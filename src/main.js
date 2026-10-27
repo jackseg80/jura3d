@@ -1,6 +1,6 @@
 import {
   BoundingSphere, Cartesian2, Cartesian3, Cartographic, CameraEventType,
-  Cesium3DTileFeature, Cesium3DTileset, CesiumTerrainProvider, Color, ClippingPolygon, ClippingPolygonCollection,
+  Cesium3DTileFeature, Cesium3DTileset, CesiumTerrainProvider, Color,
   HeadingPitchRange, ImageryLayer, JulianDate, Math as CesiumMath, Matrix4,
   MouseButton, Rectangle, ShadowMode, ScreenSpaceEventType,
   ScreenSpaceTiltOrbitCameraController, UrlTemplateImageryProvider, Viewer,
@@ -16,6 +16,7 @@ import { createHeritageLayer, officialPdfUrl } from './heritage.js';
 import territoryConfig from '#territory';
 import { validateTerritory, configureTerritoryUi } from './territory.js';
 import { createLayerCollection } from './layers.js';
+import { configureBuildingClip } from './building-clip.js';
 
 const territory = validateTerritory(territoryConfig);
 configureTerritoryUi(territory, document, import.meta.env.BASE_URL);
@@ -271,13 +272,8 @@ function startScene() {
       const tileset = await Cesium3DTileset.fromUrl(territory.sources.buildings.url, { credit: territory.sources.buildings.credit, maximumScreenSpaceError: screenSpaceError });
       if (generation !== buildingGeneration) { tileset.destroy(); return; }
       if (territory.sources.buildings.clipBounds) {
-        if (!ClippingPolygonCollection.isSupported(viewer.scene)) {
-          tileset.destroy(); const error = new Error('Découpe des bâtiments non prise en charge par ce navigateur');
-          error.code = 'CLIPPING_UNSUPPORTED'; throw error;
-        }
-        const [w,s,e,n] = territory.sources.buildings.clipBounds;
-        tileset.clippingPolygons = new ClippingPolygonCollection({ inverse: true,
-          polygons: [new ClippingPolygon({ positions: Cartesian3.fromDegreesArray([w,s,e,s,e,n,w,n]) })] });
+        try { configureBuildingClip(tileset, territory.sources.buildings.clipBounds, viewer.scene); }
+        catch (error) { tileset.destroy(); throw error; }
       }
       buildings = tileset;
       buildingRequest = false;
@@ -802,7 +798,9 @@ function startScene() {
     window.__jura3dParking = () => parking?.snapshot();
     window.__jura3dParkingTarget = id => parking?.target(id);
     window.__jura3dBuildings = () => ({ url: territory.sources.buildings.url, credit: territory.sources.buildings.credit,
-      clipBounds: territory.sources.buildings.clipBounds ?? null, inverse: buildings?.clippingPolygons?.inverse ?? null });
+      clipBounds: territory.sources.buildings.clipBounds ?? null, inverse: buildings?.clippingPolygons?.inverse ?? null,
+      clippingMode: buildings?.clippingPlanes ? 'planes' : buildings?.clippingPolygons ? 'polygon' : 'none',
+      keepInside: !!buildings?.clippingPlanes?.unionClippingRegions || !!buildings?.clippingPolygons?.inverse });
     window.__jura3dTerritory = () => ({ id: territory.id, places: Object.keys(PLACES), layers: territory.layers.map(l => l.id) });
     window.__jura3dHeritage = () => heritage?.snapshot();
     window.__jura3dHeritageTarget = (id) => heritage?.target(id);

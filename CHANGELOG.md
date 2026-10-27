@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — Correction candidate des bâtiments Bâle sur A53
+
+- Découper le cadre bâlois par quatre plans avec repli polygonal, mêmes source/informations/seuils ; approximation de bord explicitée et tests ajoutés aux deux workflows.
+- Comparaison physique A53 : rotation centre12→16,5FPS, gare17→27, Messe15,5→23 sur fenêtres courtes ; gain PC faible/non uniforme,30FPS constants non acquis. Retour propriétaire positif, portrait/paysage relevés et commandes/lien confirmés : B1 clos avec réserves.
+- Builds et contrôles complets Bâle/Jura/site réussis ; préférence, onglet et accès propres A53 nettoyés. [Preuves et limites](docs/CORRECTION_BALE_A53.md). B2/B3 restent à réaliser, aucun push/déploiement.
+
 ## 2026-10-27 — A53 : fonctions contrôlées, performance Bâle à corriger
 
 - Consigner 56 fenêtres/560 lectures sur Jura et Bâle, gestes Jura portrait/paysage et retour positif ; Bâle signalé à 5–10 FPS, qualification conservée ouverte.

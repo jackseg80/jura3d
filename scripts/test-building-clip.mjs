@@ -1,0 +1,11 @@
+import{rectangularBuildingPlanes,configureBuildingClip}from'../src/building-clip.js';import{Cartesian3,Matrix4,Transforms}from'cesium';import assert from'node:assert/strict';
+const bounds=[7.57,47.54,7.615,47.57],center=Cartesian3.fromDegrees(7.62,47.58,370),t={modelMatrix:Matrix4.IDENTITY,root:{transform:Matrix4.IDENTITY},boundingSphere:{center}},c=rectangularBuildingPlanes(t,bounds),world=Matrix4.multiply(Transforms.eastNorthUpToFixedFrame(center),c.modelMatrix,new Matrix4()),inverse=Matrix4.inverseTransformation(world,new Matrix4());
+const distances=(lon,lat,h)=>{const p=Matrix4.multiplyByPoint(inverse,Cartesian3.fromDegrees(lon,lat,h),new Cartesian3());return Array.from({length:c.length},(_,i)=>Cartesian3.dot(c.get(i).normal,p)+c.get(i).distance);};
+let checks=0,maxEdgeError=0;for(const h of[-100,0,250,800,1000]){for(const p of[[7.59,47.55],[7.5701,47.5401],[7.6149,47.5699]]){assert.ok(distances(...p,h).every(d=>d>0));checks++;}for(const p of[[7.5699,47.55],[7.6151,47.55],[7.59,47.5399],[7.59,47.5701]]){assert.ok(Math.min(...distances(...p,h))<0);checks++;}for(const p of[[7.57,47.555],[7.615,47.555],[7.5925,47.54],[7.5925,47.57]]){const d=Math.min(...distances(...p,h));maxEdgeError=Math.max(maxEdgeError,Math.abs(d));assert.ok(Math.abs(d)<2,`${p} ${h}: ${d}`);checks++;}}
+assert.equal(c.unionClippingRegions,true);const shifted={...t,modelMatrix:Matrix4.fromTranslation(new Cartesian3(100,0,0))};assert.equal(rectangularBuildingPlanes(shifted,bounds),null);
+assert.equal(rectangularBuildingPlanes(t,[7,47,8,48]),null);
+assert.equal(rectangularBuildingPlanes({...t,boundingSphere:{center:Cartesian3.ZERO}},bounds),null);
+const native={...t};configureBuildingClip(native,bounds,{context:{webgl2:false}});assert.equal(native.clippingPlanes.length,4);native.clippingPlanes.destroy();
+const fallback={...shifted};configureBuildingClip(fallback,bounds,{context:{webgl2:true}});assert.equal(fallback.clippingPolygons.inverse,true);assert.equal(fallback.clippingPolygons.length,1);
+assert.throws(()=>configureBuildingClip({...shifted},bounds,{context:{webgl2:false}}),e=>e.code==='CLIPPING_UNSUPPORTED');
+c.destroy();console.log(JSON.stringify({checks,maxEdgeErrorMeters:maxEdgeError,transformedAndWideFallback:true,polygonFallback:true,unsupportedFallbackHandled:true}));

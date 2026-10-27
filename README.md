@@ -1,5 +1,7 @@
 # Jura 3D
 
+**27 octobre, soir — B1 clos avec réserves après correction A53 :** découpage des bâtiments optimisé, source et informations conservées. Comparaison physique meilleure en rotation sur les trois vues ; propriétaire satisfait, portrait/paysage relevés et commandes/lien confirmés.30FPS constants, autonomie et S23 non acquis. [Preuves et réserves](docs/CORRECTION_BALE_A53.md). [Nouvel aperçu local4317](http://127.0.0.1:4317/jura3d/), référence4306 préservée ; téléphone nettoyé/débranchable. Suite : B2 lieux/patrimoine puis B3 services, encore non intégrés ; aucun push/déploiement. Les entrées datées ci-dessous décrivent les étapes précédentes.
+
 **27 octobre — A53 : Bâle reste à optimiser.** Le Jura est jugé correct sur le téléphone ; Bâle complet est signalé à5–10FPS. Les fonctions sont contrôlées, mais la performance B1 mobile n'est pas validée. Diagnostic et correction avant les couches B2/B3 ; [mesures et limites](docs/VALIDATION_TRANSPORTS_A53.md). Aucun push/déploiement.
 
 **Retour PC du 27 octobre :** après l'adaptation des tracés Jura, le propriétaire indique « tout semble ok ». Retour global positif consigné ; validation A53 des deux territoires encore ouverte, publication différée.
