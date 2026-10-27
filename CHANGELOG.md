@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — Livraison Jura/Bâle enrichie revue localement
+
+- Préciser l’accueil Bâle : bâtiments limités au centre, informations de visite/sanitaires statiques et observations de parkings datées.
+- Étendre le contrôle de site normal aux couches Bâle et à la cohérence des versions accueil/cartes.
+- Builds autonome/racine/Pages et deux parcours enrichis réussis sans erreur ; cartes identiques à B3, qualifications physiques conservées. [Revue et limites](docs/REVUE_PUB2_BALE.md), aucun push/déploiement.
+
 ## 2026-10-27 — B3 sanitaires qualifié avec réserves
 
 - Ajouter100031 à la demande : WC/partenaires/urinoirs/douches, filtres type/Eurokey/secteur, fiches source et fermetures signalées, sans ouverture en direct ou montant inventé.

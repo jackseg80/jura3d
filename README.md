@@ -1,5 +1,7 @@
 # Jura 3D
 
+**27 octobre,22:27 Europe/Zurich — revue PUB2 enrichie terminée localement :** builds autonome/racine/Pages et parcours normal des deux territoires réussis sans erreur, dont les quatre couches Bâle et leurs fiches/liens/crédits. Accueil précisé, contrôle des versions accueil/cartes renforcé ;402fichiers Jura et395fichiers Bâle identiques à B3, preuves physiques conservées. [Essayer la livraison revue](http://127.0.0.1:4324/jura3d/), [bilan et procédure](docs/REVUE_PUB2_BALE.md). Git/public lus sans écriture distante : site public toujours PUB1 Jura29a4089, aucun push/déploiement. Prochaine action : décision explicite sur leur autorisation, puis contrôle HTTPS réel des deux cartes après publication.
+
 **27 octobre — B3 sanitaires clos avec réserves :**159installations publiques/partenaires, urinoirs et douches100031, filtres type/Eurokey/secteur et fiches source. [Essayer Bâle localement](http://127.0.0.1:4322/jura3d/bale/) → « Toilettes, douches et services ». Tests/builds/contrôles PC et mesures Intel/A53 terminés ; retour propriétaire « Tout m’a l’air OK », portrait/paysage observés. Usage accepté, pauses/coût mobile et gestes détaillés non observés restent des limites. [Preuves et réserves](docs/VALIDATION_B3.md). A53 nettoyé/débranchable, aperçu figé4322, B2 figé4320 préservé. Fontaines IWB non intégrées ; revue de livraison avant toute publication distincte, aucun push/déploiement.
 
 **27 octobre, soir — B2 clos avec réserves :** lieux culturels, points d’intérêt et repères remarquables de Basel Info intégrés,186repères source reçus, groupes L/filtres/fiches/liens, couche désactivée au départ. [Essayer B2 localement](http://127.0.0.1:4320/jura3d/) ; Bâle → « Lieux à visiter et patrimoine ». Contrôles PC et A53 terminés, usage jugé correct par le propriétaire, portrait/paysage observés ; coût mobile en rotation et30FPS constants non acquis conservés. [Preuves et limites](docs/VALIDATION_B2.md). Téléphone nettoyé/débranchable, B1 de référence4317 préservé ; prochaine étape B3 services, encore non intégré, aucun push/déploiement.
@@ -74,15 +76,15 @@ Ouvrir `http://127.0.0.1:5173/`. Le chargement exige une connexion Internet. La 
 
 ## Comment les informations sont chargées
 
-Le site ne possède pas de serveur de base de données. Patrimoine et bus sont des instantanés GeoJSON servis avec le site : téléchargement à l’activation, puis cache en mémoire de l’onglet pour les filtres et les fiches. Les GeoPackage/SQLite originaux servent uniquement à la préparation Python. Aucun cache persistant ou mode hors ligne propre au projet ; le navigateur peut appliquer son cache HTTP habituel.
+Le site ne possède pas de serveur de base de données. Pour le Jura, patrimoine et bus sont des instantanés GeoJSON servis avec le site : téléchargement à l’activation, puis cache en mémoire de l’onglet pour les filtres et les fiches. Les GeoPackage/SQLite originaux servent uniquement à la préparation Python. À Bâle, les couches interrogent les API officielles à l’activation ; les données statiques restent en mémoire, les observations de parkings peuvent être réinterrogées en onglet visible. Aucun cache persistant ou mode hors ligne propre au projet ; le navigateur peut appliquer son cache HTTP habituel.
 
-Les tuiles terrain, bâtiments et images arrivent directement de swisstopo. Les PDF de fiches et les horaires restent sur les sites officiels, ouverts par un lien : leur contenu n’est pas recopié. Seul le PDF des conditions est livré avec le site. Actualiser les instantanés exige une nouvelle préparation validée ; aucune synchronisation automatique.
+Le relief et les images arrivent directement de swisstopo ; les bâtiments proviennent de swisstopo pour le Jura et du service cantonal pour Bâle. Les PDF de fiches et les horaires restent sur les sites officiels, ouverts par un lien : leur contenu n’est pas recopié. Seul le PDF des conditions Jura est livré avec le site. Actualiser les instantanés Jura exige une nouvelle préparation validée ; aucune synchronisation automatique de ces fichiers.
 
 ## Configuration territoriale — P7
 
 Le Jura reste la configuration par défaut. Identité, destinations, vue initiale, sources, crédits et couches disponibles sont décrits dans `src/territories/jura.js`. Une autre configuration peut être sélectionnée avant compilation par la variable d'environnement `VITE_TERRITORY`, correspondant à un fichier dans ce dossier. Aucune copie de l'application ni renommage du dépôt n'est nécessaire.
 
-Le témoin `navigation-control` vérifie un départ à Porrentruy, deux destinations et aucune couche cantonale ; il n'est pas une seconde ville publiée. La [validation P7](docs/VALIDATION_P7.md) décrit les commandes et les limites. Les adaptateurs patrimoine et bus restent propres aux schémas du Jura ; Bâle et ses parkings ne sont pas intégrés.
+Le témoin `navigation-control` vérifie un départ à Porrentruy, deux destinations et aucune couche cantonale ; il n'est pas une seconde ville publiée. La [validation P7](docs/VALIDATION_P7.md) décrit cette référence historique. La configuration `basel` dispose désormais de ses adaptateurs transports, lieux, sanitaires et parkings ; l’assemblage commun construit séparément les deux cartes. [Livraison locale actuelle et publication distincte](docs/REVUE_PUB2_BALE.md).
 
 ## Données Jura préparées — P2
 

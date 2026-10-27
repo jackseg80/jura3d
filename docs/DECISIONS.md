@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-27 — Revoir PUB2 avec les couches Bâle effectivement livrées
+
+Après clôture B1/B2/B3 avec réserves, conserver les cartes qualifiées et revoir uniquement la présentation/assemblage et son contrôle de publication. Expliciter sur l’accueil le cadre des bâtiments et les données statiques ; étendre le parcours normal aux nouvelles couches et aux versions enfants, afin de détecter un chargement ou déploiement partiel après une future mise en ligne. Identité par empreintes établie avec B3, preuves physiques réutilisées. Push/déploiement restent sur accord distinct du propriétaire. [Revue et preuves](REVUE_PUB2_BALE.md).
+
 ## 2026-10-27 — B3 commence par les sanitaires officiels
 
 Après autorisation de poursuivre, retenir100031 pour WC, partenaires, urinoirs et douches, avec licence/attribution et données complètes contrôlées avant intégration. Garder catégories, états, tarifs et Eurokey comme indications source, sans promesse d'ouverture/accessibilité ni prix inventé ; conserver la divergence des cinq payants avec la page générale. Généraliser le seul renderer de points B2, sans copier les schémas source ; B2 requalifié sur PC pour cette extraction. Fontaines IWB conditionnelles, non incluses implicitement. [Critères et preuves B3](VALIDATION_B3.md), B3 sanitaires clos avec réserves après contrôles PC/mesures Intel/A53 et retour global propriétaire positif en portrait/paysage. Ne pas attribuer au relevé des gestes sanitaires/liens détaillés absents ; garder coût mobile/pauses et absence de temps réel. Revue de livraison puis publication sur décision séparée.

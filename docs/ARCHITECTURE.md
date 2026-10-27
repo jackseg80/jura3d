@@ -1,5 +1,9 @@
 # Architecture du prototype
 
+## Revue PUB2 enrichie du27octobre
+
+L’accueil statique explicite désormais la limite centrale des bâtiments bâlois et les données de visite/sanitaires statiques. Aucun changement du flux de navigation, des cartes ou sources. Le probe de site normal vérifie les marqueurs accueil/enfants et les couches parkings/lieux/sanitaires/quais/tracés avec leurs fiches/liens/crédits, pour servir aussi au contrôle HTTPS après une future publication autorisée. [Bilan et copies figées](REVUE_PUB2_BALE.md).
+
 ## B3 — Sanitaires et composant de points partagé
 
 `sanitary-data.js` lit100031 à la demande, vérifie licence/attribution, compte/pagination/identifiants et concordance des deux positions natives. Les attributs restent dans `native`/`feature.properties`, champs français et conditions d'usage dans `display`. `point-places.js` généralise le renderer B2 par préfixe de contrôles, symbole, loader et filtres supplémentaires, avec le même cycle de vie/cache/annulation et regroupement44px/min2. `basel-places.js` reste le wrapper B2 ; `sanitary.js` fournit WC et filtre Eurokey, couleurs dont fermeture grise. Distance commune dans `point-geometry.js`, réexport B2 conservé.

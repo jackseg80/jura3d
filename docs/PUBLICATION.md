@@ -1,5 +1,7 @@
 # Publication de test sur GitHub Pages
 
+**27 octobre — PUB2 enrichi revu localement, en attente d’accord de publication.** [Bilan actuel](REVUE_PUB2_BALE.md), aperçu4324 ; transports, lieux et sanitaires Bâle inclus. Le marqueur public a été relu HTTP200 et indique toujours PUB1 Jura29a4089 ; pas de nouveau parcours public déduit. Aucun push ou déploiement lors de cette revue. La suite conserve l’historique PUB1.
+
 **26 octobre 2026 — PUB2 préparé localement :** accueil commun, accès Jura/Bâle et retour au choix ; assemblage et workflow manuel adaptés sans envoi ni déploiement. [État, revue et procédure PUB2](PUBLICATION_PUB2.md). Le site effectivement publié reste PUB1 Jura `29a4089`. La suite de ce document conserve la preuve historique de cette première publication.
 
 25 octobre 2026 — étape ajoutée entre P7 et P8 à la demande du propriétaire. La publication n'était pas un lot explicite du plan ; le dépôt avait seulement un contrôle de compilation GitHub Actions. Le propriétaire autorise les commits, l'envoi et le déploiement nécessaires à cette publication. L'ancienne consigne « aucun commit/push/déploiement » reste historique pour P1–P7 ; elle ne bloque pas cette opération autorisée.

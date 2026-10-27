@@ -1,5 +1,7 @@
 # PUB2 — Accueil commun Jura et Bâle
 
+**27 octobre — revue après enrichissement B1/B2/B3 réussie localement.** La livraison à examiner est désormais figée sous .vite/pub2-review/pages-delivery/, aperçu4324 ; les anciens aperçus ci-dessous sont historiques. [Revue actuelle, preuves, réserves et procédure](REVUE_PUB2_BALE.md). Parcours enrichi sans diagnostic réussi sur racine et Pages, versions enfants vérifiées ; publication toujours non autorisée/exécutée, public PUB1 Jura29a4089 constaté par son marqueur. Commits locaux de sauvegarde autorisés.
+
 **Après optimisation B1 :** la preview4306 sert le build `.vite/b1-opt/site-final/` après contrôle, version précédente `.vite/b1/site-delivery/` conservée. [État et rapports actuels](OPTIMISATION_B1.md). Les étapes PUB2 ci-dessous sont historiques ; aucune publication effectuée.
 
 **Après B1, 26 octobre :** la preview commune4306 sert désormais l'assemblage `.vite/b1/site-delivery/` avec les transports Bâle. Les builds et rapports PUB2 ci-dessous sont conservés comme références antérieures ; [B1](VALIDATION_B1.md) donne les nouvelles vérifications, empreintes et limites. Aucun nouveau déploiement, qualification A53 B1 ouverte.

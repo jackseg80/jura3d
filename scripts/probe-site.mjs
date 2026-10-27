@@ -9,6 +9,12 @@ const report={startedAt:new Date().toISOString(),url:url.href,browser:browser.ve
 const ready=p=>p.waitForFunction(()=>document.querySelector('#status')?.dataset.state==='ready',undefined,{timeout:90000});
 async function openControls(p){await p.locator('#toggle-controls').evaluate(e=>{if(e.getAttribute('aria-expanded')!=='true')e.click();});}
 async function returnHome(p){await openControls(p);await p.locator('#site-home').click();await p.waitForURL(url.href);assert.equal(await p.locator('[data-territory]').count(),2);}
+async function childBuild(p,territory){
+  const response=await p.request.get(new URL('build-info.json',p.url()).href);assert.equal(response.status(),200);
+  const info=await response.json();assert.equal(info.territory,territory);assert.equal(info.base,new URL(p.url()).pathname);
+  assert.equal(info.siteHome,url.pathname);assert.equal(info.revision,report.build.revision);assert.equal(info.source,report.build.source);
+  (report.childBuilds??=[]).push(info);
+}
 try{
   const context=await browser.newContext({viewport:{width:1440,height:1000}}),p=await context.newPage(),requests=[];
   p.on('pageerror',e=>report.errors.push(e.message));p.on('console',m=>{if(m.type()==='error')report.errors.push(m.text());});
@@ -22,7 +28,7 @@ try{
   await p.keyboard.press('Tab');assert.equal(await p.evaluate(()=>document.activeElement.className),'skip-link');await p.keyboard.press('Enter');
   await p.keyboard.press('Tab');assert.equal(await p.evaluate(()=>document.activeElement.dataset.territory),'jura');
   await p.screenshot({path:`${output}/home-desktop.png`,fullPage:true});report.checks.push('accueil statique, deux liens, accès clavier');
-  await p.keyboard.press('Enter');await p.waitForURL(new URL('jura/',url).href);await ready(p);
+  await p.keyboard.press('Enter');await p.waitForURL(new URL('jura/',url).href);await ready(p);await childBuild(p,'jura');
   await p.locator('#settings').evaluate(e=>{e.open=true;});await p.locator('#quality').selectOption('medium');await ready(p);
   for(const place of ['delemont','porrentruy','saignelegier','saint-ursanne']){await p.locator(`[data-place="${place}"]`).click();await p.waitForFunction(id=>document.querySelector(`[data-place="${id}"]`).getAttribute('aria-pressed')==='true',place);await ready(p);}
   for(const id of ['heritage','transport']){
@@ -32,7 +38,7 @@ try{
   }
   const condition=await p.locator('#heritage-credit a').first().getAttribute('href'),pdf=await p.request.get(new URL(condition,p.url()).href);assert.equal(pdf.status(),200);assert.equal((await pdf.body()).subarray(0,4).toString(),'%PDF');
   assert.match(await p.locator('.credit').textContent(),/© swisstopo/);await returnHome(p);report.checks.push('Jura : quatre destinations, patrimoine/bus/fiches/PDF, retour accueil');
-  const baselStart=requests.length;await p.locator('[data-territory="basel"]').click();await p.waitForURL(new URL('bale/',url).href);await ready(p);
+  const baselStart=requests.length;await p.locator('[data-territory="basel"]').click();await p.waitForURL(new URL('bale/',url).href);await ready(p);await childBuild(p,'basel');
   await p.locator('#settings').evaluate(e=>{e.open=true;});await p.locator('#quality').selectOption('medium');
   for(const place of ['basel-centre','basel-sbb','basel-messe']){await p.locator(`[data-place="${place}"]`).click();await p.waitForFunction(id=>document.querySelector(`[data-place="${id}"]`).getAttribute('aria-pressed')==='true',place);await ready(p);}
   await p.locator('#parking-settings').evaluate(e=>{e.open=true;});await p.locator('#parking').check();await p.waitForFunction(()=>document.querySelector('#parking-status').dataset.state==='ready');
@@ -41,8 +47,28 @@ try{
     assert.match(await p.locator('#selection-title').textContent(),/Parkhaus/);assert.match(await p.locator('#selection-credit').textContent(),/Parkhäuser/);
     assert.match(await p.locator('#parking-link').getAttribute('href'),/^https:\/\/www\.parkleitsystem-basel\.ch\/parkhaus\//);await p.locator('#clear-selection').click();
   }
+  report.baselLayers=[];
+  for(const id of ['heritage','services','transport']){
+    assert.equal(await p.locator(`#${id}`).isChecked(),false);
+    await p.locator(`#${id}-settings`).evaluate(e=>{e.open=true;});await p.locator(`#${id}`).check();
+    await p.waitForFunction(id=>document.querySelector(`#${id}-status`).dataset.state==='ready',id,{timeout:45000});
+    const kinds=id==='transport'?['stop','line']:[null];
+    if(id==='transport')await p.locator('#transport-lines').check();
+    for(const kind of kinds){
+      if(kind)await p.locator('#transport-kind').selectOption(kind);
+      const options=p.locator(`#${id}-place option`);assert.ok(await options.count()>0);
+      const value=await options.first().getAttribute('value');await p.locator(`#${id}-place`).selectOption(value);await p.locator(`#${id}-open`).click();
+      await p.waitForFunction(()=>!document.querySelector('#selection').hidden);
+      assert.ok((await p.locator('#selection-title').textContent()).trim());assert.match(await p.locator('#selection-credit').textContent(),/Geodaten Kanton Basel-Stadt/);
+      const links=id==='transport'?p.locator('#transport-links a'):p.locator('#selection-heritage-source a');
+      assert.ok(await links.count()>0);for(const href of await links.evaluateAll(nodes=>nodes.map(n=>n.href)))assert.match(href,/^https:\/\//);
+      report.baselLayers.push({id,kind,options:await options.count(),selected:value,title:await p.locator('#selection-title').textContent()});
+      await p.locator('#clear-selection').click();
+    }
+  }
+  assert.match(await p.locator('.data-credits').textContent(),/© swisstopo/);assert.match(await p.locator('.data-credits').textContent(),/OpenStreetMap/);
   assert.equal(requests.slice(baselStart).some(r=>r.includes('swissbuildings3d')||r.includes('/jura/jura/')),false);
-  await p.screenshot({path:`${output}/basel-site.png`});await returnHome(p);report.checks.push('Bâle : trois destinations/fiches/liens, seul modèle cantonal, retour accueil');
+  await p.screenshot({path:`${output}/basel-site.png`});await returnHome(p);report.checks.push('Bâle : trois destinations, parkings/lieux/sanitaires/quais/tracés, fiches/liens/crédits, seul modèle cantonal, retour accueil');
   const touch=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,hasTouch:true}),q=await touch.newPage();
   q.on('pageerror',e=>report.errors.push(e.message));report.touch=[];
   for(const size of [{width:320,height:700},{width:390,height:844},{width:722,height:274}]){
