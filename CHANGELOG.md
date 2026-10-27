@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — A53 : fonctions contrôlées, performance Bâle à corriger
+
+- Consigner 56 fenêtres/560 lectures sur Jura et Bâle, gestes Jura portrait/paysage et retour positif ; Bâle signalé à 5–10 FPS, qualification conservée ouverte.
+- Préserver les pauses et chargements ; isoler le coût important des bâtiments à vue fixe, sans transformer le prototype de détail interrompu en correction validée.
+- Auto restauré/relu et seuls onglets/accès de test nettoyés après reconnexion. Sources applicatives inchangées, aucun push/déploiement. [Bilan et reprise](docs/VALIDATION_TRANSPORTS_A53.md).
+
 ## 2026-10-27 — Retour PC après le portage Jura
 
 - Consigner le retour global positif du propriétaire (« tout semble ok ») ; qualification A53 Jura/Bâle conservée ouverte. Documentation seule, aucune nouvelle mesure ni publication.

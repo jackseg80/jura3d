@@ -1,5 +1,7 @@
 # État du projet
 
+**27 octobre — campagne A53 terminée, performance Bâle non validée.**56fenêtres/560lectures,16min31s, fonctions contrôlées ; Jura jugé correct, portrait/paysage observés. Bâle confirmé à5–10FPS par le propriétaire avec bus complets locaux ; mesures ensemble8–19FPS et pauses marquées. Diagnostic à vue fixe montre un coût important des bâtiments ; prototype de détail interrompu sans correction validée, aucun correctif applicatif livré à ce stade. [Résultats/limites](VALIDATION_TRANSPORTS_A53.md), [accès et reprise](RELAIS.md). Priorité : corriger/qualifier Bâle mobile avant B2/B3, sources PC conservées. Auto restauré/relu, onglets et accès propres nettoyés après reconnexion ; appareil débranchable.
+
 **Retour propriétaire du 27 octobre après le portage Jura : « tout semble ok ».** Retour global positif sur l'aperçu PC ; aucun nouveau détail de gestes, résultat chiffré ou contrôle physique déduit. Prochaine étape inchangée : A53 en Faible pour Jura et Bâle, puis B2/B3. Documentation seule depuis `2dba808`, sources et preuves PC conservées ; aucun push/déploiement.
 
 **27 octobre — tracés Jura adaptés au rendu en tuiles et vérifiés sur PC.** Données, filtres jour/nuit, arrêts/groupes, fiches et zones Noctambus conservés ; choix du renderer indépendant du territoire. Comparaisons Intel/RTX et parcours Jura/Bâle/site terminés. [Résultats et limites](OPTIMISATION_JURA.md). Qualification A53 des deux territoires encore ouverte ; B2/B3 différés, aucun push/déploiement. Les étapes datées suivantes décrivent leurs versions antérieures.

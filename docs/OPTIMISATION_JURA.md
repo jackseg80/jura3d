@@ -1,5 +1,7 @@
 # Complément P6 — Rendu en tuiles des tracés du Jura
 
+**27 octobre — A53 contrôlé : fonctions disponibles, performance Bâle non validée.** Jura jugé correct par le propriétaire ; Bâle complet local signalé à 5–10 FPS, cohérent avec les ralentissements mesurés. Diagnostic et correction du coût des bâtiments avant B2/B3 ; aucun correctif livré à ce stade. [Mesures et suite](VALIDATION_TRANSPORTS_A53.md). Auto et accès restaurés/nettoyés après reconnexion, appareil débranchable ; aucun push/déploiement.
+
 27 octobre 2026. Extension autorisée après le retour PC positif sur Bâle et la demande du propriétaire. Base `582f666`, dépôt trouvé propre ; même modèle/effort, aucun sous-agent. Les preuves P5/P6/P7 historiques restent attachées à leurs versions et réserves. Aucune publication ni modification Android dans ce lot.
 
 ## Réalisation

@@ -1,5 +1,7 @@
 # P6 — optimisation des tracés de bus
 
+**27 octobre — A53 contrôlé : fonctions disponibles, performance Bâle non validée.** Jura jugé correct par le propriétaire ; Bâle complet local signalé à 5–10 FPS, cohérent avec les ralentissements mesurés. Diagnostic et correction du coût des bâtiments avant B2/B3 ; aucun correctif livré à ce stade. [Mesures et suite](VALIDATION_TRANSPORTS_A53.md). Auto et accès restaurés/nettoyés après reconnexion, appareil débranchable ; aucun push/déploiement.
+
 **Complément du27octobre2026 :** les tracés Jura utilisent désormais le rendu en tuiles local, avec nouvelles mesures PC Intel/RTX et contrôles Jura/Bâle. [Bilan et limites](OPTIMISATION_JURA.md). Les résultats physiques P6 ci-dessous restent ceux de la version vectorielle antérieure ; A53 à qualifier sur la nouvelle version.
 
 ## Bilan P6 clos avec réserves — 25 octobre 2026, après A53

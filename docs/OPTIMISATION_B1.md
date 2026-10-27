@@ -1,5 +1,7 @@
 # B1 — Optimisation du fond des tracés Bâle
 
+**27 octobre — A53 contrôlé : fonctions disponibles, performance Bâle non validée.** Jura jugé correct par le propriétaire ; Bâle complet local signalé à 5–10 FPS, cohérent avec les ralentissements mesurés. Diagnostic et correction du coût des bâtiments avant B2/B3 ; aucun correctif livré à ce stade. [Mesures et suite](VALIDATION_TRANSPORTS_A53.md). Auto et accès restaurés/nettoyés après reconnexion, appareil débranchable ; aucun push/déploiement.
+
 **27octobre2026 :** méthode étendue aux tracés Jura, choix du renderer indépendant du schéma source ; fournisseur raster inchangé, résolution des objets pointés sécurisée pour les groupes. Contrôles Bâle/site refaits sur le build partagé. [Résultats propres au Jura](OPTIMISATION_JURA.md). Les mesures Bâle ci-dessous restent celles du26octobre ; A53 des deux territoires ouvert.
 
 **Retour du 27 octobre :** le propriétaire indique que cela semble correct sur PC. Retour global positif, sans mesure ou détail de gestes supplémentaire déduit. La qualification A53 reste ouverte ; [l'extension aux tracés Jura](OPTIMISATION_JURA.md) est désormais planifiée, non encore implémentée.

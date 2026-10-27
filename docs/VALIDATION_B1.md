@@ -1,5 +1,7 @@
 # B1 — Transports à Bâle
 
+**27 octobre — A53 contrôlé : fonctions disponibles, performance Bâle non validée.** Jura jugé correct par le propriétaire ; Bâle complet local signalé à 5–10 FPS, cohérent avec les ralentissements mesurés. Diagnostic et correction du coût des bâtiments avant B2/B3 ; aucun correctif livré à ce stade. [Mesures et suite](VALIDATION_TRANSPORTS_A53.md). Auto et accès restaurés/nettoyés après reconnexion, appareil débranchable ; aucun push/déploiement.
+
 **27octobre2026 :** renderer choisi explicitement par configuration et résolution des groupes Cesium sécurisée lors du portage Jura. Probe B1 et parcours commun refaits avec succès sur le build partagé ; [bilan du lot](OPTIMISATION_JURA.md). Qualification A53 Bâle toujours ouverte ; ne pas déduire un résultat physique des mesures PC Jura.
 
 **26 octobre au soir — optimisation B1 réalisée et contrôlée sur Intel/RTX.** Fond des tracés Bâle calculé en tuiles locales, mêmes géométries1m/identités et fiches, quais/groupes et surbrillance conservés ; le Jura garde son rendu P6. Comparaisons compilées, probes Bâle/Jura/site et tests de tuiles réussis. [Mesures et limites](OPTIMISATION_B1.md). **Qualification physique A53 et retour subjectif du propriétaire encore ouverts**, B2/B3 différés ; aucun réglage GPU Windows changé, aucun push/déploiement.
