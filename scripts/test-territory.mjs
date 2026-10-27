@@ -18,6 +18,7 @@ invalid(t => { t.layers.push(t.layers[0]); });
 invalid(t => { t.layers[0].base = '../private/'; });
 invalid(t => { t.layers[1].checksSource = 'https://example.org/checks'; });
 invalid(t => { t.layers[1].specs[0][2] = -1; });
+invalid(t => { t.layers[1].lineRenderer = 'unknown'; });
 invalid(t => { t.layers[0].kind = 'unknown'; });
 invalid(t => { t.sources.terrain.url = 'http://example.org/'; });
 

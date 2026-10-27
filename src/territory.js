@@ -22,6 +22,7 @@ export function validateTerritory(territory) {
   if (!Array.isArray(territory.layers) || new Set(territory.layers.map(l => l.id)).size !== territory.layers.length) fail('couches dupliquées ou absentes');
   const safePath = (p) => typeof p === 'string' && /^[a-zA-Z0-9_./-]+$/.test(p) && !p.startsWith('/') && !p.split('/').includes('..');
   for (const layer of territory.layers) {
+    if (layer.id === 'transport' && ![undefined, 'ground-polyline', 'terrain-imagery'].includes(layer.lineRenderer)) fail('rendu des tracés invalide');
     if(layer.kind==='basel-transit'){
       if(layer.id!=='transport'||!layer.sourceName||!layer.credit||!remote(layer.conditions)||!bounds(layer.bounds)
         ||JSON.stringify(layer.datasets)!==JSON.stringify([{id:'100064',order:'l_nr'},{id:'100065',order:'thst_nr'}])

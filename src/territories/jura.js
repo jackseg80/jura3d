@@ -23,7 +23,7 @@ export default {
     { id: 'heritage', kind: 'jura-heritage', credit: cantonCredit, conditions: 'jura/Conditions_utilisation_geodonnees.pdf',
       base: 'jura/', files: ['heritage.geojson', 'heritage-link-checks.json'], checksSource: 'data/jura-heritage-link-checks.json', count: 1159,
       bounds: [6.5, 46.5, 8, 48], sourceName: 'Patrimoine Jura' },
-    { id: 'transport', kind: 'jura-transport', credit: cantonCredit, conditions: 'jura/Conditions_utilisation_geodonnees.pdf',
+    { id: 'transport', kind: 'jura-transport', lineRenderer: 'terrain-imagery', credit: cantonCredit, conditions: 'jura/Conditions_utilisation_geodonnees.pdf',
       base: 'jura/', files: ['bus-stops.geojson', 'bus-lines.geojson', 'noctambus-zones.geojson', 'transport-link-checks.json'], checksSource: 'data/jura-transport-link-checks.json',
       specs: [['stop', 'MultiPoint', 464], ['line', 'MultiLineString', 140], ['zone', 'MultiPolygon', 2]],
       bounds: [6.5, 46.5, 8, 48], date: '13.09.2026', sourceName: 'Transports Jura' },

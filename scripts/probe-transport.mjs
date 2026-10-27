@@ -33,6 +33,8 @@ export async function probeTransport(browser, url) {
   };
   await page.goto(url,{waitUntil:'domcontentloaded'});await ready(page);assert.equal(requests.length,0,'transports téléchargés avant activation');
   await activate(page);const initial=await state(page);assert.equal(initial.total,606);assert.equal(initial.sourceCount,1);
+  assert.equal(initial.renderer,'terrain-imagery');assert.equal(initial.imageryLayerCount,2);
+  assert.ok(initial.imagery.paths>0);assert.equal(initial.highlightCount,0);
   assert.equal(initial.geometry.toleranceMeters,1);
   assert.equal(initial.geometry.clipRadiusMeters,5250);
   assert.equal(initial.geometry.sourceLineVertices,9503);
@@ -50,7 +52,9 @@ export async function probeTransport(browser, url) {
     for(const number of stopIds) {const r=await consult(page,'stop',number);sampled.push({city,kind:'stop',id:r.feature.id,name:r.feature.properties.nomarret});await page.waitForTimeout(2200);}
     await page.screenshot({path:`probe-p4-${city}-stop.png`,fullPage:true});
     const r=await consult(page,'line',lineId);sampled.push({city,kind:'line',id:r.feature.id,name:r.feature.properties.nomcadrehoraire});await page.waitForTimeout(2200);
+    assert.ok((await state(page)).highlightCount>0);
     await page.locator('#clear-selection').click();
+    assert.equal((await state(page)).highlightCount,0);assert.equal((await state(page)).imageryLayerCount,2);
     const targetHandle=await page.waitForFunction(featureId=>window.__jura3dTransportTarget(featureId),id('line',lineId),{timeout:30000,polling:500});
     const target=await targetHandle.jsonValue();await targetHandle.dispose();await page.mouse.click(target.x,target.y);
     const selectionAfterClick=await page.evaluate(()=>({kind:window.__jura3dCamera().selectionKind,selectedId:window.__jura3dTransport().selectedId,title:document.querySelector('#selection-title').textContent}));
@@ -80,11 +84,17 @@ export async function probeTransport(browser, url) {
   }
   await page.locator('#transport-offer').selectOption('');await page.locator('#transport-zones').check();assert.equal((await state(page)).filtered.filter(f=>f.kind==='zone').length,2);
   await consult(page,'zone',1);await page.waitForTimeout(2200);await page.screenshot({path:'probe-p4-noctambus-zone.png',fullPage:true});
+  assert.equal((await state(page)).imageryLayerCount,2,'zones converted into extra raster layers');
+  await page.locator('#clear-selection').click();
+  // Scan every route too: a stop cluster encountered by target lookup must not be treated as an Entity.
+  const zoneLine=await page.evaluate(()=>window.__jura3dTransport().filtered.filter(f=>f.kind==='line').map(f=>window.__jura3dTransportTarget(f.id)).find(Boolean));
+  assert.ok(zoneLine,'aucun tracé sélectionnable avec zones');await page.mouse.click(zoneLine.x,zoneLine.y);
+  assert.match(await page.evaluate(()=>window.__jura3dCamera().selectionKind),/^transport-(line|group)$/);
   await page.locator('#transport-zones').uncheck();assert.ok(!(await page.locator('#selection').isVisible()),'fiche fantôme après retrait des zones');await page.locator('#transport-stops').uncheck();await page.locator('#transport-lines').uncheck();assert.equal((await state(page)).entityCount,0);assert.ok(await page.locator('#transport-open').isDisabled());
   await page.locator('#transport-stops').check();await page.locator('#transport-lines').check();
   // Coexistence et crédit cantonal commun, sans masquer la source restante.
   await page.locator('#heritage-settings summary').click();await page.locator('#heritage').check();await page.waitForFunction(()=>window.__jura3dHeritage().state==='ready');assert.equal((await state(page)).sourceCount,2);
-  for(let n=0;n<3;n++){await page.locator('#transport').uncheck();assert.equal((await state(page)).sourceCount,1);assert.ok(await page.locator('#heritage-credit').isVisible());await page.locator('#transport').check();await layerReady(page);assert.equal((await state(page)).sourceCount,2);}
+  for(let n=0;n<3;n++){await page.locator('#transport').uncheck();assert.equal((await state(page)).sourceCount,1);assert.equal((await state(page)).imageryLayerCount,1);assert.ok(await page.locator('#heritage-credit').isVisible());await page.locator('#transport').check();await layerReady(page);assert.equal((await state(page)).sourceCount,2);assert.equal((await state(page)).imageryLayerCount,2);}
   await page.locator('#heritage').uncheck();assert.equal((await state(page)).sourceCount,1);assert.ok(await page.locator('#heritage-credit').isVisible());
   assert.equal(requests.length,3,'GeoJSON transports rechargés après bascules');
   await page.locator('#transport-sector').selectOption('active');await page.locator('[data-place="delemont"]').click();await page.waitForFunction(()=>window.__jura3dCamera().activePlace==='delemont'&&!window.__jura3dCamera().flyingTo);await ready(page);
@@ -104,6 +114,14 @@ export async function probeTransport(browser, url) {
   await touch.locator('#toggle-controls').tap();await touch.locator('#home').tap();await touch.waitForFunction(()=>!window.__jura3dCamera().flyingTo);await ready(touch);await touch.locator('#toggle-controls').tap();
   const tgHandle=await touch.waitForFunction(()=>window.__jura3dTransportGroupTarget(),undefined,{timeout:20000,polling:500});const tg=await tgHandle.jsonValue();await tgHandle.dispose();await touch.touchscreen.tap(tg.x,tg.y);const first=touch.locator('#selection-group button').first();await first.scrollIntoViewIfNeeded();assert.ok((await first.boundingBox()).height>=44);await first.tap();assert.equal(await touch.evaluate(()=>window.__jura3dCamera().selectionKind),'transport-stop');await tc.close();
   const recovered=[];
+  const rasterFailure=await browser.newPage({viewport:{width:1000,height:800}});rasterFailure.on('pageerror',e=>errors.push(e.message));
+  await rasterFailure.goto(url);await ready(rasterFailure);
+  await rasterFailure.evaluate(()=>{window.__originalCanvasContext=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){if(type==='2d'&&this.width===512&&this.height===512)throw new Error('probe raster failure');return window.__originalCanvasContext.call(this,type,...args);};});
+  await rasterFailure.locator('#transport-settings summary').click();await rasterFailure.locator('#transport').check();
+  await rasterFailure.waitForFunction(()=>window.__jura3dTransport().state==='error');assert.equal((await state(rasterFailure)).imageryLayerCount,1);
+  await rasterFailure.evaluate(()=>{HTMLCanvasElement.prototype.getContext=window.__originalCanvasContext;delete window.__originalCanvasContext;});
+  await rasterFailure.locator('#transport-retry').click();await layerReady(rasterFailure);assert.equal((await state(rasterFailure)).imageryLayerCount,2);
+  await rasterFailure.evaluate(()=>window.__jura3dLayers.destroy());assert.equal((await state(rasterFailure)).imageryLayerCount,1);await rasterFailure.close();recovered.push('raster');
   for(const type of ['http','invalid']) {
     const fail=await browser.newPage({viewport:{width:1000,height:800}});fail.on('pageerror',e=>errors.push(e.message));
     await fail.route(linesPath,r=>r.fulfill(type==='http'?{status:503,body:'indisponible'}:{status:200,contentType:'application/json',body:JSON.stringify({type:'FeatureCollection',features:[]})}));

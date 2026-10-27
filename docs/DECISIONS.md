@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-27 — Appliquer le rendu en tuiles aux tracés Jura
+
+Après autorisation de poursuivre, choisir explicitement le renderer dans chaque configuration de transport, indépendamment de son schéma source. Réutiliser le fournisseur Bâle pour le seul fond des lignes Jura ; garder les arrêts/groupes, filtres jour/nuit, fiches/liens et surbrillances. Les zones Noctambus restent des polygones distincts et ne doivent pas intercepter une ligne sous le clic. Les objets au premier plan conservent leur priorité. La voie vectorielle reste disponible par configuration. [Mesures, contrôles et limites](OPTIMISATION_JURA.md) ; les preuves mobiles P6 historiques ne qualifient pas cette nouvelle version et l'A53 reste à refaire sur les deux territoires.
+
 ## 2026-10-27 — Prévoir la même méthode pour les tracés du Jura
 
 Après retour PC positif sur Bâle et demande du propriétaire, inscrire un complément P6 pour réutiliser le rendu en tuiles et la sélection de tracés dans le Jura. Conserver schéma source, filtres jour/nuit et zones Noctambus, arrêts/groupes/fiches/surbrillance ; mesurer avant/après et contrôler les deux territoires avant qualification A53. Ce lot ne refait pas les bâtiments, le patrimoine ou les données. [Plan](OPTIMISATION_JURA.md). Aucun portage implémenté par cette décision documentaire ; gains Jura non déduits de Bâle, preuves P6 antérieures conservées.

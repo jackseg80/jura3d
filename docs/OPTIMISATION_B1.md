@@ -1,5 +1,7 @@
 # B1 — Optimisation du fond des tracés Bâle
 
+**27octobre2026 :** méthode étendue aux tracés Jura, choix du renderer indépendant du schéma source ; fournisseur raster inchangé, résolution des objets pointés sécurisée pour les groupes. Contrôles Bâle/site refaits sur le build partagé. [Résultats propres au Jura](OPTIMISATION_JURA.md). Les mesures Bâle ci-dessous restent celles du26octobre ; A53 des deux territoires ouvert.
+
 **Retour du 27 octobre :** le propriétaire indique que cela semble correct sur PC. Retour global positif, sans mesure ou détail de gestes supplémentaire déduit. La qualification A53 reste ouverte ; [l'extension aux tracés Jura](OPTIMISATION_JURA.md) est désormais planifiée, non encore implémentée.
 
 26 octobre 2026, autorisée par « ok » après le [diagnostic Intel/RTX](DIAGNOSTIC_B1_TRACES.md). Base Git `60f78fe`, modèle/effort conservés, aucun sous-agent. **Ce lot change le rendu des tracés Bâle, pas les données ni le GPU Windows.** La qualification A53 reste à faire ; aucune nouvelle couche B2/B3 ou publication.

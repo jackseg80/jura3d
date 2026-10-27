@@ -1,5 +1,13 @@
 # Architecture du prototype
 
+## Complément P6 — Rendu des tracés Jura, 27 octobre 2026
+
+Les configurations Jura et Bâle déclarent désormais `lineRenderer: 'terrain-imagery'`. Le choix du rendu est indépendant du schéma de données ; l'absence de cette option ou `ground-polyline` conserve la voie vectorielle. Une valeur inconnue est rejetée à la validation. Les filtres et fiches propres aux deux territoires restent séparés.
+
+Jura réutilise le fournisseur local décrit ci-dessous : géométries1m/5,25km inchangées, arrêts/groupes Cesium, lignes jour bleues et nuit seule violettes en pointillés, surbrillance native temporaire. Les deux zones Noctambus restent des polygones Cesium avec trous et sélection propres. Lorsqu'une zone de fond est sous le clic, les tracés proches peuvent être choisis ; arrêts, bâtiments et autres objets au premier plan gardent la priorité. Le fournisseur et ses limites de cache/épaisseur restent ceux de B1. [Vérifications et mesures Jura](OPTIMISATION_JURA.md). Les paragraphes datés du26octobre décrivent l'étape Bâle antérieure à cette généralisation.
+
+La résolution d'un objet pointé vérifie le type de son identifiant avant `EntityCollection.contains` : un groupe Cesium porte un tableau et ne doit pas être interprété comme une entité unique. Ce contrôle s'applique aussi aux cibles diagnostiques ; il évite une exception rencontrée pendant le balayage des tracés près d'un groupe d'arrêts.
+
 ## B1 — Tracés bâlois en tuiles calculées localement
 
 `transport-imagery.js` fournit à Cesium une couche d'imagerie transparente, en tuiles512×512 WebMercator/niveaux0–20, produite par Canvas2D à partir de la géométrie d'affichage déjà simplifiée1m et découpée5,25km. Pas de serveur de tuiles, nouvel accès distant, nouvelle source ou modification du relief. Cache propre au fournisseur limité à24 canvas non vides ; cela ne borne pas toute la mémoire de Cesium ni ses textures. Le moteur conserve sa gestion des tuiles visibles. Couleurs tram/bus et pointillés nocturnes, contour blanc ; l'épaisseur de rasterisation dépend du niveau de tuile et de la vue.

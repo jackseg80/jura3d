@@ -1,6 +1,6 @@
 # État du projet
 
-**27 octobre — retour propriétaire : Bâle semble correct sur PC.** Retour global positif, sans nouveau détail de gestes ou mesure déduit ; A53 toujours à qualifier. Le Jura garde actuellement P6 : [extension du rendu en tuiles planifiée](OPTIMISATION_JURA.md), non implémentée. Prochaine action sans appareil : adaptation Jura et comparaison PC Intel/RTX, puis qualification A53 des deux territoires avant B2/B3. Aucun code/configuration modifié dans ce lot documentaire, preuves précédentes conservées.
+**27 octobre — tracés Jura adaptés au rendu en tuiles et vérifiés sur PC.** Données, filtres jour/nuit, arrêts/groupes, fiches et zones Noctambus conservés ; choix du renderer indépendant du territoire. Comparaisons Intel/RTX et parcours Jura/Bâle/site terminés. [Résultats et limites](OPTIMISATION_JURA.md). Qualification A53 des deux territoires encore ouverte ; B2/B3 différés, aucun push/déploiement. Les étapes datées suivantes décrivent leurs versions antérieures.
 
 **Contrôle ponctuel ChatGPT après optimisation :**43–48FPS avec les155tracés actifs, GPU toujoursIntel et AutoMoyen terminé (mesure annoncée44FPS), étatprêt/nouveau bundleCq63 vérifiés. La case Tracés a été restaurée désactivée comme trouvée, préférenceAuto conservée. Ce contrôle du navigateur intégré ne remplace pas une campagne à preset constant ni le retour subjectif du propriétaire ou l'A53 physique. [Capture, méthode et reprise](OPTIMISATION_B1.md).
 

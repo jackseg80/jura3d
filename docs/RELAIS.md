@@ -1,5 +1,13 @@
 # Relais de reprise
 
+**27 octobre — rendu des tracés Jura adapté et contrôles PC terminés.** Base582f666, dépôt trouvé propre, modèle/effort conservés, aucun sous-agent. Configurations Jura/Bâle explicites, mêmes données1m/5,25km, arrêts/groupes/filtres/fiches et polygones Noctambus conservés. Exception de résolution d'un groupe Cesium corrigée, régression ajoutée. [Bilan, tableaux Intel/RTX et limites](OPTIMISATION_JURA.md).
+
+- Dernier contrôle Jura 27.10.26 04:03:39, Bâle 27.10.26 04:05:28, site 27.10.26 04:06:35, Europe/Zurich : zéro erreur/problème. Deux campagnes terminées de 40 fenêtres/320 lectures chacune, paramètres/cadrages/identités/géométries appariés. Coût GPU Intel réduit sur les quatre vues ; RTX variable, sans gain uniforme démontré. Complément unique Delémont A/B/B/A de 20 fenêtres avec fréquences, terminé04:29:20, sans reproduire la forte différence initiale comme un écart stable ; conserver tous les relevés, variations et pauses. Aucun résultat Android ou de l'onglet utilisateur déduit.
+- Builds index-eTTQp0XO.js / index-Dcj5VX8M.js, CSS BIPXuHPI, révision locale null ; preview4306 .vite/jura-opt/site-final/. Conserver .vite/jura-opt/ (avant/échecs, rapports finaux, sources/empreintes et campagnes), toutes les preuves historiques et la référence .vite/b1-opt/site-final/. Lire Gitlog/status pour la sauvegarde locale finale. Aucun push/déploiement ou appareil utilisé.
+- **Suite : A53 Faible pour les deux territoires lorsqu'il est disponible**, identité/accès à neuf, fiches/groupes/liens/gestes deux orientations, durée/chauffe, restauration des préférences et accès créés. B1 physique reste ouvert ; B2 puis B3 différés, P9 non commencé. Site public non mis à jour par ce lot. Les entrées suivantes sont historiques.
+
+---
+
 **27 octobre — retour PC positif sur Bâle, extension Jura inscrite au plan.** Le propriétaire dit que cela semble correct sur PC et demande l'application de la méthode au Jura. [Périmètre et critères du complément P6](OPTIMISATION_JURA.md). Le code Jura est encore en polylignes terrain P6 ; aucun portage livré par cette mise à jour documentaire. Conserver données/identités/fiches, jour/nuit, arrêts/groupes, zones Noctambus et patrimoine ; généraliser le choix du renderer sans copier les règles bâloises dans les données Jura.
 
 - Prochaine action sans appareil : adaptation Jura, mesures avant/après à mêmes paramètres sur les quatre localités/Intel/RTX et contrôles des deux territoires. Ensuite A53 pour Bâle/Jura lorsqu'il sera disponible ; B1 physique et B2/B3 restent ouverts/différés. Les campagnes P6 historiques gardent leurs réserves et leurs versions.

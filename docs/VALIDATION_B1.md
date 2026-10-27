@@ -1,5 +1,7 @@
 # B1 — Transports à Bâle
 
+**27octobre2026 :** renderer choisi explicitement par configuration et résolution des groupes Cesium sécurisée lors du portage Jura. Probe B1 et parcours commun refaits avec succès sur le build partagé ; [bilan du lot](OPTIMISATION_JURA.md). Qualification A53 Bâle toujours ouverte ; ne pas déduire un résultat physique des mesures PC Jura.
+
 **26 octobre au soir — optimisation B1 réalisée et contrôlée sur Intel/RTX.** Fond des tracés Bâle calculé en tuiles locales, mêmes géométries1m/identités et fiches, quais/groupes et surbrillance conservés ; le Jura garde son rendu P6. Comparaisons compilées, probes Bâle/Jura/site et tests de tuiles réussis. [Mesures et limites](OPTIMISATION_B1.md). **Qualification physique A53 et retour subjectif du propriétaire encore ouverts**, B2/B3 différés ; aucun réglage GPU Windows changé, aucun push/déploiement.
 
 **Complément du 26 octobre au soir : la performance B1 reste à corriger sur GPU intégré, avant l'A53.** L'onglet du propriétaire est celui de ChatGPT et affiche Intel UHD, pas la RTX. [Diagnostic instrumenté et comparaison Delémont/Bâle](DIAGNOSTIC_B1_TRACES.md). Les résultats fonctionnels et les mesures RTX ci-dessous gardent leur périmètre ; ils ne sont pas une validation de la fluidité de cet onglet. Aucun changement de renderer effectué par le diagnostic.

@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-27 — Rendu des tracés Jura en tuiles locales
+
+- Étendre le fond des tracés optimisé à Jura, choix explicite du renderer par configuration, mêmes données et filtres ; arrêts/groupes/fiches/surbrillances et zones Noctambus distinctes conservés.
+- Corriger une exception quand la sélection reçoit un groupe Cesium au lieu d’une entité unique ; tester le balayage des tracés avec zones, les couches résiduelles et la récupération après panne raster.
+- Probes Jura/Bâle/site et comparaisons compilées Intel/RTX réussis ; [résultats, variations et limites](docs/OPTIMISATION_JURA.md). Qualification A53 des deux territoires ouverte, aucun push/déploiement.
+
 ## 2026-10-27 — Retour PC Bâle et extension Jura planifiée
 
 - Consigner le retour propriétaire positif sur PC ; qualification A53 conservée ouverte.

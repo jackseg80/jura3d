@@ -1,5 +1,7 @@
 # P6 — optimisation des tracés de bus
 
+**Complément du27octobre2026 :** les tracés Jura utilisent désormais le rendu en tuiles local, avec nouvelles mesures PC Intel/RTX et contrôles Jura/Bâle. [Bilan et limites](OPTIMISATION_JURA.md). Les résultats physiques P6 ci-dessous restent ceux de la version vectorielle antérieure ; A53 à qualifier sur la nouvelle version.
+
 ## Bilan P6 clos avec réserves — 25 octobre 2026, après A53
 
 **Mesures, contrôles fonctionnels et bilan P6 terminés sur PC, Tab S8 et A53 ; usage exploratoire accepté par le propriétaire.** Après le retour positif Tab S8, il juge l’A53 réactif et « tout à fait honorable pour un téléphone de ce type », puis dit « moi, je valide ». Cette acceptation permet de clore le lot avec ses limites documentées ; **elle ne valide pas 30 FPS constants**, un gain uniforme ni une justesse/qualification exhaustive. CesiumJS est conservé pour le prototype ; aucune migration justifiée par ces seuls résultats. **P7 peut être proposé, il n’est pas commencé.** Aucun stage/stash/commit/push/déploiement, modèle/effort conservés.

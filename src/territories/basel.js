@@ -26,7 +26,7 @@ export default {
     url: 'https://data.bs.ch/api/explore/v2.1/catalog/datasets/100088/records?limit=100',
     refreshMs: 60000, staleMs: 300000, bounds: [7.57,47.54,7.615,47.57],
   },{
-    id:'transport',kind:'basel-transit',sourceName:'Tram et bus · Basel-Stadt',
+    id:'transport',kind:'basel-transit',lineRenderer:'terrain-imagery',sourceName:'Tram et bus · Basel-Stadt',
     credit:'© Geodaten Kanton Basel-Stadt · © OpenStreetMap contributors',
     conditions:'https://data.bs.ch/explore/dataset/100064/',
     licenses:[{label:'CC BY 4.0',url:'https://creativecommons.org/licenses/by/4.0/'},{label:'ODbL',url:'https://www.openstreetmap.org/copyright'}],

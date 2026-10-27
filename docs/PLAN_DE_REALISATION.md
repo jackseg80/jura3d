@@ -1,6 +1,6 @@
 # Plan de réalisation — Jura 3D
 
-**27 octobre — complément P6 planifié après retour PC positif sur Bâle :** étendre le rendu en tuiles aux seuls tracés du Jura, en conservant filtres jour/nuit, zones Noctambus, identités/fiches et contrôles existants. [Portée et critères](OPTIMISATION_JURA.md). Portage non commencé ; comparaison PC Intel/RTX puis qualification A53 des deux territoires. B1 physique reste ouvert et B2/B3 différés, aucune nouvelle ville ou publication.
+**27 octobre — complément P6 Jura réalisé et contrôlé sur PC.** Rendu en tuiles partagé avec Bâle, données/filtres/Noctambus/fiches conservés ; mesures avant/après Intel/RTX et probes des deux territoires terminés. [Bilan et limites](OPTIMISATION_JURA.md). Prochaine action : A53 en Faible sur les deux territoires ; B1 physique ouvert, B2/B3 différés, aucune publication. Les paragraphes datés suivants restent historiques.
 
 **26 octobre au soir — optimisation B1 réalisée et contrôlée sur Intel/RTX.** Fond des tracés Bâle calculé en tuiles locales, mêmes géométries1m/identités et fiches, quais/groupes et surbrillance conservés ; le Jura garde son rendu P6. Comparaisons compilées, probes Bâle/Jura/site et tests de tuiles réussis. [Mesures et limites](OPTIMISATION_B1.md). **Qualification physique A53 et retour subjectif du propriétaire encore ouverts**, B2/B3 différés ; aucun réglage GPU Windows changé, aucun push/déploiement.
 
