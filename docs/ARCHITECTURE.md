@@ -1,5 +1,31 @@
 # Architecture du prototype
 
+## Contrôle de publication ciblé — 30 octobre 2026
+
+`scripts/probe-presentation.mjs` accepte `JURA3D_PROBE_SCOPE=all|jura` (`all` par défaut), avec portée et territoires exclus dans le rapport. `jura` vérifie la présentation, le parcours, le toucher simulé et le retour au Jura normal, sans réclamer de disponibilité Bâle. Le mode global et les incidents Bâle sont conservés ; aucun changement applicatif ou contournement réseau. [Publication autorisée](PUBLICATION_PRESENTATION_JURA.md).
+
+## Finition de présentation — 30 octobre 2026
+
+L’image d’accueil est désormais `docs/images/presentation-delemont-original-2026-10-30.jpg`, copiée sous `presentation/delemont.jpg`. Capture réelle1440×900, rendu Original et ombres simulées désactivées pour cette capture seulement, conformément à sa légende ; aucune modification des réglages de démarrage. JPEG346967octets contre PNG1729093octets précédemment. Texte de la page et deux libellés du guide raccourcis ; gestionnaires, styles, scène et données inchangés. Ancienne livraison/probes préservés ; copie et preuves nouvelles sous `.vite/presentation-polish-2026-10-30/`.
+
+## Démonstration Jura — 29 octobre 2026
+
+`site/presentation/` est une page statique ajoutée par `scripts/build-site.mjs` sous `presentation/`, avec préfixe adapté pour la racine et Pages. Capture réelle issue de C1 copiée depuis `docs/images/presentation-delemont-2026-10-29.png`. Aucun moteur 3D ou géoservice chargé sur cette page ; accueil Jura/Bâle préservé.
+
+`src/presentation.js` s’active pour Jura avec `presentation=1`, après branchement du compteur : compteur masqué, réglages repliés, lien de retour adapté et trois accès aux commandes existantes. Aucun nouvel état persistant, ordonnanceur, source ou rendu ; filtres/fiches/réessais restent ceux des composants habituels. Une couche déjà cochée n’est pas réactivée. `scripts/probe-presentation.mjs` contrôle page, parcours, fiches, autre destination, retours, toucher simulé et entrées normales. [Guide et preuves](PRESENTATION_JURA.md).
+
+## C1 — Habillage local de Delémont, 28 octobre 2026
+
+`visual-trial.js` est instancié uniquement pour le Jura. Il ajoute un panneau opt-in près des couches et un badge explicite ; aucune préférence persistée, aucun shader au démarrage. `main.js` lui transmet les bâtiments après chaque chargement, le profil effectif, les changements de destination et l'accès aux fiches P3. Les vols de cadrage utilisent une altitude échantillonnée du terrain ; génération/annulation empêchent un vol ou une sélection tardive après navigation.
+
+Un `CustomShader` modifie les seuls matériaux dans l'emprise `[7.3405,47.3628,7.3485,47.3672]`, avec transition de 28 m à l'intérieur. La transformation œil → ENU est calculée sur CPU ; positions et normales sources sont inchangées. Les couleurs source distinguent deux familles visuelles, sans classification patrimoniale. Pas de `Cesium3DTileStyle` conjoint. La couleur jaune de sélection passe sans habillage. Grain filtré par dérivées et distance, désactivé en Faible ; aucune texture additionnelle ni géométrie ajoutée.
+
+Élevé/Ultra permettent la projection seule des ombres (`CAST_ONLY`, au lieu de réception/projection). Ce réglage affecte toute la vue, seulement lorsque son centre au sol est dans l’emprise et la caméra sous 6 000 m ; il revient à sa valeur initiale hors cadrage, en Original ou en quittant Delémont. Densité de culling, seuils géométriques, résolution, soleil et heure ne changent pas. Faible garde la palette seule ; Moyen permet le grain. Les shaders sont détachés/détruits lors des bascules, réessais et destruction ; une erreur de rendu désactive l’essai avec message.
+
+Après retour du propriétaire et comparaison visuelle OFF/ON/OFF, « Ambiance douce » est retirée le 28 octobre : l’essai ne modifie plus `fog.visualDensityScalar`. La brume native Cesium reste intacte. Le diagnostic conserve `atmosphere: false` pour les lecteurs des anciens rapports ; le probe vérifie l’absence du contrôle et une brume inchangée dans chaque profil. Le script de mesure supprime cette variante et les doublons de sa séquence par défaut.
+
+Sous `?probe=1`, `__jura3dVisual()` expose l'état effectif et `__jura3dVisualOrbit(angle)` reproduit une trajectoire autour du même centre. Aucun de ces accès n'est exposé dans une visite normale. [Probes, mesures et limites](VALIDATION_C1.md).
+
 ## Revue PUB2 enrichie du27octobre
 
 L’accueil statique explicite désormais la limite centrale des bâtiments bâlois et les données de visite/sanitaires statiques. Aucun changement du flux de navigation, des cartes ou sources. Le probe de site normal vérifie les marqueurs accueil/enfants et les couches parkings/lieux/sanitaires/quais/tracés avec leurs fiches/liens/crédits, pour servir aussi au contrôle HTTPS après une future publication autorisée. [Bilan et copies figées](REVUE_PUB2_BALE.md).

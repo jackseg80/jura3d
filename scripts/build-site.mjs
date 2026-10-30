@@ -25,6 +25,11 @@ for(const t of territories){
 const template=await readFile(path.join(root,'site/index.html'),'utf8');
 await writeFile(path.join(output,'index.html'),template.replaceAll('{{BASE}}',base));
 await copyFile(path.join(root,'site/site.css'),path.join(output,'site.css'));
+await mkdir(path.join(output,'presentation'),{recursive:true});
+const presentation=await readFile(path.join(root,'site/presentation/index.html'),'utf8');
+await writeFile(path.join(output,'presentation/index.html'),presentation.replaceAll('{{BASE}}',base));
+await copyFile(path.join(root,'site/presentation/presentation.css'),path.join(output,'presentation/presentation.css'));
+await copyFile(path.join(root,'docs/images/presentation-delemont-original-2026-10-30.jpg'),path.join(output,'presentation/delemont.jpg'));
 await writeFile(path.join(output,'build-info.json'),JSON.stringify({...info,status:'ready'},null,2)+'\n');
 execFileSync(process.execPath,[path.join(root,'scripts/check-site.mjs'),output,base],{cwd:root,stdio:'inherit',windowsHide:true});
 console.log(JSON.stringify({output,base,territories:territories.map(t=>t.base),ready:true}));

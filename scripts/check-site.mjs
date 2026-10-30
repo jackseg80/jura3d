@@ -12,6 +12,13 @@ assert.deepEqual(info.territories.map(t=>[t.id,t.path,t.base]),[['jura','jura/',
 assert.ok(!html.includes('{{BASE}}'));assert.ok(!/<script\b/i.test(html),'accueil sans moteur 3D ou requête de données');
 assert.ok(html.includes(`href="${base}site.css"`));await stat(path.join(directory,'site.css'));
 assert.ok(html.includes('© swisstopo'));
+const presentation=(await read('presentation/index.html')).toString();
+assert.ok(!presentation.includes('{{BASE}}'));
+assert.ok(!/<script\b/i.test(presentation),'présentation statique sans moteur 3D');
+assert.ok(presentation.includes(`href="${base}jura/?presentation=1"`));
+assert.ok(presentation.includes(`src="${base}presentation/delemont.jpg"`));
+await stat(path.join(directory,'presentation/presentation.css'));
+await stat(path.join(directory,'presentation/delemont.jpg'));
 for(const t of info.territories){
   assert.ok(html.includes(`href="${t.base}"`));
   const directoryChild=path.join(directory,t.path),child=JSON.parse(await read(`${t.path}build-info.json`));

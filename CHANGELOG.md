@@ -1,5 +1,36 @@
 # Historique
 
+## 2026-10-30 — Préparer la publication autorisée de la présentation Jura
+
+- Envoyer la livraison C1/présentation revue et ses documents après accord explicite ; attendre CI et publication Pages manuelle avant confirmation.
+- Ajouter une portée Jura explicite au probe HTTPS, avec portée globale par défaut et incidents Bâle conservés.
+
+## 2026-10-30 — Peaufiner la démonstration Jura
+
+- Remplacer l’image d’habillage expérimental par une capture du rendu Original avec réglages légendés ; JPEG environ cinq fois plus léger, ancien PNG conservé.
+- Raccourcir les textes et le bandeau de découverte, préciser le parcours et la portée d’Android.
+- Conserver les fonctions, sources, rendu, préférences et contrôles valides ; répéter le parcours avant remise locale, sans publication.
+
+## 2026-10-29 — Préparer une démonstration Jura
+
+- Ajouter une page dédiée : capture réelle, parcours court, sources, limites et complémentarité à discuter avec les outils officiels.
+- Mode découverte Jura avec accès Explorer/Patrimoine/Bus, compteur FPS masqué et réglages repliés au départ ; entrées ordinaires et rendu conservés.
+- Android documenté comme piste conditionnelle ; C1 limité à Delémont, préparation locale distincte de GitHub et du site publié.
+- Probe de présentation et contrôles d’assemblage racine/Pages ; aucune publication ou prise de contact dans ce lot.
+
+## 2026-10-28 — Simplifier C1 après comparaison visuelle
+
+- Retirer « Ambiance douce » et la modification de brume, sans gain visible démontré au cadrage proche.
+- Conserver palette/matière et ombres, adapter les probes et les mesures à ces effets.
+- Préserver la première livraison et ses résultats ; remettre un nouvel aperçu local au même port après contrôle.
+
+## 2026-10-28 — C1, essai visuel local du centre de Delémont
+
+- Ajouter une comparaison Original/Essai désactivée au départ : palette d'enduits/toitures, matière discrète, ambiance et projection seule des ombres facultatives selon le profil.
+- Ajouter trois cadrages et un accès aux fiches RBC Saint-Marcel/Hôtel de ville/Château, avec transitions annulables et mention d'habillage illustratif.
+- Conserver géométries/données/crédits et restaurer le rendu en quittant l'essai ; aucun habillage ajouté à Bâle ou aux autres localités.
+- Ajouter probe C1 et campagne A/B/A des coûts séparés ; [preuves, mesures et limites](docs/VALIDATION_C1.md). A53 physique hors lot, aucune publication.
+
 ## 2026-10-27 — Publier Jura et Bâle enrichi sur GitHub Pages
 
 - Publier573e55c après accord explicite, push non forcé et CI réussie ; Pages build/deploy réussis.

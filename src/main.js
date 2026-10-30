@@ -19,6 +19,8 @@ import territoryConfig from '#territory';
 import { validateTerritory, configureTerritoryUi } from './territory.js';
 import { createLayerCollection } from './layers.js';
 import { configureBuildingClip } from './building-clip.js';
+import { createVisualTrial } from './visual-trial.js';
+import { configurePresentation } from './presentation.js';
 
 const territory = validateTerritory(territoryConfig);
 configureTerritoryUi(territory, document, import.meta.env.BASE_URL);
@@ -164,6 +166,19 @@ function startScene() {
     && /NVIDIA|GeForce|Radeon\s*(RX|Pro)|Intel.*Arc/i.test(gpuRenderer);
   document.querySelector('#quality-gpu').textContent = `GPU WebGL utilisé : ${gpuRenderer}`;
   const errors = new Map();
+  const visualTrial = territory.id === 'jura' ? createVisualTrial(viewer, {
+    getPlace: () => flyingTo ?? activePlace, getQuality: () => qualityProfile, clearSelection,
+    async visit(id, isCurrent) {
+      await layers.setEnabled('heritage', true);
+      if (!isCurrent() || activePlace !== 'delemont' || heritage?.snapshot().state !== 'ready') return;
+      const locality = document.querySelector('#heritage-locality');
+      const category = document.querySelector('#heritage-category');
+      locality.value = 'active'; category.value = '';
+      locality.dispatchEvent(new Event('change')); category.dispatchEvent(new Event('change'));
+      document.querySelector('#heritage-place').value = id;
+      document.querySelector('#heritage-open').click();
+    },
+  }) : null;
   const resourceNames = { terrain: 'Relief', imagery: 'Fond de carte', buildings: 'Bâtiments' };
 
   function reportError(kind, error) {
@@ -267,6 +282,7 @@ function startScene() {
     const generation = ++buildingGeneration;
     errors.delete('buildings');
     clearSelection();
+    visualTrial?.attach(undefined);
     if (buildings) viewer.scene.primitives.remove(buildings);
     buildings = undefined;
     buildingRequest = true;
@@ -287,6 +303,7 @@ function startScene() {
         if (buildings === tileset) reportError('buildings', error);
       });
       viewer.scene.primitives.add(buildings);
+      visualTrial?.attach(buildings);
       updateStatus();
     } catch (error) {
       if (generation !== buildingGeneration) return;
@@ -306,6 +323,7 @@ function startScene() {
   shadowsToggle.addEventListener('change', () => {
     markCustomQuality();
     viewer.shadows = shadowsToggle.checked;
+    visualTrial?.update();
     viewer.scene.requestRender();
   });
   viewer.clock.shouldAnimate = false;
@@ -326,6 +344,7 @@ function startScene() {
     }
     qualityStatus.textContent = `${qualitySelect.value === 'auto' ? 'Auto : ' : ''}${preset.label} · ${preset.description} Bâtiments conservés.${qualitySelect.value === 'auto' && autoMeasuredFps !== null ? ` Dernière mesure : ${Math.round(autoMeasuredFps)} FPS.` : ''}`;
     qualityRecheck.hidden = qualitySelect.value !== 'auto';
+    visualTrial?.update();
     viewer.scene.requestRender();
   }
   function startAutoQuality() {
@@ -421,6 +440,7 @@ function startScene() {
   }
   fpsToggle.addEventListener('change', updateFpsDisplay);
   updateFpsDisplay();
+  configurePresentation({ territory, parameters: probeParameters });
   viewer.camera.setView(INITIAL_VIEW);
 
   function updateActivePlace() {
@@ -429,6 +449,7 @@ function startScene() {
       button.setAttribute('aria-pressed', String(button.dataset.place === activePlace));
     });
     layers.navigate();
+    visualTrial?.update();
   }
 
   function navigate(id, home = false) {
@@ -436,6 +457,7 @@ function startScene() {
     viewer.camera.cancelFlight();
     clearSelection();
     flyingTo = id;
+    visualTrial?.navigate();
     loadingSince = performance.now();
     updateStatus();
     const callbacks = {
@@ -451,6 +473,7 @@ function startScene() {
       cancel: () => {
         if (generation !== navigationGeneration) return;
         flyingTo = null;
+        visualTrial?.update();
         updateStatus();
       },
     };
@@ -836,8 +859,10 @@ function startScene() {
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape') clearSelection(); });
 
   updateCantonCredit();
-  addEventListener('pagehide', (event) => { if (!event.persisted) layers.destroy(); });
+  addEventListener('pagehide', (event) => { if (!event.persisted) { visualTrial?.destroy(); layers.destroy(); } });
   if (probeParameters.has('probe')) {
+    window.__jura3dVisual = () => visualTrial?.snapshot() ?? null;
+    window.__jura3dVisualOrbit = angle => visualTrial?.orbit(angle);
     window.__jura3dLayers = layers;
     window.__jura3dParking = () => parking?.snapshot();
     window.__jura3dParkingTarget = id => parking?.target(id);

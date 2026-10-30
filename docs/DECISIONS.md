@@ -1,5 +1,27 @@
 # Décisions techniques
 
+## 2026-10-30 — Publier la présentation Jura après accord explicite
+
+Le propriétaire demande l’envoi GitHub pour disposer d’une adresse externe après la revue locale et l’annonce de la réserve Bâle. Sauvegarder les changements préparés, pousser main sans forcer, attendre Build puis déclencher Pages manuellement. Contrôler la révision et le parcours Jura sur HTTPS avant de livrer le lien. Déclarer la portée ciblée Jura ; conserver les échecs HTTP2 Bâle et leur cause non isolée. Aucun nouveau contenu, changement réseau, contact ou appareil. [Bilan de publication](PUBLICATION_PRESENTATION_JURA.md).
+
+## 2026-10-30 — Terminer par une finition de présentation bornée
+
+Le propriétaire demande de peaufiner avant de présenter au canton. Retenir une image du rendu Original, qui est celui du démarrage, et expliciter ses réglages pour éviter de suggérer un habillage généralisé. Alléger l’image et raccourcir la présentation et le bandeau ; conserver toutes les fonctions, les données, les préférences et les preuves du29octobre. C1 reste facultatif et local à Delémont. Pas de nouvelle fonction, application Android, extension, commit, push, déploiement, contact ou appareil. [Guide de remise](PRESENTATION_JURA.md).
+
+## 2026-10-29 — Petite démonstration avant un échange exploratoire
+
+Le propriétaire approuve un parcours court et un premier affichage allégé avant d’investir davantage. Ajouter une page statique dédiée et un mode découverte sélectionné explicitement ; conserver les accès ordinaires Jura/Bâle, la qualité mémorisée et le rendu. Reconnaître les outils officiels et discuter du besoin complémentaire. Aucun habillage généralisé, façade inventée ou application Android ; aucune valeur ajoutée exclusive revendiquée. Retour propriétaire puis éventuelle publication distinctement autorisée ; aucun contact, commit, push, publication ou appareil autorisé par ce lot. [Guide](PRESENTATION_JURA.md).
+
+## 2026-10-28 — Retirer Ambiance douce après contrôle visuel
+
+Le propriétaire approuve le retrait proposé. Au cadrage proche/Élevé, les captures centrales1000×600px OFF/ON/OFF sont strictement identiques malgré un changement du paramètre de brume ; la validation précédente du seul paramètre ne démontrait pas un gain visuel. Supprimer le contrôle, son état actif et toute écriture de brume par C1. Garder matière discrète, palette, ombres et brume native ; conserver les preuves historiques et distinguer leurs réglages de la version révisée. Aucun nouveau benchmark complet, essai A53, commit ou déploiement déduit de cette correction.
+
+## 2026-10-28 — C1 sobre, réversible et local avant P9
+
+Le propriétaire autorise l'implémentation du plan C1 et choisit « sobre et crédible » : palette/matière, sans fenêtres ni ornements inventés. Garder CesiumJS 1.145 et les sources actuelles ; aucune migration, texture photographique de façade, géométrie ou jointure patrimoniale ajoutée. Conserver l'original au démarrage et une bascule à conditions constantes. L'essai est borné au centre historique de Delémont ; projection seule des ombres et ambiance peuvent concerner toute sa vue centrale, avec restauration explicite à la sortie. Les autres destinations et Bâle gardent leur rendu normal.
+
+Faible reste une palette seule, Moyen permet le grain, Élevé/Ultra permettent des effets facultatifs mesurés séparément. Le budget de 10 % est un critère de comparaison locale, pas une promesse A53. Référence compilée/empreintes conservées sous `.vite/c1/original*`. Aucune autorisation de commit, push, déploiement, service payant ou appareil ; les autorisations anciennes ne s'appliquent pas. P9 reste en attente. [Validation et réserves](VALIDATION_C1.md).
+
 ## 2026-10-27 — Publier la livraison enrichie examinée
 
 Le propriétaire répond « ok » à la demande explicite de push et publication de573e55c. Envoyer main sans forcer, attendre la CI puis déclencher Pages manuellement ; contrôler le SHA sur accueil/deux cartes et le parcours enrichi HTTPS avant de déclarer la publication acquise. Réalisé et vérifié, réserves mobiles/données conservées. Un commit documentaire de bilan peut ensuite dépasser le SHA servi sans redéploiement automatique. [Résultat et preuves](REVUE_PUB2_BALE.md).

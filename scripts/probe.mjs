@@ -308,7 +308,20 @@ try {
   await touchPage.locator('#buildings').uncheck();
   await touchPage.screenshot({ path: 'probe-p1-touch-settings.png', fullPage: true });
   await touchPage.locator('#settings summary').tap();
-  await touchPage.touchscreen.tap(300, 600);
+  // New optional sections can change panel height. Select actual free terrain,
+  // never a fixed coordinate that may now hit a panel or its credits.
+  const touchTerrainPoint = await touchPage.evaluate(() => {
+    for (const y of [innerHeight * .72, innerHeight * .82]) {
+      for (const x of [innerWidth - 20, innerWidth * .8, innerWidth * .5]) {
+        if (document.elementFromPoint(x, y)?.tagName === 'CANVAS') return { x, y,
+          previousTarget: document.elementFromPoint(300, 600)?.tagName };
+      }
+    }
+    return null;
+  });
+  assert.ok(touchTerrainPoint, 'aucune zone de terrain réellement libre');
+  console.log(`Cible terrain tactile : ${JSON.stringify(touchTerrainPoint)}`);
+  await touchPage.touchscreen.tap(touchTerrainPoint.x, touchTerrainPoint.y);
   assert.equal(await touchPage.evaluate(() => window.__jura3dCamera().selectionKind), 'point');
   await touchPage.screenshot({ path: 'probe-p1-touch-selection.png', fullPage: true });
   await touchPage.locator('#clear-selection').tap();

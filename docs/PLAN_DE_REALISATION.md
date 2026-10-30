@@ -1,5 +1,13 @@
 # Plan de réalisation — Jura 3D
 
+**30 octobre — publication de la démonstration Jura préparée désormais autorisée.** Commit/push puis CI/Pages et contrôle du lien externe. Synchroniser le bilan documentaire sur GitHub après vérification. Réserve Bâle conservée, C1 limité à Delémont, P9/Android et contacts restent distincts. [Suivi](PUBLICATION_PRESENTATION_JURA.md).
+
+**30 octobre — petite finition Jura remise, sans nouveau lot fonctionnel.** Image Original/légendée, textes allégés, builds réussis et parcours Jura vérifié deux fois. Contrôles globaux du29octobre réutilisés pour le code commun identique ; contrôle Bâle actuel non terminé à cause d’erreurs HTTP2 de tuiles, à recontrôler avant sa démonstration. Copies anciennes conservées. Suite : revue propriétaire et éventuelle publication distincte du Jura. C1 limité à Delémont, P9 et Android en attente. [Guide et preuves](PRESENTATION_JURA.md).
+
+**Priorité du 29 octobre : petite démonstration Jura réalisée et vérifiée sur PC pour un premier retour exploratoire.** Page dédiée, parcours court et premier affichage allégé, sans extension des données ou du rendu. Préciser le public et le besoin complémentaire au GéoPortail avant d’investir davantage. Android conditionné à un besoin confirmé et une qualification séparée. Suite : retour propriétaire, éventuelle publication distinctement autorisée ; aucun contact automatique. **C1 limité à Delémont ; P9 en attente.** [Guide et réserves](PRESENTATION_JURA.md). Les états ci-dessous sont historiques.
+
+**État actuel au 28 octobre 2026 :** P5/P6 et B1/B2/B3 clos avec réserves, P7 vérifié PC, P8 technique qualifié avec réserves ; PUB2 Jura/Bâle enrichi publié le 27 octobre (`573e55c`), relais documentaire `5f146b1`. **C1 est réalisé et qualifié PC avec réserves avant toute extension**, autorisé sans commit/push/publication/appareil. Référence/livraison figées, builds et probes C1/Jura/Bâle/accueil réussis ; 96 fenêtres/888 lectures, configurations livrées dans le budget PC observé, variations conservées. Qualification A53 et retour sur l’essai ouverts. **P9 en attente.** [État et critères C1](VALIDATION_C1.md). Les paragraphes datés suivants décrivent des états historiques, pas les tâches actuelles.
+
 **27 octobre — A53 contrôlé : fonctions disponibles, performance Bâle non validée.** Jura jugé correct par le propriétaire ; Bâle complet local signalé à 5–10 FPS, cohérent avec les ralentissements mesurés. Diagnostic et correction du coût des bâtiments avant B2/B3 ; aucun correctif livré à ce stade. [Mesures et suite](VALIDATION_TRANSPORTS_A53.md). Auto et accès restaurés/nettoyés après reconnexion, appareil débranchable ; aucun push/déploiement.
 
 **27 octobre — complément P6 Jura réalisé et contrôlé sur PC.** Rendu en tuiles partagé avec Bâle, données/filtres/Noctambus/fiches conservés ; mesures avant/après Intel/RTX et probes des deux territoires terminés. [Bilan et limites](OPTIMISATION_JURA.md). Prochaine action : A53 en Faible sur les deux territoires ; B1 physique ouvert, B2/B3 différés, aucune publication. Les paragraphes datés suivants restent historiques.
@@ -8,7 +16,7 @@
 
 **Priorité B1 révisée le 26 octobre au soir :** coût GPU des tracés confirmé sur Intel dans le navigateur intégré du propriétaire. Optimiser et mesurer sur Intel/RTX avant la qualification A53, puis B2/B3. Le renderer P6 est partagé avec Delémont, mais le réseau Bâle est nettement plus dense. [Diagnostic et critères](DIAGNOSTIC_B1_TRACES.md). Les validations fonctionnelles précédentes restent bornées à leurs méthodes et GPU.
 
-**Date : 26 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 validé sur PC, PUB1 publié. P8 technique qualifié avec réserves ; B1 transports réalisé sur PC, qualification A53 ouverte ; B2 lieux/patrimoine et B3 services restent à réaliser dans cet ordre confirmé. PUB2 accueil préparé et contrôlé localement, publication différée ; docs et commit de sauvegarde autorisés, aucun push/déploiement dans ce lot ; S23 non testé et P9 non commencé.**
+**État historique du 26 octobre 2026. Statut : P5 et bilan P6 clos avec réserves ; optimisation et mesures PC/Tab S8/A53 achevées, usage exploratoire accepté par le propriétaire. 30 FPS A53 constants non acquis, performances variables et pauses documentées. CesiumJS conservé ; P7 validé sur PC, PUB1 publié. P8 technique qualifié avec réserves ; B1 transports réalisé sur PC, qualification A53 ouverte ; B2 lieux/patrimoine et B3 services restent à réaliser dans cet ordre confirmé. PUB2 accueil préparé et contrôlé localement, publication différée ; docs et commit de sauvegarde autorisés, aucun push/déploiement dans ce lot ; S23 non testé et P9 non commencé.**
 
 **Sauvegarde historique à 13:13 Europe/Zurich :** Tab S8 Faible terminé à 13:04:07, 13 min 27 s, 28 phases/616 lectures sans erreur/coupure, nettoyage confirmé par Wi-Fi appairé. Moyen en cours après repos, aucun résultat achevé à ce point ; manuel/récupération réseau encore ouverts. Vérifier le [rapport et processus consignés dans le relais](RELAIS.md) avant toute relance. P5 non clos, P6 non proposé ou commencé.
 
@@ -16,7 +24,7 @@
 
 Rendre le site exploratoire du canton du Jura utile : relief et bâtiments 3D, navigation entre localités, patrimoine et transports. Conserver CesiumJS comme base tant que les mesures ne justifient pas une autre solution. Le jeu reste une expérimentation distincte. Genève est une référence fonctionnelle ; Bâle est le premier essai multicité conseillé, Berne et Zurich des alternatives, Rennes une candidate française ultérieure.
 
-Preuves actuelles : navigation quatre localités, patrimoine P3 et bus P4 intégrés, P5/P6 mesurés sur PC/Tab S8/A53 avec réserves, configuration et contrat de couches P7 validés sur PC. Bâle intégré localement, rendu et parkings contrôlés sur PC, mesures et usage A53 portrait/paysage ajoutés le 26 octobre. Limites : 30 FPS A53 constants non acquis, S23 non testé, observations anciennes, conditions et coût d'une autre ville à revalider. Voir [l'état vérifié](ETAT_DU_PROJET.md), les validations P5/P6/P7/P8 et [l'étude des sources](ETUDE_VILLES_COUCHES_MOTEURS.md).
+Preuves historiques (avant PUB2) : navigation quatre localités, patrimoine P3 et bus P4 intégrés, P5/P6 mesurés sur PC/Tab S8/A53 avec réserves, configuration et contrat de couches P7 validés sur PC. Bâle intégré localement, rendu et parkings contrôlés sur PC, mesures et usage A53 portrait/paysage ajoutés le 26 octobre. Limites : 30 FPS A53 constants non acquis, S23 non testé, observations anciennes, conditions et coût d'une autre ville à revalider. Voir [l'état vérifié](ETAT_DU_PROJET.md), les validations P5/P6/P7/P8 et [l'étude des sources](ETUDE_VILLES_COUCHES_MOTEURS.md).
 
 ## Modèles, effort et continuité du travail
 
@@ -45,7 +53,8 @@ P1 est réalisé localement, avec [validation bureau, premiers essais physiques 
 | P7 | Petite séparation entre scène, configuration territoriale et couches | Astra / `high` pour concevoir ; GPT-6.1 Sol / `high` pour réaliser | Astra / `xhigh` si sources et cycles de vie imposent des compromis non résolus | **Nouvelle discussion d'architecture multicité**, après validation Jura ; conserver la même pour la réalisation |
 | PUB1 | Publication de test GitHub Pages, après P7 et avant P8 | Modèle/effort actuels conservés | Aucun changement requis | Autorisée le 25 octobre ; [procédure et preuves](PUBLICATION.md) |
 | P8 | Essai Bâle : bâtiments puis parkings, arbres optionnels | GPT-6.1 Sol / `high` | Astra / `high` pour difficultés 3D Tiles, alignement ou charge inexpliquée | **Nouvelle discussion Bâle**, à partir du socle P7 et des sources vérifiées |
-| P9 | Décision sur Berne/Zurich, puis éventuel terrain français | Astra / `high` pour comparer ; GPT-6.1 Sol / `high` pour un essai retenu | `xhigh` seulement si choix de pipeline ou conditions contradictoires | Discussion par territoire ou pipeline important ; recherche bornée avant développement |
+| C1 | Essai visuel sobre et réversible à Delémont, consolidation Jura/Bâle | Modèle et effort du chat conservés | Aucun changement requis | Lot local avant P9 ; comparaison et qualification selon VALIDATION_C1.md |
+| P9 | En attente après C1 : décision sur Berne/Zurich, puis éventuel terrain français | Astra / `high` pour comparer ; GPT-6.1 Sol / `high` pour un essai retenu | `xhigh` seulement si choix de pipeline ou conditions contradictoires | Discussion par territoire ou pipeline important ; recherche bornée avant développement |
 
 ## Contenu et critères de sortie
 
@@ -143,7 +152,17 @@ Cette étape manquait au plan initial : le dépôt et sa compilation ne constitu
 - **Sortie avant publication :** accueil lisible au clavier/toucher, chargement des deux cartes et de leurs seules sources, fiches/crédits/conditions, liens de retour et marqueurs de révision/bases cohérents ; documents synchronisés, limites physiques P8 conservées sans nouveau benchmark Android.
 - Après revue et autorisation distincte : commit/push examinés, déclenchement manuel Pages et contrôle HTTPS réel des deux territoires et de la révision servie. Aucune extension du cadre, couche ou ville supplémentaire déduite de PUB2.
 
-### P9 — Extension facultative
+### C1 — Consolidation visuelle locale Jura/Bâle, avant P9
+
+Ajustement approuvé le 28 octobre : retirer l’option Ambiance douce, dont le réglage interne ne démontrait pas de gain visuel en vue proche. Garder palette/matière et ombres ; historique des premières mesures conservé, contrôles ciblés de la version révisée. Aucun passage à une autre destination ou à P9.
+
+Autorisé le 28 octobre 2026. Garder CesiumJS et les données réelles ; essai sobre au centre de Delémont, Original/Essai à conditions constantes, trois cadrages et trois fiches RBC existantes. Aucun habillage hors secteur ni identité/architecture inventée. Bâle et les autres destinations conservent leur rendu normal ; les changements communs sont requalifiés sur les deux territoires.
+
+Critères de sortie : référence figée/captures, build autonome et site, probes C1/Jura/Bâle/accueil, coûts palette/matière/ambiance/ombres mesurés séparément en Faible/Élevé, fixe et rotation A/B/A. Budget cible ≤10 % de perte médiane et absence d'aggravation reproductible des pauses ; alléger les effets facultatifs si nécessaire, sans perte de bâtiments ou de résolution dissimulée. Restituer résultats, limites mobiles, proposition d'extension et relais. Qualification A53 ouverte sans accès à l'appareil. Modèle et effort du chat conservés, pas de sous-agent, commit/push/déploiement ou service payant. [Rapport de validation](VALIDATION_C1.md).
+
+**Bilan du 28 octobre :** essai livré localement, tests/builds/probes et mesures PC terminés ; budget observé avec réserves, qualification A53 et appréciation propriétaire ouvertes. Aucun passage à une extension ni à P9 déduit de C1. [Captures, résultats et relais](VALIDATION_C1.md).
+
+### P9 — Extension facultative — en attente après C1
 
 - Comparer Berne (patrimoine/équipements et modèle LOD2 à confirmer) à Zurich (richesse des modèles municipaux, conversion nécessaire) selon les retours d'usage. Ne pas lancer toutes les villes ensemble.
 - Rennes teste ensuite, si retenue, un pipeline CityJSON et les positions réelles des bus STAR ; Paris reste un essai d'échelle ultérieur. Recontrôler formats, fraîcheur, droits et accès au moment de chaque lot.

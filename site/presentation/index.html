@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jura 3D, un prototype indépendant pour découvrir le territoire, consulter le patrimoine et explorer les transports publics. Démonstration et pistes à discuter." />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="{{BASE}}presentation/presentation.css" />
+    <title>Jura 3D — découvrir, situer, explorer</title>
+  </head>
+  <body>
+    <a class="skip" href="#demonstration">Aller à la démonstration</a>
+    <header class="wrap masthead">
+      <a class="brand" href="{{BASE}}presentation/">Jura <span>3D</span></a>
+      <span class="prototype">Prototype indépendant</span>
+    </header>
+    <main>
+      <section class="wrap hero" id="demonstration" aria-labelledby="title">
+        <div class="hero-copy">
+          <p class="eyebrow">Une proposition à explorer ensemble</p>
+          <h1 id="title">Le Jura,<br />à découvrir<br /><em>autrement.</em></h1>
+          <p class="lead">Parcourir un paysage, découvrir un lieu, retrouver un arrêt de bus. Une expérience en 3D pour relier le territoire aux informations qui l’accompagnent.</p>
+          <a class="button" data-demo href="{{BASE}}jura/?presentation=1">Ouvrir la démonstration <span aria-hidden="true">↗</span></a>
+          <p class="practical">Une découverte en trois minutes · Connexion Internet nécessaire</p>
+        </div>
+        <figure class="hero-view">
+          <img src="{{BASE}}presentation/delemont.jpg" width="1440" height="900" alt="Vue du centre historique de Delémont dans Jura 3D, avec les matériaux d’origine des bâtiments et les ombres simulées désactivées." fetchpriority="high" />
+          <figcaption><span>Delémont · rendu original, ombres simulées désactivées</span><span>Données © swisstopo</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="wrap discovery" aria-labelledby="discovery-title">
+        <div class="section-heading"><p class="eyebrow">Trois minutes pour se faire une idée</p><h2 id="discovery-title">Un petit parcours,<br />des usages concrets.</h2></div>
+        <ol class="steps">
+          <li><span class="step-number" aria-hidden="true">01</span><h3>Explorer le territoire</h3><p>Commencez à Delémont, déplacez la vue, puis découvrez Porrentruy, Saignelégier ou Saint-Ursanne.</p></li>
+          <li><span class="step-number" aria-hidden="true">02</span><h3>Découvrir le patrimoine</h3><p>Ouvrez « 2 · Patrimoine », choisissez un lieu, puis consultez sa fiche et le document officiel.</p></li>
+          <li><span class="step-number" aria-hidden="true">03</span><h3>Repérer les transports</h3><p>Ouvrez « 3 · Bus », consultez un arrêt ou un tracé, puis suivez les liens vers les horaires officiels.</p></li>
+        </ol>
+      </section>
+
+      <section class="discussion" aria-labelledby="discussion-title">
+        <div class="wrap discussion-grid">
+          <div><p class="eyebrow">Un support de discussion</p><h2 id="discussion-title">Quelle place pour une<br />vitrine du territoire ?</h2></div>
+          <div class="discussion-copy"><p>Ce prototype propose un point de départ pour discuter d’un parcours de découverte simple, en complément du <a href="https://geo.jura.ch/" target="_blank" rel="noopener noreferrer">GéoPortail du Jura</a> et de son <a href="https://geo.jura.ch/geo3d/" target="_blank" rel="noopener noreferrer">visualiseur 3D</a>.</p><p>Les questions à explorer : pour quels publics, pour quels parcours et avec quels contenus actualisés ? L’intérêt d’une vitrine complémentaire reste à évaluer.</p><p>Une déclinaison Android pourrait être étudiée après confirmation des usages. La démonstration actuelle s’utilise dans un navigateur.</p></div>
+        </div>
+      </section>
+
+      <section class="wrap transparency" aria-labelledby="transparency-title">
+        <div><p class="eyebrow">Ce que vous voyez aujourd’hui</p><h2 id="transparency-title">Un prototype,<br />des limites explicites.</h2></div>
+        <div class="limits">
+          <p><strong>Une initiative indépendante.</strong> Cette démonstration utilise des données officielles pour proposer un support d’échange. Elle n’est pas un service du canton.</p>
+          <p><strong>Des informations datées.</strong> Patrimoine : fiches du 2 avril 2026. Réseau de bus : instantané du 13 septembre 2026. Aucun véhicule, retard ou départ en direct ; les liens conduisent aux sites officiels.</p>
+          <p><strong>Des volumes 3D, sans façades photographiques.</strong> Un habillage illustratif peut être comparé à l’original dans le centre de Delémont. Il est désactivé au départ et conserve les volumes réels.</p>
+          <p><strong>Une démonstration vérifiée sur ordinateur.</strong> La qualité est réglable selon l’appareil. Les formats mobiles ont été simulés ; la dernière version reste à qualifier sur téléphone. Connexion Internet nécessaire.</p>
+        </div>
+      </section>
+      <div class="wrap closing"><p>Explorer d’abord. Discuter de l’utilité ensuite.</p><a class="button" href="{{BASE}}jura/?presentation=1">Essayer Jura 3D <span aria-hidden="true">↗</span></a></div>
+    </main>
+    <footer class="wrap"><p>Jura 3D · Démonstration du 30 octobre 2026</p><p>Données © swisstopo · © Géodonnées de la République et Canton du Jura<br /><a href="{{BASE}}jura/jura/Conditions_utilisation_geodonnees.pdf" target="_blank" rel="noopener noreferrer">Conditions des données jurassiennes</a> · <a href="{{BASE}}">Autres démonstrations</a></p></footer>
+  </body>
+</html>

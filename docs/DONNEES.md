@@ -1,5 +1,23 @@
 # Données et conditions d'usage
 
+## Image de présentation — 30 octobre 2026
+
+Nouvelle capture réelle de Delémont avec les matériaux d’origine du modèle, sans shader C1 actif et sans ombres simulées pour cette capture. Réglages indiqués dans la légende ; aucune photographie de façade ou couleur réelle revendiquée. Copyright swisstopo affiché, crédit Cesium conservé dans l’image. Le JPEG remplace uniquement l’image livrée par la page ; ancien PNG et preuves conservés. Aucune source, condition, donnée ou préférence d’affichage de la carte modifiée.
+
+## Présentation et GéoPortail — 28–29 octobre 2026
+
+Aucune nouvelle source intégrée. Capture C1 proche de Delémont, légendée comme habillage illustratif et créditée swisstopo ; volumes/données conservés. Patrimoine et bus restent les instantanés existants, fiches du 02.04.2026 et réseau du 13.09.2026. Les liens vers les portails officiels n’intègrent ni leur visualiseur ni leurs services.
+
+Recherche du 28 octobre : le Jura a déjà un portail 3D de nuages de points et de nombreuses couches recoupant nos sujets. Le [catalogue officiel](https://www.jura.ch/fr/Autorites/Administration/DEC/SDT/Cadastre-et-geoinformation/Liste-et-commande-de-geodonnees/Liste-et-commande-de-geodonnees.html) prévoit le réemploi des jeux publics de niveau A avec source et conditions ; données restreintes et mensuration ont des règles propres. Les [conditions en ligne du 01.01.2021](https://geo.jura.ch/geodonnees/Conditions_utilisation_geodonnees.pdf) autorisent la publication des données publiques avec attribution et transmission des conditions ; ne pas remplacer l’archive historique sans qualifier une mise à jour. Les [géoservices](https://www.jura.ch/fr/Autorites/Administration/DEC/SDT/Cadastre-et-geoinformation/Liste-et-commande-de-geodonnees/Geoservices-de-consultation/Geoservices-de-consultation.html) demandent de contacter le SIT-Jura pour un portail web ou au-delà d’une moyenne de 10 appels/minute. Aucune prise de contact ou nouvelle intégration réalisée. [Portée](PRESENTATION_JURA.md).
+
+## C1 — Traitement illustratif, 28 octobre 2026
+
+Aucune nouvelle source. Racine swisstopo relue : génération `20260520`. La tuile centrale `11/625/1597.b3dm` répond HTTP 200 ; échantillon de 63 objets, positions/normales/`_BATCHID`, compression Draco, deux matériaux colorés, aucune image, texture ou coordonnée UV. Cela ne qualifie ni tous les modèles ni l'exactitude des couleurs d'origine.
+
+L'essai conserve le modèle en ligne et ses propriétés. Enduits clairs, terre cuite et grain sont un **habillage illustratif**, pas des matériaux réels documentés ; aucune photographie de façade, fenêtre ou identité ajoutée. L'orthophoto garde sa végétation et ses ombres photographiques fixes. Les réglages d'ombres simulées ne corrigent pas ces dernières. © swisstopo et les conditions actuelles restent applicables.
+
+Le parcours utilise les fiches RBC existantes `321` Eglise Saint-Marcel, `322` Hôtel de ville, `323` Château, leurs positions MultiPoint et PDF cantonaux 2283/2284/2285. Aucune jointure entre ces repères et les bâtiments voisins. [Preuves et limites C1](VALIDATION_C1.md).
+
 **27 octobre — PUB2 enrichi publié :** mêmes sources/conditions que la livraison revue, quatre assets applicatifs publics identiques au local ; sept ressources Jura servies identiques aux blobs du commit573e55c, licences/inventaire Cesium identiques au paquet. Les sources Bâle sont chargées directement depuis les services officiels et les couches ont été activées avec succès depuis l’origine HTTPS publique dans le probe PC. Aucun instantané Bâle ou modèle redistribué, aucune nouvelle licence présumée. [Publication, attributions et limites](REVUE_PUB2_BALE.md).
 
 **B3,27octobre — sanitaires100031 intégrés localement, qualification close avec réserves :**159records lus, CC BY4.0/attribution cantonale contrôlées, géométries Point WGS84 et propriétés natives conservées, cache mémoire sans snapshot livré.75types fauteuil/30non adaptés/12urinoirs/16douches/26partenaires ;6fermetures,45équipements Eurokey,5payants. Valeurs absentes distinctes de false ; pas d'horaire individuel ou ouverture en direct. Métadonnée10août ne suit pas chaque mise à jour des données. La page générale annonce WC gratuits alors que cinq flags sont payants : afficher la valeur source, sans montant inventé. [Provenance](../data/basel-sanitary-sources.json), [qualification et divergences](VALIDATION_B3.md). Fontaines IWB non intégrées, leurs conditions ne deviennent pas CC BY.
