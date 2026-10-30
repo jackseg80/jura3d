@@ -1,5 +1,9 @@
 # Décisions techniques
 
+## 2026-10-30 — Publication réalisée, réserves conservées
+
+L’autorisation explicite est exécutée : sauvegarde/push `55a6d61`, CI puis Pages réussis et contrôle HTTPS ciblé Jura réussi. Fournir l’URL de la présentation au propriétaire ; laisser la prise de contact et la décision Android ultérieures. Le bilan documentaire peut dépasser le SHA servi sans republier le site ; ne pas supprimer les incidents Bâle ni assimiler le toucher simulé à une qualification physique. [Résultat](PUBLICATION_PRESENTATION_JURA.md).
+
 ## 2026-10-30 — Publier la présentation Jura après accord explicite
 
 Le propriétaire demande l’envoi GitHub pour disposer d’une adresse externe après la revue locale et l’annonce de la réserve Bâle. Sauvegarder les changements préparés, pousser main sans forcer, attendre Build puis déclencher Pages manuellement. Contrôler la révision et le parcours Jura sur HTTPS avant de livrer le lien. Déclarer la portée ciblée Jura ; conserver les échecs HTTP2 Bâle et leur cause non isolée. Aucun nouveau contenu, changement réseau, contact ou appareil. [Bilan de publication](PUBLICATION_PRESENTATION_JURA.md).

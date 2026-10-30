@@ -1,5 +1,11 @@
 # Historique
 
+## 2026-10-30 — Publier la vitrine Jura
+
+- Mettre en ligne la présentation dédiée et le mode découverte après autorisation, commit/push `55a6d61`, CI et déploiement Pages réussis.
+- Vérifier les versions/ressources et le parcours HTTPS Jura : quatre groupes, zéro erreur/échec réseau, portrait/paysage simulés.
+- Synchroniser le bilan sur GitHub ; conserver la réserve réseau Bâle et l’absence de nouvelle qualification Android physique.
+
 ## 2026-10-30 — Préparer la publication autorisée de la présentation Jura
 
 - Envoyer la livraison C1/présentation revue et ses documents après accord explicite ; attendre CI et publication Pages manuelle avant confirmation.

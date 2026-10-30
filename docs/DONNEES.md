@@ -1,5 +1,9 @@
 # Données et conditions d'usage
 
+## Publication de la vitrine — 30 octobre 2026
+
+Présentation et carte Jura désormais publiques sous `/jura3d/presentation/` et `/jura3d/jura/`. Sources et conditions inchangées ; sept ressources Jura servies identiques aux blobs Git de `55a6d61`, JPEG de présentation identique au fichier source. La publication ne rafraîchit ni patrimoine ni bus. Crédits/conditions et liens officiels contrôlés depuis HTTPS, Bâle exclu du parcours et réserve de disponibilité conservée. [Preuves](PUBLICATION_PRESENTATION_JURA.md).
+
 ## Image de présentation — 30 octobre 2026
 
 Nouvelle capture réelle de Delémont avec les matériaux d’origine du modèle, sans shader C1 actif et sans ombres simulées pour cette capture. Réglages indiqués dans la légende ; aucune photographie de façade ou couleur réelle revendiquée. Copyright swisstopo affiché, crédit Cesium conservé dans l’image. Le JPEG remplace uniquement l’image livrée par la page ; ancien PNG et preuves conservés. Aucune source, condition, donnée ou préférence d’affichage de la carte modifiée.

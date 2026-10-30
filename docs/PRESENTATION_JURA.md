@@ -1,5 +1,9 @@
 # Démonstration Jura
 
+## Version publique — 30 octobre 2026
+
+[Lien externe à transmettre au canton](https://jackseg80.github.io/jura3d/presentation/), sans serveur PC. Publication `55a6d61` et parcours HTTPS ciblé Jura vérifiés à23:35:31 Europe/Zurich : quatre groupes, zéro erreur/échec réseau, formats mobiles simulés. [Bilan, preuves et limites](PUBLICATION_PRESENTATION_JURA.md). Les liens locaux et étapes antérieures ci-dessous sont conservés comme historique. Aucun message au canton envoyé par l’agent ; Android reste une piste à discuter.
+
 ## Finition du 30 octobre
 
 Le propriétaire demande une dernière petite finition avant un premier échange. Image d’accueil remplacée par une capture réelle du rendu Original, cadrage proche, résolution normale et ombres simulées désactivées pour la capture seulement. Aucune modification des réglages de démarrage ; la légende précise ces réglages. Le JPEG346967octets remplace le PNG1729093octets, sans retouche d’image ou géométrie. L’ancien habillage C1 n’est plus l’illustration principale ; il reste une option dans la carte. Présentation et deux libellés du bandeau raccourcis, gestionnaires de commandes inchangés.

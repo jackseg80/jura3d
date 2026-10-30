@@ -1,5 +1,7 @@
 # Plan de réalisation — Jura 3D
 
+**30 octobre — publication de la démonstration Jura terminée et contrôlée.** Lien externe `https://jackseg80.github.io/jura3d/presentation/`, révision `55a6d61`, Build/Pages réussis et parcours HTTPS ciblé Jura sans erreur. [Bilan](PUBLICATION_PRESENTATION_JURA.md). Suite : retour du canton sur l’usage complémentaire, sans nouvelles fonctions automatiques. Bâle à recontrôler séparément, C1 limité à Delémont, qualification physique Android et P9 ouverts. Les étapes ci-dessous restent historiques.
+
 **30 octobre — publication de la démonstration Jura préparée désormais autorisée.** Commit/push puis CI/Pages et contrôle du lien externe. Synchroniser le bilan documentaire sur GitHub après vérification. Réserve Bâle conservée, C1 limité à Delémont, P9/Android et contacts restent distincts. [Suivi](PUBLICATION_PRESENTATION_JURA.md).
 
 **30 octobre — petite finition Jura remise, sans nouveau lot fonctionnel.** Image Original/légendée, textes allégés, builds réussis et parcours Jura vérifié deux fois. Contrôles globaux du29octobre réutilisés pour le code commun identique ; contrôle Bâle actuel non terminé à cause d’erreurs HTTP2 de tuiles, à recontrôler avant sa démonstration. Copies anciennes conservées. Suite : revue propriétaire et éventuelle publication distincte du Jura. C1 limité à Delémont, P9 et Android en attente. [Guide et preuves](PRESENTATION_JURA.md).

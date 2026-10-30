@@ -1,5 +1,9 @@
 # Architecture du prototype
 
+## Présentation publiée — 30 octobre 2026
+
+Le workflow manuel Pages livre maintenant aussi `/jura3d/presentation/`. Les trois marqueurs accueil/Jura/Bâle servent `55a6d61` et les ressources de présentation correspondent au commit ; parcours HTTPS ciblé Jura vérifié. Le bilan documentaire ultérieur n’entraîne pas de redéploiement automatique. Aucun nouveau flux de données ou changement d’hébergement. [Bilan](PUBLICATION_PRESENTATION_JURA.md).
+
 ## Contrôle de publication ciblé — 30 octobre 2026
 
 `scripts/probe-presentation.mjs` accepte `JURA3D_PROBE_SCOPE=all|jura` (`all` par défaut), avec portée et territoires exclus dans le rapport. `jura` vérifie la présentation, le parcours, le toucher simulé et le retour au Jura normal, sans réclamer de disponibilité Bâle. Le mode global et les incidents Bâle sont conservés ; aucun changement applicatif ou contournement réseau. [Publication autorisée](PUBLICATION_PRESENTATION_JURA.md).
